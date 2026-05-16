@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prahar Trucking – Invoice & Billing Software</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    :root {
+      --col-orange: #FF6B2C;
+      --col-violet: #7C3AED;
+      --col-sky: #0EA5E9;
+      --col-emerald: #10B981;
+      --col-pink: #EC4899;
+      --col-amber: #F59E0B;
+      --col-rose: #F43F5E;
+      --col-indigo: #4F46E5;
+      --white: #ffffff;
+      --bg: #F8F9FF;
+      --card: #ffffff;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --sidebar-w: 260px;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 200;
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+      overflow-y: auto;
+    }
+    .sidebar.collapsed { transform: translateX(-100%); }
+    .sidebar-logo {
+      padding: 28px 20px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--col-orange), var(--col-rose));
+      border-radius: 12px;
+      display: grid; place-items: center;
+      color: white; font-size: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(255,107,44,0.35);
+    }
+    .logo-text { font-family: 'Clash Display', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.2; }
+    .logo-sub { font-size: 10px; color: var(--text-muted); font-weight: 400; }
+    .sidebar-nav { padding: 12px 12px; flex: 1; }
+    .nav-section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); padding: 14px 8px 6px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px; font-weight: 500;
+      transition: all 0.18s ease;
+      margin-bottom: 2px;
+      cursor: pointer;
+      border: none; background: none; width: 100%;
+    }
+    .nav-item i { width: 20px; text-align: center; font-size: 15px; }
+    .nav-item:hover { background: var(--bg); color: var(--text); }
+    .nav-item.active { background: linear-gradient(135deg, #FFF1EB, #FFF8F6); color: var(--col-orange); font-weight: 600; border-left: 3px solid var(--col-orange); }
+    .nav-item.active.violet { color: var(--col-violet); background: linear-gradient(135deg, #F5F3FF,#FAF9FF); border-color: var(--col-violet); }
+    .nav-item.active.sky { color: var(--col-sky); background: linear-gradient(135deg, #F0F9FF,#F8FDFF); border-color: var(--col-sky); }
+    .nav-item.active.emerald { color: var(--col-emerald); background: linear-gradient(135deg, #ECFDF5,#F8FFFE); border-color: var(--col-emerald); }
+    .nav-item.active.pink { color: var(--col-pink); background: linear-gradient(135deg, #FDF2F8,#FFF8FC); border-color: var(--col-pink); }
+    .nav-item.active.amber { color: var(--col-amber); background: linear-gradient(135deg, #FFFBEB,#FFFDF5); border-color: var(--col-amber); }
+
+    /* MAIN */
+    .main-content { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; transition: margin-left 0.3s cubic-bezier(.4,0,.2,1); }
+    .main-content.expanded { margin-left: 0; }
+
+    /* TOPBAR */
+    .topbar { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 28px; height: 64px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; }
+    .sidebar-toggle { background: none; border: none; width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; color: var(--text-muted); font-size: 16px; cursor: pointer; transition: all 0.15s; }
+    .sidebar-toggle:hover { background: var(--bg); color: var(--text); }
+    .topbar-title { font-family: 'Clash Display', sans-serif; font-size: 18px; font-weight: 600; color: var(--text); flex: 1; }
+    .topbar-badge { display: flex; align-items: center; gap: 6px; background: linear-gradient(135deg, var(--col-orange), var(--col-rose)); color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; box-shadow: 0 4px 12px rgba(255,107,44,0.3); }
+    .user-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, var(--col-violet), var(--col-indigo)); border-radius: 50%; display: grid; place-items: center; color: white; font-size: 14px; box-shadow: 0 4px 10px rgba(124,58,237,0.3); }
+
+    /* MODULES */
+    .module { display: none; padding: 28px; animation: fadeSlide 0.25s ease; }
+    .module.active { display: block; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .page-header { margin-bottom: 24px; }
+    .page-header h2 { font-family: 'Clash Display', sans-serif; font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .page-header p { color: var(--text-muted); font-size: 14px; }
+
+    /* STAT CARDS */
+    .stat-card { background: var(--white); border-radius: var(--radius); padding: 20px 22px; display: flex; align-items: center; gap: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+    .stat-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .stat-card.c1::after { background: linear-gradient(90deg, var(--col-orange), var(--col-rose)); }
+    .stat-card.c2::after { background: linear-gradient(90deg, var(--col-emerald), var(--col-sky)); }
+    .stat-card.c3::after { background: linear-gradient(90deg, var(--col-rose), var(--col-pink)); }
+    .stat-card.c4::after { background: linear-gradient(90deg, var(--col-sky), var(--col-indigo)); }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .stat-icon { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; flex-shrink: 0; }
+    .stat-icon.orange { background: linear-gradient(135deg,#FFF1EB,#FFE4D6); color: var(--col-orange); }
+    .stat-icon.green { background: linear-gradient(135deg,#ECFDF5,#D1FAE5); color: var(--col-emerald); }
+    .stat-icon.red { background: linear-gradient(135deg,#FFF1F2,#FFE4E6); color: var(--col-rose); }
+    .stat-icon.blue { background: linear-gradient(135deg,#F0F9FF,#E0F2FE); color: var(--col-sky); }
+    .stat-value { font-family: 'Clash Display', sans-serif; font-size: 26px; font-weight: 700; color: var(--text); line-height: 1; }
+    .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+
+    /* CARDS */
+    .card-white { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); padding: 22px; margin-bottom: 4px; }
+    .card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+    .card-head h5 { font-family: 'Clash Display', sans-serif; font-size: 15px; font-weight: 600; color: var(--text); margin: 0; }
+
+    /* TABLES */
+    .table { font-size: 13.5px; }
+    .table thead th { background: var(--bg); color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; border: none; padding: 10px 14px; }
+    .table tbody td { padding: 12px 14px; vertical-align: middle; border-color: var(--border); }
+    .table-hover tbody tr:hover { background: #F8F9FF; }
+
+    /* STATUS BADGES */
+    .badge-status { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge-paid { background: #ECFDF5; color: var(--col-emerald); }
+    .badge-pending { background: #FFF1F2; color: var(--col-rose); }
+    .badge-partial { background: #FFFBEB; color: var(--col-amber); }
+
+    /* FORM CONTROLS */
+    .form-label { font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .form-control, .form-select { border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; padding: 10px 14px; color: var(--text); background: var(--white); transition: border-color 0.15s, box-shadow 0.15s; }
+    .form-control:focus, .form-select:focus { border-color: var(--col-orange); box-shadow: 0 0 0 3px rgba(255,107,44,0.12); outline: none; }
+    textarea.form-control { resize: none; }
+    .invalid-feedback-custom { font-size: 11px; color: var(--col-rose); margin-top: 4px; display: none; }
+    .is-invalid-custom { border-color: var(--col-rose) !important; }
+    .is-invalid-custom + .invalid-feedback-custom { display: block; }
+
+    /* BUTTONS */
+    .btn { border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 600; padding: 10px 20px; transition: all 0.18s; }
+    .btn-orange { background: linear-gradient(135deg, var(--col-orange), #FF4500); border: none; color: white; box-shadow: 0 4px 12px rgba(255,107,44,0.3); }
+    .btn-orange:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,107,44,0.4); color: white; }
+    .btn-violet { background: linear-gradient(135deg, var(--col-violet), var(--col-indigo)); border: none; color: white; box-shadow: 0 4px 12px rgba(124,58,237,0.3); }
+    .btn-violet:hover { color: white; transform: translateY(-1px); }
+    .btn-sky { background: linear-gradient(135deg, var(--col-sky), var(--col-indigo)); border: none; color: white; box-shadow: 0 4px 12px rgba(14,165,233,0.3); }
+    .btn-sky:hover { color: white; transform: translateY(-1px); }
+    .btn-emerald { background: linear-gradient(135deg, var(--col-emerald), #059669); border: none; color: white; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+    .btn-emerald:hover { color: white; transform: translateY(-1px); }
+    .btn-outline-secondary { border-color: var(--border); color: var(--text-muted); background: var(--white); }
+    .btn-outline-secondary:hover { background: var(--bg); color: var(--text); border-color: #CBD5E1; }
+    .btn-outline-danger { border-color: #FECDD3; color: var(--col-rose); background: #FFF1F2; }
+    .btn-outline-danger:hover { background: var(--col-rose); color: white; }
+
+    /* TOTAL BOX */
+    .total-box { background: linear-gradient(135deg, #F8F9FF, #FFFBF5); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 20px; }
+    .total-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .total-val { font-family: 'Clash Display', sans-serif; font-size: 20px; font-weight: 700; color: var(--text); }
+    .total-val.grand { color: var(--col-orange); font-size: 26px; }
+    .total-val.highlight { color: var(--col-emerald); font-size: 24px; }
+
+    /* PER-LR SECTION BOX */
+    .lr-section-box {
+      background: linear-gradient(135deg,#FFF8F5,#FFFBF5);
+      border: 1.5px solid #FDBA74;
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .lr-section-header {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Clash Display',sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--col-orange);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #FDBA74;
+    }
+
+    /* REPORT CARDS */
+    .report-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow); }
+    .report-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--col-orange); }
+    .report-card h6 { font-family: 'Clash Display', sans-serif; font-weight: 600; color: var(--text); margin: 10px 0 4px; font-size: 15px; }
+    .report-card p { color: var(--text-muted); font-size: 12.5px; margin: 0; }
+
+    /* UPLOAD ZONE */
+    .upload-zone { border: 2.5px dashed #CBD5E1; border-radius: var(--radius); padding: 40px; text-align: center; cursor: pointer; transition: all 0.2s; background: #FAFBFF; }
+    .upload-zone:hover { border-color: var(--col-orange); background: #FFF8F5; }
+    .upload-zone h5 { font-family: 'Clash Display', sans-serif; color: var(--text); margin: 0 0 4px; }
+
+    /* COLOR DOTS */
+    .color-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+    /* ACTION BUTTONS TABLE */
+    .btn-icon { width: 32px; height: 32px; border-radius: 8px; border: none; display: inline-grid; place-items: center; font-size: 13px; cursor: pointer; transition: all 0.15s; }
+    .btn-icon.edit { background: #EFF6FF; color: var(--col-sky); }
+    .btn-icon.edit:hover { background: var(--col-sky); color: white; }
+    .btn-icon.del { background: #FFF1F2; color: var(--col-rose); }
+    .btn-icon.del:hover { background: var(--col-rose); color: white; }
+    .btn-icon.pdf { background: #FFF7ED; color: var(--col-orange); }
+    .btn-icon.pdf:hover { background: var(--col-orange); color: white; }
+    .btn-icon.print { background: #F0F9FF; color: var(--col-indigo); }
+    .btn-icon.print:hover { background: var(--col-indigo); color: white; }
+
+    /* QUICK ACTION BUTTONS */
+    .quick-btn { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--white); color: var(--text); font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.18s; text-align: left; width: 100%; }
+    .quick-btn:hover { transform: translateX(4px); box-shadow: var(--shadow); }
+    .quick-btn .q-icon { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-size: 15px; flex-shrink: 0; }
+
+    /* TOAST */
+    #appToast { border-radius: 12px !important; box-shadow: var(--shadow-lg) !important; }
+    #appToast.bg-success { background: linear-gradient(135deg, var(--col-emerald), #059669) !important; }
+    #appToast.bg-danger { background: linear-gradient(135deg, var(--col-rose), #DC2626) !important; }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 20px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main-content { margin-left: 0; }
+      .module { padding: 16px; }
+      .topbar { padding: 0 16px; }
+    }
+
+    @media print {
+      .sidebar, .topbar, .btn, .no-print, .page-header button { display: none !important; }
+      .main-content { margin: 0; padding: 0; }
+      .module { display: none; padding: 0; }
+      #print-area { display: block !important; position: absolute; top: 0; left: 0; width: 100%; }
+      body, .main-content { background: white; color: black; height: auto; overflow: visible; }
+      .card-white { border: none; box-shadow: none; padding: 0; }
+      .table { border: 1px solid #000; width: 100%; }
+      .table th, .table td { border: 1px solid #000; color: black; padding: 8px; }
+    }
+
+    /* PDF TEMPLATE */
+    #pdfTemplate {
+      display: none;
+      width: 190mm;
+      padding: 6mm 8mm;
+      background: white;
+      color: #000;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      box-sizing: border-box;
+    }
+
+    /* Misc */
+    .text-orange { color: var(--col-orange); }
+    .gradient-text { background: linear-gradient(135deg, var(--col-orange), var(--col-rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    hr { border-color: var(--border); opacity: 1; }
+    .separator { height: 1px; background: var(--border); margin: 16px 0; }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon"><i class="fa-solid fa-truck"></i></div>
+    <div>
+      <div class="logo-text">Prahar Trucking</div>
+      <div class="logo-sub">Billing & Invoice System</div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <button class="nav-item active" data-module="dashboard" onclick="showModule('dashboard',this)"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></button>
+    <button class="nav-item" data-module="invoice" onclick="showModule('invoice',this)"><i class="fa-solid fa-file-invoice"></i><span>Create Invoice</span></button>
+    <button class="nav-item" data-module="invoices" onclick="showModule('invoices',this)"><i class="fa-solid fa-list-check"></i><span>Invoice List</span></button>
+    <div class="nav-section-label">Management</div>
+    <button class="nav-item" data-module="transport" onclick="showModule('transport',this)"><i class="fa-solid fa-truck"></i><span>Transport</span></button>
+    <button class="nav-item" data-module="parties" onclick="showModule('parties',this)"><i class="fa-solid fa-users"></i><span>Parties / Clients</span></button>
+    <button class="nav-item" data-module="payments" onclick="showModule('payments',this)"><i class="fa-solid fa-money-bill-wave"></i><span>Payments</span></button>
+    <div class="nav-section-label">Finance</div>
+    <button class="nav-item" data-module="bank" onclick="showModule('bank',this)"><i class="fa-solid fa-building-columns"></i><span>Bank Statement</span></button>
+    <button class="nav-item" data-module="reports" onclick="showModule('reports',this)"><i class="fa-solid fa-chart-bar"></i><span>Reports</span></button>
+    <button class="nav-item" data-module="consolidated" onclick="showModule('consolidated',this)"><i class="fa-solid fa-database"></i><span>Consolidated Data</span></button>
+    <div class="nav-section-label">System</div>
+    <button class="nav-item" data-module="settings" onclick="showModule('settings',this)"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
+  </nav>
+</div>
+
+<!-- MAIN -->
+<div class="main-content" id="mainContent">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <button class="sidebar-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+    <div class="topbar-title" id="pageTitle">Dashboard</div>
+    <div class="d-flex align-items-center gap-3">
+      <span class="topbar-badge d-none d-sm-flex"><i class="fa-solid fa-truck"></i>Prahar Trucking</span>
+      <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="module active" id="mod-dashboard">
+    <div class="page-header">
+      <h2>Good Morning, <span class="gradient-text">Prahar Trucking</span> 👋</h2>
+      <p class="text-muted">Here's what's happening with your business today.</p>
+    </div>
+    <div class="row g-3 mb-4">
+      <div class="col-sm-6 col-xl-3"><div class="stat-card c1"><div class="stat-icon orange"><i class="fa-solid fa-file-invoice"></i></div><div><div class="stat-value" id="totalInvoices">0</div><div class="stat-label">Total Invoices</div></div></div></div>
+      <div class="col-sm-6 col-xl-3"><div class="stat-card c2"><div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div><div><div class="stat-value" id="paidAmt">₹0</div><div class="stat-label">Amount Received</div></div></div></div>
+      <div class="col-sm-6 col-xl-3"><div class="stat-card c3"><div class="stat-icon red"><i class="fa-solid fa-clock"></i></div><div><div class="stat-value" id="pendingAmt">₹0</div><div class="stat-label">Pending Amount</div></div></div></div>
+      <div class="col-sm-6 col-xl-3"><div class="stat-card c4"><div class="stat-icon blue"><i class="fa-solid fa-truck"></i></div><div><div class="stat-value" id="totalTrips">0</div><div class="stat-label">Total Trips</div></div></div></div>
+    </div>
+    <div class="row g-3">
+      <div class="col-lg-8">
+        <div class="card-white">
+          <div class="card-head"><h5>Recent Invoices</h5><button class="btn btn-orange btn-sm" onclick="showModule('invoice',null)"><i class="fa-solid fa-plus me-1"></i>New</button></div>
+          <div class="table-responsive">
+            <table class="table table-hover" id="dashInvoiceTable">
+              <thead><tr><th>Invoice#</th><th>Party</th><th>Route</th><th>Amount</th><th>Status</th></tr></thead>
+              <tbody id="dashInvoiceBody"><tr><td colspan="5" class="text-center text-muted py-5"><i class="fa-solid fa-file-invoice fa-2x mb-2 d-block" style="opacity:.2"></i>No invoices yet</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card-white">
+          <div class="card-head"><h5>Quick Actions</h5></div>
+          <div class="d-flex flex-column gap-2">
+            <button class="quick-btn" onclick="showModule('invoice',null)"><div class="q-icon" style="background:#FFF1EB;color:var(--col-orange)"><i class="fa-solid fa-plus"></i></div><span>New Invoice</span></button>
+            <button class="quick-btn" onclick="showModule('bank',null)"><div class="q-icon" style="background:#F0F9FF;color:var(--col-sky)"><i class="fa-solid fa-upload"></i></div><span>Upload Bank Statement</span></button>
+            <button class="quick-btn" onclick="showModule('parties',null)"><div class="q-icon" style="background:#F5F3FF;color:var(--col-violet)"><i class="fa-solid fa-user-plus"></i></div><span>Add Party</span></button>
+            <button class="quick-btn" onclick="showModule('transport',null)"><div class="q-icon" style="background:#ECFDF5;color:var(--col-emerald)"><i class="fa-solid fa-truck"></i></div><span>Add Transport</span></button>
+            <button class="quick-btn" onclick="showModule('reports',null)"><div class="q-icon" style="background:#FFFBEB;color:var(--col-amber)"><i class="fa-solid fa-chart-bar"></i></div><span>View Reports</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE INVOICE -->
+  <div class="module" id="mod-invoice">
+    <div class="page-header">
+      <h2 id="invoiceFormTitle">Create Invoice</h2>
+      <p class="text-muted">LR / Billing Invoice — Prahar Trucking</p>
+    </div>
+    <div class="card-white" id="invoicePrintArea">
+      <input type="hidden" id="editInvoiceId" value="" />
+
+      <!-- Section 1: Invoice Info -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-orange),var(--col-rose));display:grid;place-items:center;color:white;font-size:12px;font-weight:700">1</div>
+        <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">Invoice Details</span>
+      </div>
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <label class="form-label">Invoice Number</label>
+          <input type="text" class="form-control" id="invNo" placeholder="Auto-generated" readonly style="background:#f1f5f9" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Invoice Date</label>
+          <input type="date" class="form-control" id="invDate" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label d-flex align-items-center justify-content-between">
+            <span>LR / GR / Ship</span>
+            <button type="button" class="btn btn-sm btn-orange py-0 px-2" style="font-size:11px;height:22px;" onclick="addLRField()"><i class="fa-solid fa-plus me-1"></i>Add LR</button>
+          </label>
+          <div id="lrContainer">
+            <div class="d-flex gap-1 mb-1 lr-row">
+              <input type="text" class="form-control" placeholder="LR / GR Number" oninput="syncAllLRSections()" />
+              <button type="button" class="btn btn-outline-danger btn-sm px-2" onclick="removeLRField(this)" style="display:none"><i class="fa-solid fa-minus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Bill To (Party / Client)</label>
+          <select class="form-select" id="invParty"><option value="">— Select Party —</option></select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Transport Name</label>
+          <select class="form-select" id="invTransport"><option value="Prahar Trucking">Prahar Trucking</option></select>
+        </div>
+      </div>
+
+      <!-- CONSIGNOR / CONSIGNEE PER LR -->
+      <div class="separator"></div>
+      <div class="d-flex align-items-center gap-2 mb-3 mt-3">
+        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-violet),var(--col-indigo));display:grid;place-items:center;color:white;font-size:12px;font-weight:700">📦</div>
+        <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">Consignor (Sender) &amp; Consignee (Receiver) — Per LR</span>
+      </div>
+      <div id="lrConsignorConsigneeContainer"></div>
+
+      <!-- *** NEW: ROUTE & VEHICLE PER LR *** -->
+      <div class="separator"></div>
+      <div class="d-flex align-items-center gap-2 mb-3 mt-3">
+        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-sky),var(--col-indigo));display:grid;place-items:center;color:white;font-size:12px;font-weight:700">2</div>
+        <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">Route &amp; Vehicle — Per LR</span>
+      </div>
+      <div id="lrRouteVehicleContainer"></div>
+
+      <!-- *** NEW: GOODS & CHARGES PER LR *** -->
+      <div class="separator"></div>
+      <div class="d-flex align-items-center gap-2 mb-3 mt-3">
+        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-violet),var(--col-pink));display:grid;place-items:center;color:white;font-size:12px;font-weight:700">3</div>
+        <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">Goods &amp; Charges — Per LR</span>
+      </div>
+      <div id="lrGoodsChargesContainer"></div>
+
+      <!-- GRAND TOTALS (computed across all LR rows) -->
+      <div class="total-box mb-4">
+        <div class="row text-center g-2">
+          <div class="col-6 col-md-3"><div class="total-label">Sub Total</div><div class="total-val" id="subTotal">₹0.00</div></div>
+          <div class="col-6 col-md-3"><div class="total-label">GST Amount</div><div class="total-val" id="gstAmt">₹0.00</div></div>
+          <div class="col-6 col-md-3"><div class="total-label">Round Off</div><div class="total-val" id="roundOff">₹0.00</div></div>
+          <div class="col-6 col-md-3"><div class="total-label" style="color:var(--col-orange)">Grand Total</div><div class="total-val grand" id="grandTotal">₹0.00</div></div>
+        </div>
+      </div>
+
+      <!-- *** NEW: REMARKS PER LR *** -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-emerald),#059669);display:grid;place-items:center;color:white;font-size:12px;font-weight:700">📝</div>
+        <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">Remarks / Notes — Per LR</span>
+      </div>
+      <div id="lrRemarksContainer"></div>
+
+      <div class="row g-3">
+        <div class="col-12 d-flex gap-2 flex-wrap no-print">
+          <button class="btn btn-orange" onclick="saveInvoice()"><i class="fa-solid fa-floppy-disk me-2"></i>Save Invoice</button>
+          <button class="btn btn-sky" onclick="printCurrentInvoice()"><i class="fa-solid fa-print me-2"></i>Print</button>
+          <button class="btn btn-outline-danger" onclick="clearForm()"><i class="fa-solid fa-rotate-left me-2"></i>Clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVOICE LIST -->
+  <div class="module" id="mod-invoices">
+    <div class="page-header d-flex justify-content-between align-items-start align-items-sm-center flex-column flex-sm-row gap-2">
+      <div><h2>Invoice List</h2><p class="text-muted">All billing records</p></div>
+      <button class="btn btn-orange" onclick="showModule('invoice',null)"><i class="fa-solid fa-plus me-1"></i>New Invoice</button>
+    </div>
+    <div class="card-white">
+      <div class="row g-2 mb-3">
+        <div class="col-md-5"><input type="text" class="form-control" id="invSearch" placeholder="🔍 Search invoice, party, route..." oninput="filterInvoices()" /></div>
+        <div class="col-md-3"><select class="form-select" id="invStatusFilter" onchange="filterInvoices()"><option value="">All Status</option><option>Paid</option><option>Pending</option><option>Partial</option></select></div>
+        <div class="col-md-2"><button class="btn btn-emerald w-100" onclick="exportAllExcel()"><i class="fa-solid fa-file-excel me-1"></i>Export</button></div>
+        <div class="col-md-2"><button class="btn btn-sky w-100" onclick="printTable('invTableBody')"><i class="fa-solid fa-print me-1"></i>Print List</button></div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead><tr><th>Invoice#</th><th>Date</th><th>Party</th><th>Route</th><th>Vehicle</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="invTableBody"><tr><td colspan="8" class="text-center text-muted py-5"><i class="fa-solid fa-list-check fa-2x mb-2 d-block" style="opacity:.2"></i>No invoices yet. <a href="#" onclick="showModule('invoice',null)" style="color:var(--col-orange)">Create one →</a></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRANSPORT -->
+  <div class="module" id="mod-transport">
+    <div class="page-header"><h2>Transport Management</h2><p class="text-muted">Manage transport companies and vehicles</p></div>
+    <div class="row g-3">
+      <div class="col-lg-5">
+        <div class="card-white">
+          <div class="card-head"><h5>Add Transport</h5><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--col-emerald),#059669);display:grid;place-items:center;color:white;font-size:13px"><i class="fa-solid fa-truck"></i></div></div>
+          <div class="row g-2">
+            <div class="col-12"><label class="form-label">Transport Name</label><input type="text" class="form-control" id="tName" placeholder="e.g. Prahar Trucking" /></div>
+            <div class="col-md-6"><label class="form-label">Contact Person</label><input type="text" class="form-control" id="tContact" placeholder="Name" /></div>
+            <div class="col-md-6"><label class="form-label">Phone</label><input type="text" class="form-control" id="tPhone" placeholder="+91 XXXXXXXXXX" /></div>
+            <div class="col-12"><label class="form-label">Address</label><textarea class="form-control" id="tAddress" rows="2" placeholder="Full Address"></textarea></div>
+            <div class="col-md-6"><label class="form-label">PAN</label><input type="text" class="form-control" id="tPAN" placeholder="PAN Number" /></div>
+            <div class="col-md-6"><label class="form-label">GST No.</label><input type="text" class="form-control" id="tGST" placeholder="GSTIN" onblur="validateGST(this)" /><div class="invalid-feedback-custom">Invalid GST Format (e.g., 22AAAAA0000A1Z5)</div></div>
+            <div class="col-12"><button class="btn btn-emerald w-100" onclick="saveTransport()"><i class="fa-solid fa-plus me-2"></i>Add Transport</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="card-white">
+          <div class="card-head"><h5>Transport List</h5></div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead><tr><th>Transport Name</th><th>Contact</th><th>Phone</th><th>GST</th><th>Action</th></tr></thead>
+              <tbody id="transportBody"><tr><td colspan="5" class="text-center text-muted py-4"><i class="fa-solid fa-truck fa-2x mb-2 d-block" style="opacity:.2"></i>No transports added</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTIES -->
+  <div class="module" id="mod-parties">
+    <div class="page-header"><h2>Parties / Clients</h2><p class="text-muted">Register Consignors &amp; Consignees — auto-filled in invoices</p></div>
+    <div class="row g-3">
+      <div class="col-lg-5">
+        <div class="card-white">
+          <div class="card-head"><h5>Add Party</h5><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--col-violet),var(--col-indigo));display:grid;place-items:center;color:white;font-size:13px"><i class="fa-solid fa-user-plus"></i></div></div>
+          <div class="row g-2">
+            <div class="col-12"><label class="form-label">Party / Company Name</label><input type="text" class="form-control" id="pName" placeholder="Company Name" /></div>
+            <div class="col-12"><label class="form-label">Party Role</label><select class="form-select" id="pRole"><option value="Both">Both (Consignor &amp; Consignee)</option><option value="Consignor">Consignor (Sender)</option><option value="Consignee">Consignee (Receiver)</option><option value="BillTo">Bill To (Client)</option></select></div>
+            <div class="col-md-6"><label class="form-label">Contact Person</label><input type="text" class="form-control" id="pContact" placeholder="Name" /></div>
+            <div class="col-md-6"><label class="form-label">Phone</label><input type="text" class="form-control" id="pPhone" placeholder="+91 XXXXXXXXXX" /></div>
+            <div class="col-12"><label class="form-label">Address</label><textarea class="form-control" id="pAddress" rows="2" placeholder="Full Address"></textarea></div>
+            <div class="col-md-6"><label class="form-label">GSTIN</label><input type="text" class="form-control" id="pGSTIN" placeholder="GST Number" onblur="validateGST(this)" /><div class="invalid-feedback-custom">Invalid GST Format</div></div>
+            <div class="col-md-6"><label class="form-label">Opening Balance (₹)</label><input type="number" class="form-control" id="pBalance" placeholder="0.00" /></div>
+            <div class="col-12"><button class="btn btn-violet w-100" onclick="saveParty()"><i class="fa-solid fa-user-plus me-2"></i>Add Party</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="card-white">
+          <div class="card-head"><h5>Party List</h5></div>
+          <div class="row g-2 mb-3">
+            <div class="col-md-7"><input type="text" class="form-control" id="partySearch" placeholder="🔍 Search parties..." oninput="filterParties()" /></div>
+            <div class="col-md-5"><select class="form-select" id="partyRoleFilter" onchange="filterParties()"><option value="">All Roles</option><option value="Consignor">Consignor (Sender)</option><option value="Consignee">Consignee (Receiver)</option><option value="BillTo">Bill To</option><option value="Both">Both</option></select></div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead><tr><th>Name</th><th>Role</th><th>Phone</th><th>GSTIN</th><th>Balance</th><th>Action</th></tr></thead>
+              <tbody id="partyBody"><tr><td colspan="6" class="text-center text-muted py-4"><i class="fa-solid fa-users fa-2x mb-2 d-block" style="opacity:.2"></i>No parties added</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENTS -->
+  <div class="module" id="mod-payments">
+    <div class="page-header"><h2>Payment Receipts</h2><p class="text-muted">Record and track payments</p></div>
+    <div class="row g-3">
+      <div class="col-lg-5">
+        <div class="card-white">
+          <div class="card-head"><h5>Record Payment</h5><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--col-amber),#D97706);display:grid;place-items:center;color:white;font-size:13px"><i class="fa-solid fa-money-bill-wave"></i></div></div>
+          <div class="row g-2">
+            <div class="col-12"><label class="form-label">Invoice Number</label><select class="form-select" id="payInv" onchange="updatePaymentBalance()"><option value="">— Select Invoice —</option></select></div>
+            <div class="col-md-6"><label class="form-label">Payment Date</label><input type="date" class="form-control" id="payDate" /></div>
+            <div class="col-md-6"><label class="form-label">Amount (₹)</label><input type="number" class="form-control" id="payAmt" placeholder="0.00" /></div>
+            <div class="col-12"><label class="form-label">Payment Mode</label><select class="form-select" id="payMode"><option>Cash</option><option>NEFT / RTGS</option><option>UPI</option><option>Cheque</option><option>IMPS</option></select></div>
+            <div class="col-12"><label class="form-label">Reference / Cheque No.</label><input type="text" class="form-control" id="payRef" placeholder="Transaction ID / Cheque No." /></div>
+            <div class="col-12"><label class="form-label">Remarks</label><textarea class="form-control" id="payRemarks" rows="2" placeholder="Notes..."></textarea></div>
+            <div class="col-12 mt-2 p-3 rounded bg-light border" id="paymentBalanceBox" style="display:none;">
+              <div class="d-flex justify-content-between"><span class="text-muted small">Total Amount:</span><strong class="small" id="payTotalAmt">₹0</strong></div>
+              <div class="d-flex justify-content-between"><span class="text-muted small">Already Paid:</span><strong class="small" id="payPaidAmt">₹0</strong></div>
+              <hr class="my-1">
+              <div class="d-flex justify-content-between align-items-center"><span class="fw-bold small text-rose">Balance To Pay:</span><span class="fw-bold text-rose h5 mb-0" id="payBalanceAmt">₹0</span></div>
+            </div>
+            <div class="col-12 mt-3"><button class="btn w-100" style="background:linear-gradient(135deg,var(--col-amber),#D97706);color:white;border:none;" onclick="savePayment()"><i class="fa-solid fa-check me-2"></i>Record Payment</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="card-white">
+          <div class="card-head"><h5>Payment History</h5></div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead><tr><th>Invoice#</th><th>Date</th><th>Amount</th><th>Mode</th><th>Reference</th><th>Action</th></tr></thead>
+              <tbody id="paymentBody"><tr><td colspan="6" class="text-center text-muted py-4"><i class="fa-solid fa-money-bill-wave fa-2x mb-2 d-block" style="opacity:.2"></i>No payments recorded</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANK STATEMENT -->
+  <div class="module" id="mod-bank">
+    <div class="page-header"><h2>Bank Statement</h2><p class="text-muted">Upload and reconcile bank statements</p></div>
+    <div class="card-white mb-3">
+      <div class="card-head"><h5><i class="fa-solid fa-upload me-2 text-sky"></i>Upload Bank Statement</h5></div>
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('bankFile').click()">
+        <i class="fa-solid fa-cloud-arrow-up fa-3x mb-3 text-orange"></i>
+        <h5>Click or Drag & Drop</h5>
+        <p class="text-muted" style="font-size:13px">Upload CSV / Excel bank statement file</p>
+        <input type="file" id="bankFile" accept=".csv,.xls,.xlsx" style="display:none" onchange="handleBankUpload(event)" />
+      </div>
+      <div id="bankUploadStatus" class="mt-2"></div>
+    </div>
+    <div class="card-white">
+      <div class="card-head"><h5>Bank Transactions</h5></div>
+      <div class="row g-2 mb-3">
+        <div class="col-md-3"><input type="date" class="form-control" id="bankFrom" /></div>
+        <div class="col-md-3"><input type="date" class="form-control" id="bankTo" /></div>
+        <div class="col-md-3"><select class="form-select" id="bankType"><option value="">All Transactions</option><option>Credit</option><option>Debit</option></select></div>
+        <div class="col-md-3"><button class="btn btn-sky w-100" onclick="filterBank()"><i class="fa-solid fa-filter me-1"></i>Filter</button></div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead><tr><th>Date</th><th>Description</th><th>Reference</th><th>Debit (₹)</th><th>Credit (₹)</th><th>Balance (₹)</th></tr></thead>
+          <tbody id="bankBody"><tr><td colspan="6" class="text-center text-muted py-5"><i class="fa-solid fa-building-columns fa-2x mb-2 d-block" style="opacity:.2"></i>Upload a bank statement to view transactions</td></tr></tbody>
+        </table>
+      </div>
+      <div class="d-flex gap-2 mt-2">
+        <button class="btn btn-outline-secondary btn-sm" onclick="exportTableToExcel('bankBody','Bank_Statement')"><i class="fa-solid fa-file-excel me-1"></i>Export Excel</button>
+        <button class="btn btn-outline-secondary btn-sm" onclick="printTable('bankBody')"><i class="fa-solid fa-print me-1"></i>Print</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPORTS -->
+  <div class="module" id="mod-reports">
+    <div class="page-header"><h2>Reports</h2><p class="text-muted">Business analytics and reports</p></div>
+    <div class="row g-3">
+      <div class="col-md-4"><div class="report-card" onclick="generateReport('profit-loss')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#FFF1EB,#FFE4D6);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-chart-line fa-xl text-orange"></i></div><h6>Profit & Loss</h6><p class="text-muted small">Monthly income & expense</p></div></div>
+      <div class="col-md-4"><div class="report-card" onclick="generateReport('party-ledger')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-book fa-xl text-violet"></i></div><h6>Party Ledger</h6><p class="text-muted small">Outstanding per client</p></div></div>
+      <div class="col-md-4"><div class="report-card" onclick="generateReport('transport')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#ECFDF5,#D1FAE5);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-truck fa-xl text-emerald"></i></div><h6>Transport Report</h6><p class="text-muted small">Trip-wise summary</p></div></div>
+      <div class="col-md-4"><div class="report-card" onclick="generateReport('gst')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#F0F9FF,#E0F2FE);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-percent fa-xl text-sky"></i></div><h6>GST Report</h6><p class="text-muted small">GSTR-1 / Tax summary</p></div></div>
+      <div class="col-md-4"><div class="report-card" onclick="generateReport('outstanding')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#FFF1F2,#FFE4E6);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-clock fa-xl text-rose"></i></div><h6>Outstanding Report</h6><p class="text-muted small">Pending receivables</p></div></div>
+      <div class="col-md-4"><div class="report-card" onclick="generateReport('vehicle')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#FFFBEB,#FEF3C7);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-car fa-xl" style="color:var(--col-amber)"></i></div><h6>Vehicle-wise Report</h6><p class="text-muted small">Trip details per vehicle</p></div></div>
+    </div>
+    <div class="card-white mt-3" id="reportOutput" style="display:none">
+      <div class="card-head"><h5 id="reportTitle">Report</h5><div class="d-flex gap-2"><button class="btn btn-emerald btn-sm" onclick="exportTableToExcel('reportTable','Report')"><i class="fa-solid fa-file-excel me-1"></i>Excel</button><button class="btn btn-orange btn-sm" onclick="printTable('reportTable')"><i class="fa-solid fa-print me-1"></i>Print</button></div></div>
+      <div id="reportContent"></div>
+    </div>
+  </div>
+
+  <!-- CONSOLIDATED -->
+  <div class="module" id="mod-consolidated">
+    <div class="page-header"><h2>Consolidated Data Management</h2><p class="text-muted">Backup, Restore, and Export all data</p></div>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card-white">
+          <div class="card-head"><h5><i class="fa-solid fa-file-export me-2 text-emerald"></i>Export All Data</h5></div>
+          <p class="text-muted small">Download a complete backup of all Invoices, Parties, Transports, Payments, and Bank data.</p>
+          <button class="btn btn-emerald w-100" onclick="exportConsolidatedData()"><i class="fa-solid fa-download me-2"></i>Download Consolidated Excel</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card-white">
+          <div class="card-head"><h5><i class="fa-solid fa-file-import me-2 text-orange"></i>Import / Restore Data</h5></div>
+          <p class="text-muted small">Upload a previously exported Excel file to restore. <strong class="text-rose">Warning: This will overwrite existing data.</strong></p>
+          <div class="upload-zone p-3" onclick="document.getElementById('restoreFile').click()">
+            <i class="fa-solid fa-upload fa-2x text-muted mb-2"></i>
+            <div class="small fw-bold">Click to Upload Backup File</div>
+            <input type="file" id="restoreFile" accept=".xlsx,.xls" style="display:none" onchange="importConsolidatedData(event)" />
+          </div>
+          <div id="restoreStatus" class="mt-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="module" id="mod-settings">
+    <div class="page-header"><h2>Settings</h2><p class="text-muted">Company & application settings</p></div>
+    <div class="row g-3">
+      <div class="col-lg-6">
+        <div class="card-white">
+          <div class="card-head"><h5>Company Information</h5><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--col-orange),var(--col-rose));display:grid;place-items:center;color:white;font-size:13px"><i class="fa-solid fa-building"></i></div></div>
+          <div class="row g-2">
+            <div class="col-12"><label class="form-label">Company Name</label><input type="text" class="form-control" id="cName" value="Prahar Trucking" /></div>
+            <div class="col-12"><label class="form-label">Address</label><textarea class="form-control" id="cAddress" rows="2"></textarea></div>
+            <div class="col-md-6"><label class="form-label">Phone</label><input type="text" class="form-control" id="cPhone" /></div>
+            <div class="col-md-6"><label class="form-label">Email</label><input type="email" class="form-control" id="cEmail" /></div>
+            <div class="col-md-6"><label class="form-label">GSTIN</label><input type="text" class="form-control" id="cGSTIN" /></div>
+            <div class="col-md-6"><label class="form-label">PAN</label><input type="text" class="form-control" id="cPAN" /></div>
+            <div class="col-12"><button class="btn btn-orange" onclick="saveSettings()"><i class="fa-solid fa-floppy-disk me-2"></i>Save Settings</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card-white">
+          <div class="card-head"><h5>Bank Details</h5><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--col-sky),var(--col-indigo));display:grid;place-items:center;color:white;font-size:13px"><i class="fa-solid fa-building-columns"></i></div></div>
+          <div class="row g-2">
+            <div class="col-12"><label class="form-label">Bank Name</label><input type="text" class="form-control" id="bName" placeholder="e.g. State Bank of India" /></div>
+            <div class="col-md-6"><label class="form-label">Account Number</label><input type="text" class="form-control" id="bAccNo" /></div>
+            <div class="col-md-6"><label class="form-label">IFSC Code</label><input type="text" class="form-control" id="bIFSC" /></div>
+            <div class="col-12"><label class="form-label">Branch</label><input type="text" class="form-control" id="bBranch" /></div>
+            <div class="col-12"><label class="form-label">Account Holder Name</label><input type="text" class="form-control" id="bHolder" value="Prahar Trucking" /></div>
+            <div class="col-12"><button class="btn btn-sky" onclick="saveBankSettings()"><i class="fa-solid fa-floppy-disk me-2"></i>Save Bank Details</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-content -->
+
+<!-- TOAST -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:9999">
+  <div id="appToast" class="toast align-items-center text-white border-0" role="alert">
+    <div class="d-flex">
+      <div class="toast-body fw-600" id="toastMsg">Saved!</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<div id="print-area"></div>
+
+<!-- PDF TEMPLATE (Hidden) -->
+<div id="pdfTemplate">
+  <!-- HEADER -->
+  <div style="border-bottom:3px solid #FF6B2C;padding-bottom:14px;margin-bottom:0;display:flex;justify-content:space-between;align-items:flex-start;">
+    <div style="display:flex;flex-direction:column;justify-content:center;">
+      <svg width="200" height="64" viewBox="0 0 420 130" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+        <line x1="130" y1="18" x2="300" y2="18" stroke="#000" stroke-width="4"/>
+        <line x1="310" y1="18" x2="410" y2="18" stroke="#000" stroke-width="4"/>
+        <text x="10" y="80" font-family="Arial Black,Arial" font-weight="900" font-size="72" fill="#FF6B2C" letter-spacing="2">PR</text>
+        <text x="130" y="80" font-family="Arial Black,Arial" font-weight="900" font-size="72" fill="#111111" letter-spacing="2">AHAR</text>
+        <line x1="10" y1="90" x2="115" y2="90" stroke="#111" stroke-width="4"/>
+        <line x1="120" y1="90" x2="195" y2="90" stroke="#111" stroke-width="4"/>
+        <text x="240" y="118" font-family="Arial,sans-serif" font-weight="700" font-size="26" fill="#111111" letter-spacing="6">TRUCKING</text>
+      </svg>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:42px;font-weight:900;color:#111;letter-spacing:2px;line-height:1;">INVOICE</div>
+      <table style="margin-top:14px;margin-left:auto;border-collapse:collapse;">
+        <tr><td style="padding:3px 10px 3px 0;color:#555;font-size:11px;">Invoice No.</td><td style="font-weight:700;font-size:13px;color:#111;" id="pdfInvNo"></td></tr>
+        <tr><td style="padding:3px 10px 3px 0;color:#555;font-size:11px;">Invoice Date</td><td style="font-weight:700;font-size:13px;color:#111;" id="pdfInvDate"></td></tr>
+        <tr><td style="padding:3px 10px 3px 0;color:#555;font-size:11px;">Due Date</td><td style="font-weight:700;font-size:13px;color:#111;" id="pdfDueDate"></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Company Info + Truck -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0 10px;border-bottom:1px solid #ddd;margin-bottom:10px;">
+    <div>
+      <div style="color:#FF6B2C;font-weight:800;font-size:14px;margin-bottom:3px;">PRAHAR TRUCKING</div>
+      <div id="pdfCompAddress" style="color:#444;font-size:10px;line-height:1.5;"></div>
+      <div style="margin-top:4px;font-size:10px;color:#333;">📞 <span id="pdfCompPhone"></span> &nbsp; ✉ <span id="pdfCompEmail"></span><br>🌐 www.prahartrucking.com</div>
+      <div style="margin-top:4px;font-size:10px;color:#333;"><strong>GSTIN:</strong> <span id="pdfCompGST"></span></div>
+    </div>
+    <div style="opacity:0.85;">
+      <svg width="180" height="72" viewBox="0 0 440 180" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="40" width="310" height="100" rx="4" fill="#f0f0f0" stroke="#ccc" stroke-width="2"/>
+        <text x="30" y="100" font-family="Arial Black" font-weight="900" font-size="22" fill="#FF6B2C">PRAHAR</text>
+        <text x="30" y="122" font-family="Arial" font-weight="700" font-size="14" fill="#333" letter-spacing="4">TRUCKING</text>
+        <rect x="320" y="65" width="100" height="75" rx="6" fill="#ddd" stroke="#aaa" stroke-width="2"/>
+        <rect x="330" y="72" width="85" height="45" rx="3" fill="#aacff0" stroke="#aaa" stroke-width="1"/>
+        <circle cx="80" cy="148" r="20" fill="#333"/><circle cx="80" cy="148" r="10" fill="#777"/>
+        <circle cx="200" cy="148" r="20" fill="#333"/><circle cx="200" cy="148" r="10" fill="#777"/>
+        <circle cx="370" cy="148" r="20" fill="#333"/><circle cx="370" cy="148" r="10" fill="#777"/>
+        <line x1="0" y1="168" x2="440" y2="168" stroke="#ccc" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Bill To + Trip Details (From/To REMOVED from trip details) -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px;">
+    <div>
+      <div style="background:#FF6B2C;color:white;font-weight:700;font-size:12px;padding:6px 10px;border-radius:4px 4px 0 0;">👤 BILL TO</div>
+      <div style="border:1px solid #ddd;border-top:none;border-radius:0 0 4px 4px;padding:12px;">
+        <div style="font-weight:800;font-size:13px;color:#111;margin-bottom:4px;" id="pdfParty"></div>
+        <div style="font-size:11px;color:#555;line-height:1.7;" id="pdfPartyAddress"></div>
+        <div style="margin-top:6px;font-size:11px;color:#333;"><strong>GSTIN:</strong> <span id="pdfPartyGST"></span></div>
+      </div>
+    </div>
+    <div>
+      <div style="background:#FF6B2C;color:white;font-weight:700;font-size:12px;padding:6px 10px;border-radius:4px 4px 0 0;">🚚 TRIP DETAILS</div>
+      <div style="border:1px solid #ddd;border-top:none;border-radius:0 0 4px 4px;padding:10px;">
+        <table style="width:100%;border-collapse:collapse;font-size:11px;">
+          <!-- FROM and TO columns REMOVED as requested -->
+          <tr><td style="padding:3px 6px;font-weight:700;color:#333;width:45%;">Vehicle No.</td><td style="color:#555;" id="pdfVehicle"></td></tr>
+          <tr id="pdfServiceTypeRow" style="display:none;"><td style="padding:3px 6px;font-weight:700;color:#333;">Type of Service</td><td style="color:#555;" id="pdfServiceType"></td></tr>
+          <tr><td style="padding:3px 6px;font-weight:700;color:#333;">Date of Transport</td><td style="color:#555;" id="pdfTransportDate"></td></tr>
+          <tr><td style="padding:3px 6px;font-weight:700;color:#333;">LR / Waybill No.</td><td style="color:#555;font-weight:600;" id="pdfLrNo"></td></tr>
+          <tr><td style="padding:3px 6px;font-weight:700;color:#333;">Driver Name</td><td style="color:#555;" id="pdfDriver">—</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consignor / Consignee per LR -->
+  <div id="pdfLrDetailsSection" style="margin-bottom:12px;display:none;">
+    <div style="background:#7C3AED;color:white;font-weight:700;font-size:12px;padding:6px 10px;border-radius:4px 4px 0 0;">📦 CONSIGNOR (SENDER) &amp; CONSIGNEE (RECEIVER) — LR WISE</div>
+    <div style="border:1px solid #C4B5FD;border-top:none;border-radius:0 0 4px 4px;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;font-size:11px;">
+        <thead>
+          <tr style="background:#F5F3FF;">
+            <th style="padding:6px 10px;font-weight:700;color:#7C3AED;border-bottom:1px solid #E9D5FF;width:20%;">LR No.</th>
+            <th style="padding:6px 10px;font-weight:700;color:#FF6B2C;border-bottom:1px solid #E9D5FF;width:40%;">Consignor (Sender)</th>
+            <th style="padding:6px 10px;font-weight:700;color:#7C3AED;border-bottom:1px solid #E9D5FF;width:40%;">Consignee (Receiver)</th>
+          </tr>
+        </thead>
+        <tbody id="pdfLrDetailsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Service Table — S.No + LR/Ship column + other columns -->
+  <table style="width:100%;border-collapse:collapse;margin-bottom:0;">
+    <thead>
+      <tr>
+        <th style="width:35px;background:#FF6B2C;color:white;padding:10px 6px;text-align:center;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);">S.NO.</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 8px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);width:80px;">LR / SHIP NO.</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 8px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);">DESCRIPTION OF SERVICE</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:center;width:80px;">VEHICLE TYPE</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:center;width:65px;">QTY</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:right;width:90px;">FREIGHT (₹)</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:right;width:80px;">OTHER CHG (₹)</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;text-align:right;width:80px;">AMOUNT (₹)</th>
+      </tr>
+    </thead>
+    <tbody id="pdfItemsBody"></tbody>
+  </table>
+
+  <!-- Totals -->
+  <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+    <table style="border-collapse:collapse;min-width:220px;">
+      <tr style="background:#f9f9f9;"><td style="padding:7px 14px;font-size:12px;font-weight:600;color:#444;border:1px solid #ddd;">SUB TOTAL</td><td style="padding:7px 14px;font-size:12px;font-weight:700;color:#111;text-align:right;border:1px solid #ddd;" id="pdfSubTotal"></td></tr>
+      <tr><td style="padding:7px 14px;font-size:12px;font-weight:600;color:#444;border:1px solid #ddd;">GST @ <span id="pdfGstPct">0</span>%</td><td style="padding:7px 14px;font-size:12px;font-weight:700;color:#111;text-align:right;border:1px solid #ddd;" id="pdfGstAmt"></td></tr>
+      <tr style="background:#FF6B2C;"><td style="padding:9px 14px;font-size:13px;font-weight:800;color:white;border:1px solid #FF6B2C;">TOTAL AMOUNT</td><td style="padding:9px 14px;font-size:13px;font-weight:800;color:white;text-align:right;border:1px solid #FF6B2C;" id="pdfGrandTotal"></td></tr>
+    </table>
+  </div>
+
+  <!-- Terms + Bank + Signatory -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:8px;">
+    <div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;"><strong style="color:#FF6B2C;font-size:12px;">📋 TERMS &amp; CONDITIONS</strong></div>
+      <ul style="font-size:10px;color:#555;padding-left:14px;line-height:1.8;margin:0;">
+        <li>Payment within 14 days from invoice date.</li>
+        <li>Interest @ 18% p.a. on overdue payments.</li>
+        <li>Goods once delivered are not the transporter's responsibility.</li>
+      </ul>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;"><strong style="color:#FF6B2C;font-size:12px;">🏦 BANK DETAILS</strong></div>
+      <table style="font-size:10px;border-collapse:collapse;">
+        <tr><td style="padding:2px 8px 2px 0;color:#555;font-weight:600;">Bank Name</td><td style="color:#333;">: <span id="pdfBankName"></span></td></tr>
+        <tr><td style="padding:2px 8px 2px 0;color:#555;font-weight:600;">Account Name</td><td style="color:#333;">: Prahar Trucking</td></tr>
+        <tr><td style="padding:2px 8px 2px 0;color:#555;font-weight:600;">Account No.</td><td style="color:#333;">: <span id="pdfAccNo"></span></td></tr>
+        <tr><td style="padding:2px 8px 2px 0;color:#555;font-weight:600;">IFSC Code</td><td style="color:#333;">: <span id="pdfIfsc"></span></td></tr>
+        <tr><td style="padding:2px 8px 2px 0;color:#555;font-weight:600;">Branch</td><td style="color:#333;">: <span id="pdfBranch"></span></td></tr>
+      </table>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:12px;font-weight:600;color:#333;margin-bottom:40px;">For Prahar Trucking</div>
+      <div style="border-top:1px solid #aaa;padding-top:6px;font-size:11px;color:#555;">Authorized Signatory</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:20px;border-top:2px solid #FF6B2C;padding-top:12px;">
+    <strong style="color:#FF6B2C;font-size:14px;letter-spacing:1px;">THANK YOU FOR YOUR BUSINESS!</strong>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+// ===== CORE UI =====
+let sidebarOpen = true;
+function toggleSidebar() {
+  const s = document.getElementById('sidebar');
+  const m = document.getElementById('mainContent');
+  if (window.innerWidth <= 768) { s.classList.toggle('open'); }
+  else { sidebarOpen = !sidebarOpen; s.classList.toggle('collapsed', !sidebarOpen); m.classList.toggle('expanded', !sidebarOpen); }
+}
+
+const navColors = { dashboard:'', invoice:'', invoices:'', transport:'emerald', parties:'violet', payments:'amber', bank:'sky', reports:'amber', consolidated:'pink', settings:'' };
+
+function showModule(name, btn) {
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+  document.getElementById('mod-' + name).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active','violet','sky','emerald','pink','amber'));
+  if (btn) { btn.classList.add('active'); const col=navColors[name]; if(col) btn.classList.add(col); }
+  else { const match=document.querySelector(`.nav-item[data-module="${name}"]`); if(match){ match.classList.add('active'); const col=navColors[name]; if(col) match.classList.add(col); } }
+  const titles = { dashboard:'Dashboard', invoice:'Create Invoice', invoices:'Invoice List', transport:'Transport', parties:'Parties / Clients', payments:'Payments', bank:'Bank Statement', reports:'Reports', consolidated:'Consolidated Data', settings:'Settings' };
+  document.getElementById('pageTitle').textContent = titles[name] || name;
+  if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+}
+
+function showToast(msg, type='success') {
+  const t = document.getElementById('appToast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.className = 'toast align-items-center text-white border-0';
+  t.classList.add(type==='success' ? 'bg-success' : 'bg-danger');
+  new bootstrap.Toast(t, { delay: 2800 }).show();
+}
+
+// ===== DATA =====
+let invoices = JSON.parse(localStorage.getItem('pt_invoices') || '[]');
+let parties = JSON.parse(localStorage.getItem('pt_parties') || '[]');
+let transports = JSON.parse(localStorage.getItem('pt_transports') || '[]');
+let payments = JSON.parse(localStorage.getItem('pt_payments') || '[]');
+let bankTx = JSON.parse(localStorage.getItem('pt_bank') || '[]');
+let settings = JSON.parse(localStorage.getItem('pt_settings') || '{}');
+let bankSettings = JSON.parse(localStorage.getItem('pt_bankSettings') || '{}');
+
+function save(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
+
+function validateGST(input) {
+  const regex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+  if (input.value && !regex.test(input.value)) { input.classList.add('is-invalid-custom'); return false; }
+  else { input.classList.remove('is-invalid-custom'); return true; }
+}
+
+function getNextInvoiceNo() {
+  if (!invoices.length) return 'PT-' + new Date().getFullYear() + '-001';
+  const year = new Date().getFullYear();
+  const yearInvoices = invoices.filter(i => i.no && i.no.includes(year.toString()));
+  if (!yearInvoices.length) return `PT-${year}-001`;
+  const nums = yearInvoices.map(i => { const parts=i.no.split('-'); return parseInt(parts[parts.length-1])||0; });
+  return `PT-${year}-${(Math.max(...nums)+1).toString().padStart(3,'0')}`;
+}
+
+// ===== LR FIELD MANAGEMENT =====
+function addLRField() {
+  const container = document.getElementById('lrContainer');
+  const row = document.createElement('div');
+  row.className = 'd-flex gap-1 mb-1 lr-row';
+  row.innerHTML = `<input type="text" class="form-control" placeholder="LR / GR Number" oninput="syncAllLRSections()" /><button type="button" class="btn btn-outline-danger btn-sm px-2" onclick="removeLRField(this)"><i class="fa-solid fa-minus"></i></button>`;
+  container.appendChild(row);
+  updateFirstLRRemoveBtn();
+  syncAllLRSections();
+}
+
+function removeLRField(btn) {
+  btn.closest('.lr-row').remove();
+  updateFirstLRRemoveBtn();
+  syncAllLRSections();
+}
+
+function updateFirstLRRemoveBtn() {
+  const rows = document.querySelectorAll('#lrContainer .lr-row');
+  rows.forEach(row => { const b=row.querySelector('button'); if(b) b.style.display = rows.length>1?'':'none'; });
+}
+
+function getLRNumbers() {
+  return [...document.querySelectorAll('#lrContainer .lr-row input')].map(i=>i.value.trim()).filter(Boolean);
+}
+
+function setLRNumbers(lrs) {
+  const container = document.getElementById('lrContainer');
+  container.innerHTML = '';
+  const list = Array.isArray(lrs) ? lrs : (lrs?[lrs]:['']);
+  if (!list.length) list.push('');
+  list.forEach(lr => {
+    const row = document.createElement('div');
+    row.className = 'd-flex gap-1 mb-1 lr-row';
+    row.innerHTML = `<input type="text" class="form-control" placeholder="LR / GR Number" value="${lr}" oninput="syncAllLRSections()" /><button type="button" class="btn btn-outline-danger btn-sm px-2" onclick="removeLRField(this)" style="display:none"><i class="fa-solid fa-minus"></i></button>`;
+    container.appendChild(row);
+  });
+  updateFirstLRRemoveBtn();
+}
+
+// ===== MASTER SYNC — syncs all 4 per-LR sections =====
+function syncAllLRSections() {
+  syncLRConsignorConsignee();
+  syncLRRouteVehicle();
+  syncLRGoodsCharges();
+  syncLRRemarks();
+}
+
+// ===== SECTION A: CONSIGNOR / CONSIGNEE =====
+function getConsignorOptions() { return parties.filter(p => !p.role||p.role==='Consignor'||p.role==='Both'); }
+function getConsigneeOptions() { return parties.filter(p => !p.role||p.role==='Consignee'||p.role==='Both'); }
+function buildPartyOptions(list, selectedName) {
+  return '<option value="">— Select —</option>' + list.map(p=>`<option value="${p.name}"${p.name===selectedName?' selected':''}>${p.name}</option>`).join('');
+}
+function updateConsignorConsigneeDropdowns() {
+  document.querySelectorAll('#lrConsignorConsigneeContainer .lr-cc-row').forEach(row => {
+    const cSel=row.querySelector('.consignor-sel'), ceSel=row.querySelector('.consignee-sel');
+    if(cSel) cSel.innerHTML=buildPartyOptions(getConsignorOptions(),cSel.value);
+    if(ceSel) ceSel.innerHTML=buildPartyOptions(getConsigneeOptions(),ceSel.value);
+  });
+}
+
+function syncLRConsignorConsignee() {
+  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
+  const ccContainer = document.getElementById('lrConsignorConsigneeContainer');
+  const existing = [...ccContainer.querySelectorAll('.lr-cc-row')];
+  const consignorOpts = getConsignorOptions();
+  const consigneeOpts = getConsigneeOptions();
+
+  while (existing.length < lrInputs.length) {
+    const idx = existing.length;
+    const row = document.createElement('div');
+    row.className = 'row g-2 mb-2 lr-cc-row';
+    row.setAttribute('data-lr-idx', idx);
+    row.innerHTML = `
+      <div class="col-12">
+        <div style="background:linear-gradient(135deg,#F5F3FF,#FAF9FF);border:1.5px solid #E9D5FF;border-radius:10px;padding:10px 14px;">
+          <div style="font-size:11px;font-weight:700;color:#7C3AED;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">
+            <i class="fa-solid fa-truck-ramp-box me-1"></i>LR #<span class="lr-label">${idx+1}</span>: <span class="lr-no-display" style="color:#111"></span>
+          </div>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label class="form-label" style="font-size:11px;color:#FF6B2C;"><i class="fa-solid fa-arrow-up-from-bracket me-1"></i>Consignor (Sender)</label>
+              <select class="form-select form-select-sm consignor-sel" style="border-color:#FDBA74;">${buildPartyOptions(consignorOpts,'')}</select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" style="font-size:11px;color:#7C3AED;"><i class="fa-solid fa-arrow-down-to-bracket me-1"></i>Consignee (Receiver)</label>
+              <select class="form-select form-select-sm consignee-sel" style="border-color:#C4B5FD;">${buildPartyOptions(consigneeOpts,'')}</select>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    ccContainer.appendChild(row);
+    existing.push(row);
+  }
+  while (existing.length > lrInputs.length) { existing.pop().remove(); }
+  ccContainer.querySelectorAll('.lr-cc-row').forEach((row, i) => {
+    row.querySelector('.lr-label').textContent = i+1;
+    const lrVal = lrInputs[i]?lrInputs[i].value.trim():'';
+    row.querySelector('.lr-no-display').textContent = lrVal?`(${lrVal})`:'';
+  });
+}
+
+function getLRConsignorConsigneeData() {
+  const rows = document.querySelectorAll('#lrConsignorConsigneeContainer .lr-cc-row');
+  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
+  return [...rows].map((row,i)=>({ lr: lrInputs[i]?lrInputs[i].value.trim():'', consignor: row.querySelector('.consignor-sel')?.value||'', consignee: row.querySelector('.consignee-sel')?.value||'' }));
+}
+
+function setLRConsignorConsigneeData(lrCCData) {
+  setTimeout(() => {
+    const rows = document.querySelectorAll('#lrConsignorConsigneeContainer .lr-cc-row');
+    lrCCData.forEach((d,i)=>{ if(rows[i]){ const cSel=rows[i].querySelector('.consignor-sel'); const ceSel=rows[i].querySelector('.consignee-sel'); if(cSel) cSel.value=d.consignor||''; if(ceSel) ceSel.value=d.consignee||''; } });
+  }, 60);
+}
+
+// ===== SECTION B: ROUTE & VEHICLE PER LR =====
+function syncLRRouteVehicle() {
+  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
+  const container = document.getElementById('lrRouteVehicleContainer');
+  const existing = [...container.querySelectorAll('.lr-rv-row')];
+
+  while (existing.length < lrInputs.length) {
+    const idx = existing.length;
+    const row = document.createElement('div');
+    row.className = 'mb-2 lr-rv-row lr-section-box';
+    row.setAttribute('data-lr-idx', idx);
+    row.innerHTML = `
+      <div class="lr-section-header">
+        <i class="fa-solid fa-route"></i>
+        LR #<span class="lr-label">${idx+1}</span>: <span class="lr-no-display" style="color:#111;font-weight:600;margin-left:4px;"></span>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-3">
+          <label class="form-label">From (Origin)</label>
+          <input type="text" class="form-control rv-from" placeholder="City / State" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">To (Destination)</label>
+          <input type="text" class="form-control rv-to" placeholder="City / State" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Vehicle Number</label>
+          <input type="text" class="form-control rv-vehicle" placeholder="e.g. TN 01 AB 1234" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Type of Service <span style="font-size:10px;color:var(--text-muted);font-weight:400">(shown in PDF)</span></label>
+          <select class="form-select rv-service">
+            <option value="">— Select —</option>
+            <option value="Full Truck Load (FTL)">Full Truck Load (FTL)</option>
+            <option value="Part Truck Load (PTL)">Part Truck Load (PTL)</option>
+            <option value="Container">Container</option>
+            <option value="Express Delivery">Express Delivery</option>
+            <option value="Cold Chain">Cold Chain</option>
+            <option value="ODC (Over Dimension Cargo)">ODC (Over Dimension Cargo)</option>
+          </select>
+        </div>
+      </div>`;
+    container.appendChild(row);
+    existing.push(row);
+  }
+  while (existing.length > lrInputs.length) { existing.pop().remove(); }
+  container.querySelectorAll('.lr-rv-row').forEach((row, i) => {
+    row.querySelector('.lr-label').textContent = i+1;
+    const lrVal = lrInputs[i]?lrInputs[i].value.trim():'';
+    row.querySelector('.lr-no-display').textContent = lrVal?`(${lrVal})`:'';
+  });
+}
+
+function getLRRouteVehicleData() {
+  const rows = document.querySelectorAll('#lrRouteVehicleContainer .lr-rv-row');
+  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
+  return [...rows].map((row,i)=>({
+    lr: lrInputs[i]?lrInputs[i].value.trim():'',
+    from: row.querySelector('.rv-from')?.value||'',
+    to: row.querySelector('.rv-to')?.value||'',
+    vehicle: row.querySelector('.rv-vehicle')?.value||'',
+    service: row.querySelector('.rv-service')?.value||''
+  }));
+}
+
+function setLRRouteVehicleData(data) {
+  setTimeout(() => {
+    const rows = document.querySelectorAll('#lrRouteVehicleContainer .lr-rv-row');
+    data.forEach((d,i)=>{ if(rows[i]){ if(rows[i].querySelector('.rv-from')) rows[i].querySelector('.rv-from').value=d.from||''; if(rows[i].querySelector('.rv-to')) rows[i].querySelector('.rv-to').value=d.to||''; if(rows[i].querySelector('.rv-vehicle')) rows[i].querySelector('.rv-vehicle').value=d.vehicle||''; if(rows[i].querySelector('.rv-service')) rows[i].querySelector('.rv-service').value=d.service||''; } });
+  }, 80);
+}
+
+// ===== SECTION C: GOODS & CHARGES PER LR =====
+function syncLRGoodsCharges() {
+  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
+  const container = document.getElementById('lrGoodsChargesContainer');
+  const existing = [...container.querySelectorAll('.lr-gc-row')];
+
+  while (existing.length < lrInputs.length) {
+    const idx = existing.length;
+    const row = document.createElement('div');
+    row.className = 'mb-2 lr-gc-row lr-section-box';
+    row.setAttribute('data-lr-idx', idx);
+    row.innerHTML = `
+      <div class="lr-section-header">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        LR #<span class="lr-label">${idx+1}</span>: <span class="lr-no-display" style="color:#111;font-weight:600;margin-left:4px;"></span>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Description of Goods</label>
+          <input type="text" class="form-control gc-goods" placeholder="Goods / Commodity" />
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Qty</label>
+          <input type="number" class="form-control gc-qty" placeholder="0" oninput="calcAllTotals()" />
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Weight (MT)</label>
+          <input type="number" class="form-control gc-weight" placeholder="0.00" />
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Rate (₹)</label>
+          <input type="number" class="form-control gc-rate" placeholder="0.00" oninput="calcAllTotals()" />
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Freight (₹)</label>
+          <input type="number" class="form-control gc-freight" placeholder="0.00" readonly style="background:#F8F9FF" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Loading Charges (₹)</label>
+          <input type="number" class="form-control gc-loading" value="0" oninput="calcAllTotals()" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Unloading Charges (₹)</label>
+          <input type="number" class="form-control gc-unloading" value="0" oninput="calcAllTotals()" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Detention / Extra (₹)</label>
+          <input type="number" class="form-control gc-detention" value="0" oninput="calcAllTotals()" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">GST % <small style="color:var(--text-muted);font-weight:400">(5/12/18)</small></label>
+          <input type="number" class="form-control gc-gst" value="5" oninput="calcAllTotals()" />
+        </div>
+      </div>`;
+    container.appendChild(row);
+    existing.push(row);
+  }
+  while (existing.length > lrInputs.length) { existing.pop().remove(); }
+  container.querySelectorAll('.lr-gc-row').forEach((row, i) => {
+    row.querySelector('.lr-label').textContent = i+1;
+    const lrVal = lrInputs[i]?lrInputs[i].value.trim():'';
+    row.querySelector('.lr-no-display').textContent = lrVal?`(${lrVal})`:'';
+  });
+  calcAllTotals();
+}
+
+function getLRGoodsChargesData() {
+  const rows = document.querySelectorAll('#lrGoodsChargesContainer .lr-gc-row');
+  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
+  return [...rows].map((row,i)=>({
+    lr: lrInputs[i]?lrInputs[i].value.trim():'',
+    goods: row.querySelector('.gc-goods')?.value||'',
+    qty: row.querySelector('.gc-qty')?.value||'',
+    weight: row.querySelector('.gc-weight')?.value||'',
+    rate: row.querySelector('.gc-rate')?.value||'',
+    freight: row.querySelector('.gc-freight')?.value||'',
+    loading: row.querySelector('.gc-loading')?.value||'0',
+    unloading: row.querySelector('.gc-unloading')?.value||'0',
+    detention: row.querySelector('.gc-detention')?.value||'0',
+    gst: row.querySelector('.gc-gst')?.value||'5'
+  }));
+}
+
+function setLRGoodsChargesData(data) {
+  setTimeout(() => {
+    const rows = document.querySelectorAll('#lrGoodsChargesContainer .lr-gc-row');
+    data.forEach((d,i)=>{ if(rows[i]){
+      const f=s=>rows[i].querySelector(s);
+      if(f('.gc-goods')) f('.gc-goods').value=d.goods||'';
+      if(f('.gc-qty')) f('.gc-qty').value=d.qty||'';
+      if(f('.gc-weight')) f('.gc-weight').value=d.weight||'';
+      if(f('.gc-rate')) f('.gc-rate').value=d.rate||'';
+      if(f('.gc-loading')) f('.gc-loading').value=d.loading||'0';
+      if(f('.gc-unloading')) f('.gc-unloading').value=d.unloading||'0';
+      if(f('.gc-detention')) f('.gc-detention').value=d.detention||'0';
+      if(f('.gc-gst')) f('.gc-gst').value=d.gst||'5';
+      calcAllTotals();
+    }});
+  }, 100);
+}
+
+// ===== SECTION D: REMARKS PER LR =====
+function syncLRRemarks() {
+  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
+  const container = document.getElementById('lrRemarksContainer');
+  const existing = [...container.querySelectorAll('.lr-rem-row')];
+
+  while (existing.length < lrInputs.length) {
+    const idx = existing.length;
+    const row = document.createElement('div');
+    row.className = 'mb-2 lr-rem-row lr-section-box';
+    row.setAttribute('data-lr-idx', idx);
+    row.innerHTML = `
+      <div class="lr-section-header">
+        <i class="fa-solid fa-note-sticky"></i>
+        LR #<span class="lr-label">${idx+1}</span>: <span class="lr-no-display" style="color:#111;font-weight:600;margin-left:4px;"></span>
+      </div>
+      <div class="row g-2">
+        <div class="col-12">
+          <label class="form-label">Remarks / Notes</label>
+          <textarea class="form-control rem-text" rows="2" placeholder="Any additional notes for this LR..."></textarea>
+        </div>
+      </div>`;
+    container.appendChild(row);
+    existing.push(row);
+  }
+  while (existing.length > lrInputs.length) { existing.pop().remove(); }
+  container.querySelectorAll('.lr-rem-row').forEach((row, i) => {
+    row.querySelector('.lr-label').textContent = i+1;
+    const lrVal = lrInputs[i]?lrInputs[i].value.trim():'';
+    row.querySelector('.lr-no-display').textContent = lrVal?`(${lrVal})`:'';
+  });
+}
+
+function getLRRemarksData() {
+  const rows = document.querySelectorAll('#lrRemarksContainer .lr-rem-row');
+  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
+  return [...rows].map((row,i)=>({ lr: lrInputs[i]?lrInputs[i].value.trim():'', remarks: row.querySelector('.rem-text')?.value||'' }));
+}
+
+function setLRRemarksData(data) {
+  setTimeout(() => {
+    const rows = document.querySelectorAll('#lrRemarksContainer .lr-rem-row');
+    data.forEach((d,i)=>{ if(rows[i]&&rows[i].querySelector('.rem-text')) rows[i].querySelector('.rem-text').value=d.remarks||''; });
+  }, 120);
+}
+
+// ===== CALC TOTALS (across all LR rows) =====
+function calcAllTotals() {
+  let totalSub = 0, totalGstAmt = 0;
+  document.querySelectorAll('#lrGoodsChargesContainer .lr-gc-row').forEach(row => {
+    const qty = parseFloat(row.querySelector('.gc-qty')?.value)||0;
+    const rate = parseFloat(row.querySelector('.gc-rate')?.value)||0;
+    const freight = qty * rate;
+    if(row.querySelector('.gc-freight')) row.querySelector('.gc-freight').value = freight.toFixed(2);
+    const load = parseFloat(row.querySelector('.gc-loading')?.value)||0;
+    const unload = parseFloat(row.querySelector('.gc-unloading')?.value)||0;
+    const det = parseFloat(row.querySelector('.gc-detention')?.value)||0;
+    const gstPct = parseFloat(row.querySelector('.gc-gst')?.value)||0;
+    const sub = freight + load + unload + det;
+    const gst = sub * gstPct / 100;
+    totalSub += sub;
+    totalGstAmt += gst;
+  });
+  const raw = totalSub + totalGstAmt;
+  const rounded = Math.round(raw);
+  const ro = rounded - raw;
+  document.getElementById('subTotal').textContent = '₹' + totalSub.toFixed(2);
+  document.getElementById('gstAmt').textContent = '₹' + totalGstAmt.toFixed(2);
+  document.getElementById('roundOff').textContent = '₹' + ro.toFixed(2);
+  document.getElementById('grandTotal').textContent = '₹' + rounded.toFixed(2);
+}
+
+// ===== SAVE INVOICE =====
+function saveInvoice() {
+  const id = document.getElementById('editInvoiceId').value;
+  const no = document.getElementById('invNo').value.trim();
+  if (!no) { showToast('Invoice Number error', 'danger'); return; }
+
+  const lrCCData = getLRConsignorConsigneeData();
+  const lrRVData = getLRRouteVehicleData();
+  const lrGCData = getLRGoodsChargesData();
+  const lrRemData = getLRRemarksData();
+
+  // Get first LR's route/vehicle for summary columns
+  const firstRV = lrRVData[0] || {};
+
+  const invData = {
+    id: id ? parseInt(id) : Date.now(),
+    no,
+    date: document.getElementById('invDate').value,
+    lr: getLRNumbers(),
+    lrDetails: lrCCData,
+    lrRouteVehicle: lrRVData,
+    lrGoodsCharges: lrGCData,
+    lrRemarks: lrRemData,
+    party: document.getElementById('invParty').value,
+    transport: document.getElementById('invTransport').value,
+    // summary fields from first LR for list display
+    from: firstRV.from || '',
+    to: firstRV.to || '',
+    vehicle: firstRV.vehicle || '',
+    total: document.getElementById('grandTotal').textContent,
+    status: id ? (invoices.find(i=>i.id==id)?.status||'Pending') : 'Pending'
+  };
+
+  if (id) {
+    const idx = invoices.findIndex(i=>i.id==id);
+    if (idx>-1) invoices[idx] = invData;
+    showToast('Invoice updated successfully!');
+  } else {
+    invoices.unshift(invData);
+    showToast('Invoice saved successfully!');
+  }
+
+  save('pt_invoices', invoices);
+  renderDashboard(); renderInvoiceList(); updatePaymentDropdown();
+  if (!id) clearForm();
+}
+
+// ===== EDIT INVOICE =====
+function editInvoice(id) {
+  const inv = invoices.find(i=>i.id===id);
+  if (!inv) return;
+
+  document.getElementById('editInvoiceId').value = inv.id;
+  document.getElementById('invoiceFormTitle').textContent = 'Edit Invoice';
+  document.getElementById('invNo').value = inv.no;
+  document.getElementById('invDate').value = inv.date;
+  document.getElementById('invParty').value = inv.party||'';
+  document.getElementById('invTransport').value = inv.transport||'Prahar Trucking';
+
+  setLRNumbers(inv.lr||['']);
+  // After LR numbers set, sync all sections then populate data
+  setTimeout(() => {
+    syncAllLRSections();
+    setTimeout(() => {
+      if (inv.lrDetails?.length) setLRConsignorConsigneeData(inv.lrDetails);
+      if (inv.lrRouteVehicle?.length) setLRRouteVehicleData(inv.lrRouteVehicle);
+      if (inv.lrGoodsCharges?.length) setLRGoodsChargesData(inv.lrGoodsCharges);
+      if (inv.lrRemarks?.length) setLRRemarksData(inv.lrRemarks);
+    }, 50);
+  }, 30);
+
+  calcAllTotals();
+  showModule('invoice', null);
+}
+
+// ===== CLEAR FORM =====
+function clearForm() {
+  document.getElementById('editInvoiceId').value = '';
+  document.getElementById('invoiceFormTitle').textContent = 'Create Invoice';
+  document.getElementById('invNo').value = getNextInvoiceNo();
+  document.getElementById('invDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('invParty').selectedIndex = 0;
+
+  // Reset LR container to single empty row
+  const container = document.getElementById('lrContainer');
+  container.innerHTML = `<div class="d-flex gap-1 mb-1 lr-row"><input type="text" class="form-control" placeholder="LR / GR Number" oninput="syncAllLRSections()" /><button type="button" class="btn btn-outline-danger btn-sm px-2" onclick="removeLRField(this)" style="display:none"><i class="fa-solid fa-minus"></i></button></div>`;
+
+  // Clear all per-LR section containers
+  document.getElementById('lrConsignorConsigneeContainer').innerHTML='';
+  document.getElementById('lrRouteVehicleContainer').innerHTML='';
+  document.getElementById('lrGoodsChargesContainer').innerHTML='';
+  document.getElementById('lrRemarksContainer').innerHTML='';
+
+  syncAllLRSections();
+  ['subTotal','gstAmt','roundOff','grandTotal'].forEach(id=>document.getElementById(id).textContent='₹0.00');
+}
+
+// ===== PRINT =====
+function printCurrentInvoice() {
+  const content = document.getElementById('invoicePrintArea').innerHTML;
+  const printArea = document.getElementById('print-area');
+  printArea.innerHTML = `<div style="padding:40px;font-family:sans-serif;color:black;"><h2 style="text-align:center;border-bottom:2px solid #000;padding-bottom:10px;">INVOICE</h2>${content.replace(/<button[^>]*>.*?<\/button>/gi,'')}</div>`;
+  window.print();
+  setTimeout(()=>printArea.innerHTML='',1000);
+}
+
+function printTable(tbodyId) {
+  const table = document.getElementById(tbodyId).closest('table');
+  const printArea = document.getElementById('print-area');
+  printArea.innerHTML = `<div style="padding:20px;">${table.outerHTML}</div>`;
+  window.print();
+  setTimeout(()=>printArea.innerHTML='',1000);
+}
+
+// ===== DOWNLOAD PDF =====
+function downloadInvoicePDF(id) {
+  const inv = invoices.find(i=>i.id===id);
+  if (!inv) return;
+
+  document.getElementById('pdfInvNo').textContent = inv.no;
+  document.getElementById('pdfInvDate').textContent = inv.date||'-';
+  if (inv.date) {
+    const d=new Date(inv.date); d.setDate(d.getDate()+14);
+    document.getElementById('pdfDueDate').textContent = d.toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
+  } else document.getElementById('pdfDueDate').textContent='-';
+
+  document.getElementById('pdfCompAddress').innerHTML=(settings.address||'Address Line 1, City').replace(/\n/g,'<br>');
+  document.getElementById('pdfCompPhone').textContent=settings.phone||'+91 0000000000';
+  document.getElementById('pdfCompEmail').textContent=settings.email||'info@prahartrucking.com';
+  document.getElementById('pdfCompGST').textContent=settings.gstin||'-';
+
+  const party=parties.find(p=>p.name===inv.party);
+  document.getElementById('pdfParty').textContent=inv.party||'Unknown';
+  document.getElementById('pdfPartyAddress').innerHTML=(party?(party.address||'-'):'-').replace(/\n/g,'<br>');
+  document.getElementById('pdfPartyGST').textContent=party?(party.gstin||'-'):'-';
+
+  // TRIP DETAILS — FROM and TO removed
+  const firstRV = inv.lrRouteVehicle?.[0] || {};
+  document.getElementById('pdfVehicle').textContent=firstRV.vehicle||inv.vehicle||'-';
+  document.getElementById('pdfTransportDate').textContent=inv.date||'-';
+
+  // Type of Service — show only if provided
+  const serviceVal = firstRV.service||'';
+  if (serviceVal) {
+    document.getElementById('pdfServiceType').textContent = serviceVal;
+    document.getElementById('pdfServiceTypeRow').style.display='';
+  } else {
+    document.getElementById('pdfServiceTypeRow').style.display='none';
+  }
+
+  const lrs = Array.isArray(inv.lr)?inv.lr.filter(Boolean):(inv.lr?[inv.lr]:[]);
+  document.getElementById('pdfLrNo').textContent=lrs.length?lrs.join(', '):'-';
+
+  // Consignor/Consignee
+  const lrDetails = inv.lrDetails||[];
+  if (lrDetails.length && lrDetails.some(d=>d.consignor||d.consignee)) {
+    document.getElementById('pdfLrDetailsSection').style.display='';
+    document.getElementById('pdfLrDetailsBody').innerHTML = lrDetails.map(d=>`
+      <tr>
+        <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-weight:600;color:#333;">${d.lr||'-'}</td>
+        <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;color:#555;">${d.consignor||'-'}</td>
+        <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;color:#555;">${d.consignee||'-'}</td>
+      </tr>`).join('');
+  } else {
+    document.getElementById('pdfLrDetailsSection').style.display='none';
+  }
+
+  // Service table items — one row per LR with LR/Ship column
+  const gcData = inv.lrGoodsCharges || [];
+  const rvData = inv.lrRouteVehicle || [];
+  let itemsHtml = '';
+  let rowNum = 1;
+  let totalSub = 0, totalGstAmt = 0, usedGstPct = 5;
+
+  if (gcData.length) {
+    gcData.forEach((gc, i) => {
+      const lrNo = lrs[i] || (gc.lr||'-');
+      const rv = rvData[i] || {};
+      const freight = parseFloat(gc.freight)||0;
+      const load = parseFloat(gc.loading)||0;
+      const unload = parseFloat(gc.unloading)||0;
+      const det = parseFloat(gc.detention)||0;
+      const gstPct = parseFloat(gc.gst)||5;
+      usedGstPct = gstPct;
+      const sub = freight+load+unload+det;
+      const gst = sub*gstPct/100;
+      totalSub += sub;
+      totalGstAmt += gst;
+      const otherChg = load+unload+det;
+
+      if (freight>0 || sub>0) {
+        itemsHtml += `<tr>
+          <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">${rowNum++}</td>
+          <td style="padding:9px 8px;border-bottom:1px solid #eee;font-weight:700;color:#7C3AED;">${lrNo}</td>
+          <td style="padding:9px 8px;border-bottom:1px solid #eee;">Transport Service${rv.from&&rv.to?' – '+rv.from+' to '+rv.to:''}</td>
+          <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;font-size:11px;">${gc.goods||'FTL'}</td>
+          <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">${gc.qty||'-'}</td>
+          <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;">${freight>0?freight.toFixed(2):'-'}</td>
+          <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;">${otherChg>0?otherChg.toFixed(2):'-'}</td>
+          <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;font-weight:700;">${sub.toFixed(2)}</td>
+        </tr>`;
+      }
+    });
+  } else {
+    // fallback for old invoice format
+    const freight=parseFloat(inv.freight)||0;
+    const load=parseFloat(inv.loading)||0;
+    const unload=parseFloat(inv.unloading)||0;
+    const det=parseFloat(inv.detention)||0;
+    const sub=freight+load+unload+det;
+    const gstPct=parseFloat(inv.gst)||5;
+    usedGstPct=gstPct;
+    totalSub=sub; totalGstAmt=sub*gstPct/100;
+    const otherChg=load+unload+det;
+    itemsHtml=`<tr>
+      <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">1</td>
+      <td style="padding:9px 8px;border-bottom:1px solid #eee;font-weight:700;color:#7C3AED;">${lrs[0]||'-'}</td>
+      <td style="padding:9px 8px;border-bottom:1px solid #eee;">Transport Service – ${inv.from||'?'} to ${inv.to||'?'}</td>
+      <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">${inv.goods||'FTL'}</td>
+      <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">${inv.qty||'-'}</td>
+      <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;">${freight>0?freight.toFixed(2):'-'}</td>
+      <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;">${otherChg>0?otherChg.toFixed(2):'-'}</td>
+      <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;font-weight:700;">${sub.toFixed(2)}</td>
+    </tr>`;
+  }
+
+  document.getElementById('pdfItemsBody').innerHTML = itemsHtml;
+  const rounded = Math.round(totalSub+totalGstAmt);
+  document.getElementById('pdfSubTotal').textContent='₹ '+totalSub.toFixed(2);
+  document.getElementById('pdfGstPct').textContent=usedGstPct;
+  document.getElementById('pdfGstAmt').textContent='₹ '+totalGstAmt.toFixed(2);
+  document.getElementById('pdfGrandTotal').textContent='₹ '+rounded.toFixed(2);
+
+  document.getElementById('pdfBankName').textContent=bankSettings.name||'-';
+  document.getElementById('pdfAccNo').textContent=bankSettings.acc||'-';
+  document.getElementById('pdfIfsc').textContent=bankSettings.ifsc||'-';
+  document.getElementById('pdfBranch').textContent=bankSettings.branch||'-';
+
+  const element = document.getElementById('pdfTemplate');
+  element.style.display='block';
+  html2pdf().set({
+    margin:8, filename:`${inv.no.replace(/\//g,'-')}_PraharTrucking.pdf`,
+    image:{type:'jpeg',quality:0.98},
+    html2canvas:{scale:2,useCORS:true,letterRendering:true},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+  }).from(element).save().then(()=>{ element.style.display='none'; showToast('PDF Downloaded Successfully!'); });
+}
+
+// ===== EXCEL EXPORT =====
+function exportTableToExcel(tbodyId, filename) {
+  const table = document.getElementById(tbodyId).closest('table');
+  const wb = XLSX.utils.table_to_book(table, {sheet:'Sheet 1'});
+  XLSX.writeFile(wb, `${filename}.xlsx`);
+}
+
+function exportAllExcel() {
+  if (!invoices.length) { showToast('No invoices to export','danger'); return; }
+  const ws = XLSX.utils.json_to_sheet(invoices);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Invoices');
+  XLSX.writeFile(wb, 'Prahar_Invoices.xlsx');
+}
+
+function downloadInvoiceExcelById(id) {
+  const inv = invoices.find(i=>i.id===id);
+  if (!inv) return;
+  const data=[{'Invoice No':inv.no,'Date':inv.date,'Party':inv.party,'From':inv.from,'To':inv.to,'Vehicle':inv.vehicle,'Grand Total':inv.total}];
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Invoice');
+  XLSX.writeFile(wb, `Invoice_${inv.no.replace(/\//g,'-')}.xlsx`);
+}
+
+// ===== CONSOLIDATED =====
+function exportConsolidatedData() {
+  const wb = XLSX.utils.book_new();
+  const addSheet=(data,name)=>{ if(!data||!data.length) data=[{Info:'No Data'}]; XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),name); };
+  addSheet(invoices,'Invoices'); addSheet(parties,'Parties'); addSheet(transports,'Transports'); addSheet(payments,'Payments'); addSheet(bankTx,'Bank_Statement');
+  XLSX.writeFile(wb, `Prahar_Backup_${new Date().toISOString().split('T')[0]}.xlsx`);
+}
+
+function importConsolidatedData(event) {
+  const file = event.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const wb=XLSX.read(e.target.result,{type:'binary'});
+      const ps=name=>{ if(wb.Sheets[name]){ const d=XLSX.utils.sheet_to_json(wb.Sheets[name]); if(d.length&&Object.keys(d[0]).includes('Info')&&d[0].Info==='No Data') return []; return d; } return []; };
+      invoices=ps('Invoices'); parties=ps('Parties'); transports=ps('Transports'); payments=ps('Payments'); bankTx=ps('Bank_Statement');
+      save('pt_invoices',invoices); save('pt_parties',parties); save('pt_transports',transports); save('pt_payments',payments); save('pt_bank',bankTx);
+      document.getElementById('restoreStatus').innerHTML=`<div class="alert alert-success py-2 mt-2"><i class="fa-solid fa-check-circle me-2"></i>Data imported! Reloading...</div>`;
+      setTimeout(()=>location.reload(),2000);
+    } catch(err){ document.getElementById('restoreStatus').innerHTML=`<div class="alert alert-danger py-2 mt-2">Error reading file.</div>`; }
+  };
+  reader.readAsBinaryString(file);
+}
+
+// ===== DASHBOARD =====
+function renderDashboard() {
+  document.getElementById('totalInvoices').textContent=invoices.length;
+  document.getElementById('totalTrips').textContent=invoices.length;
+  const paid=payments.reduce((s,p)=>s+parseFloat(p.amount||0),0);
+  const totalAmt=invoices.reduce((s,inv)=>s+parseFloat((inv.total||'₹0').replace('₹','')||0),0);
+  document.getElementById('paidAmt').textContent='₹'+paid.toLocaleString('en-IN');
+  document.getElementById('pendingAmt').textContent='₹'+Math.max(0,totalAmt-paid).toLocaleString('en-IN');
+  const tb=document.getElementById('dashInvoiceBody');
+  if(!invoices.length){tb.innerHTML='<tr><td colspan="5" class="text-center text-muted py-5"><i class="fa-solid fa-file-invoice fa-2x mb-2 d-block" style="opacity:.2"></i>No invoices yet</td></tr>';return;}
+  tb.innerHTML=invoices.slice(0,6).map(inv=>`<tr><td><strong style="color:var(--col-orange)">${inv.no}</strong></td><td>${inv.party||'—'}</td><td><small>${inv.from||'?'} → ${inv.to||'?'}</small></td><td><strong>${inv.total}</strong></td><td>${statusBadge(inv.status)}</td></tr>`).join('');
+}
+
+// ===== INVOICE LIST =====
+function renderInvoiceList(list=invoices) {
+  const tb=document.getElementById('invTableBody');
+  if(!list.length){tb.innerHTML='<tr><td colspan="8" class="text-center text-muted py-5"><i class="fa-solid fa-list-check fa-2x mb-2 d-block" style="opacity:.2"></i>No invoices found.</td></tr>';return;}
+  tb.innerHTML=list.map(inv=>`
+    <tr>
+      <td><strong style="color:var(--col-orange)">${inv.no}</strong></td>
+      <td>${inv.date||'—'}</td>
+      <td>${inv.party||'—'}</td>
+      <td><small>${inv.from||'?'} → ${inv.to||'?'}</small></td>
+      <td>${inv.vehicle||'—'}</td>
+      <td><strong>${inv.total}</strong></td>
+      <td>${statusBadge(inv.status)}</td>
+      <td>
+        <button class="btn-icon edit me-1" onclick="editInvoice(${inv.id})"><i class="fa-solid fa-pen"></i></button>
+        <button class="btn-icon pdf me-1" onclick="downloadInvoicePDF(${inv.id})" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></button>
+        <button class="btn-icon print me-1" onclick="editInvoice(${inv.id});setTimeout(()=>printCurrentInvoice(),600)"><i class="fa-solid fa-print"></i></button>
+        <button class="btn-icon del me-1" onclick="downloadInvoiceExcelById(${inv.id})"><i class="fa-solid fa-file-excel"></i></button>
+        <button class="btn-icon del" onclick="deleteInvoice(${inv.id})"><i class="fa-solid fa-trash"></i></button>
+      </td>
+    </tr>`).join('');
+}
+
+function filterInvoices() {
+  const q=document.getElementById('invSearch').value.toLowerCase();
+  const st=document.getElementById('invStatusFilter').value;
+  renderInvoiceList(invoices.filter(inv=>(!q||[inv.no,inv.party,inv.from,inv.to,inv.vehicle].join(' ').toLowerCase().includes(q))&&(!st||inv.status===st)));
+}
+
+function deleteInvoice(id) {
+  if(!confirm('Delete this invoice?')) return;
+  invoices=invoices.filter(i=>i.id!==id);
+  save('pt_invoices',invoices);
+  renderInvoiceList(); renderDashboard();
+  showToast('Invoice deleted');
+}
+
+function statusBadge(s) {
+  const map={Paid:'badge-paid',Pending:'badge-pending',Partial:'badge-partial'};
+  const dots={Paid:'var(--col-emerald)',Pending:'var(--col-rose)',Partial:'var(--col-amber)'};
+  return `<span class="badge-status ${map[s]||'badge-pending'}"><span class="color-dot" style="background:${dots[s]||'var(--col-rose)'}"></span>${s||'Pending'}</span>`;
+}
+
+// ===== PARTIES =====
+function saveParty() {
+  const name=document.getElementById('pName').value.trim();
+  const gstInput=document.getElementById('pGSTIN');
+  if(!name){showToast('Enter party name','danger');return;}
+  if(!validateGST(gstInput)){showToast('Invalid GSTIN format','danger');return;}
+  parties.push({id:Date.now(),name,role:document.getElementById('pRole').value||'Both',contact:document.getElementById('pContact').value,phone:document.getElementById('pPhone').value,address:document.getElementById('pAddress').value,gstin:gstInput.value,balance:document.getElementById('pBalance').value||'0'});
+  save('pt_parties',parties);
+  renderParties(); updatePartyDropdown(); updateConsignorConsigneeDropdowns();
+  ['pName','pContact','pPhone','pAddress','pGSTIN','pBalance'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('pRole').value='Both';
+  showToast('Party added!');
+}
+
+function renderParties(list=parties) {
+  const tb=document.getElementById('partyBody');
+  if(!list.length){tb.innerHTML='<tr><td colspan="6" class="text-center text-muted py-4"><i class="fa-solid fa-users fa-2x mb-2 d-block" style="opacity:.2"></i>No parties added</td></tr>';return;}
+  const roleColor={Consignor:'#FF6B2C',Consignee:'#7C3AED',BillTo:'#0EA5E9',Both:'#10B981'};
+  tb.innerHTML=list.map(p=>`<tr><td><strong>${p.name}</strong></td><td><span style="background:${roleColor[p.role||'Both']}22;color:${roleColor[p.role||'Both']};padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700">${p.role||'Both'}</span></td><td>${p.phone||'—'}</td><td><small>${p.gstin||'—'}</small></td><td style="color:var(--col-orange)">₹${parseFloat(p.balance||0).toLocaleString('en-IN')}</td><td><button class="btn-icon del" onclick="deleteParty(${p.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
+}
+
+function filterParties() {
+  const q=document.getElementById('partySearch').value.toLowerCase();
+  const roleF=document.getElementById('partyRoleFilter').value;
+  renderParties(parties.filter(p=>(!q||p.name.toLowerCase().includes(q)||(p.phone||'').includes(q))&&(!roleF||p.role===roleF||(roleF!=='Both'&&p.role==='Both'))));
+}
+
+function deleteParty(id) {
+  parties=parties.filter(p=>p.id!==id);
+  save('pt_parties',parties);
+  renderParties(); updatePartyDropdown(); updateConsignorConsigneeDropdowns();
+  showToast('Party deleted');
+}
+
+function updatePartyDropdown() {
+  const sel=document.getElementById('invParty');
+  let filtered=parties.filter(p=>!p.role||p.role==='Both'||p.role==='BillTo');
+  if(!filtered.length) filtered=parties;
+  sel.innerHTML='<option value="">— Select Party —</option>'+filtered.map(p=>`<option>${p.name}</option>`).join('');
+}
+
+// ===== TRANSPORT =====
+function saveTransport() {
+  const name=document.getElementById('tName').value.trim();
+  const gstInput=document.getElementById('tGST');
+  if(!name){showToast('Enter transport name','danger');return;}
+  if(!validateGST(gstInput)){showToast('Invalid GSTIN format','danger');return;}
+  transports.push({id:Date.now(),name,contact:document.getElementById('tContact').value,phone:document.getElementById('tPhone').value,address:document.getElementById('tAddress').value,pan:document.getElementById('tPAN').value,gst:gstInput.value});
+  save('pt_transports',transports);
+  renderTransports(); updateTransportDropdown();
+  ['tName','tContact','tPhone','tAddress','tPAN','tGST'].forEach(id=>document.getElementById(id).value='');
+  showToast('Transport added!');
+}
+
+function renderTransports() {
+  const tb=document.getElementById('transportBody');
+  if(!transports.length){tb.innerHTML='<tr><td colspan="5" class="text-center text-muted py-4">No transports added</td></tr>';return;}
+  tb.innerHTML=transports.map(t=>`<tr><td><strong>${t.name}</strong></td><td>${t.contact||'—'}</td><td>${t.phone||'—'}</td><td><small>${t.gst||'—'}</small></td><td><button class="btn-icon del" onclick="deleteTransport(${t.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
+}
+
+function deleteTransport(id) {
+  transports=transports.filter(t=>t.id!==id);
+  save('pt_transports',transports);
+  renderTransports(); updateTransportDropdown();
+  showToast('Transport deleted');
+}
+
+function updateTransportDropdown() {
+  const sel=document.getElementById('invTransport');
+  sel.innerHTML='<option value="Prahar Trucking">Prahar Trucking</option>'+transports.map(t=>`<option>${t.name}</option>`).join('');
+}
+
+// ===== PAYMENTS =====
+function updatePaymentDropdown() {
+  const sel=document.getElementById('payInv');
+  sel.innerHTML='<option value="">— Select Invoice —</option>'+invoices.map(inv=>`<option value="${inv.id}">${inv.no} | ${inv.party||'No Party'} | ${inv.total}</option>`).join('');
+}
+
+function updatePaymentBalance() {
+  const invId=document.getElementById('payInv').value;
+  const box=document.getElementById('paymentBalanceBox');
+  if(!invId){box.style.display='none';return;}
+  const inv=invoices.find(i=>i.id==invId); if(!inv) return;
+  const total=parseFloat((inv.total||'₹0').replace('₹',''))||0;
+  const paid=payments.filter(p=>p.invId==invId).reduce((s,p)=>s+parseFloat(p.amount||0),0);
+  document.getElementById('payTotalAmt').textContent='₹'+total.toLocaleString('en-IN');
+  document.getElementById('payPaidAmt').textContent='₹'+paid.toLocaleString('en-IN');
+  document.getElementById('payBalanceAmt').textContent='₹'+(total-paid).toLocaleString('en-IN');
+  document.getElementById('payAmt').max=total-paid;
+  box.style.display='block';
+}
+
+function savePayment() {
+  const invId=document.getElementById('payInv').value;
+  const amount=parseFloat(document.getElementById('payAmt').value);
+  if(!invId||!amount){showToast('Select invoice and enter amount','danger');return;}
+  payments.push({id:Date.now(),invId,invNo:invoices.find(i=>i.id==invId)?.no||'',date:document.getElementById('payDate').value,amount,mode:document.getElementById('payMode').value,ref:document.getElementById('payRef').value,remarks:document.getElementById('payRemarks').value});
+  const inv=invoices.find(i=>i.id==invId);
+  if(inv){
+    const total=parseFloat((inv.total||'₹0').replace('₹',''))||0;
+    const paid=payments.filter(p=>p.invId==invId).reduce((s,p)=>s+p.amount,0);
+    inv.status=paid>=total?'Paid':paid>0?'Partial':'Pending';
+  }
+  save('pt_payments',payments); save('pt_invoices',invoices);
+  renderPayments(); renderDashboard(); renderInvoiceList();
+  ['payAmt','payRef','payRemarks','payDate'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('payInv').value='';
+  document.getElementById('paymentBalanceBox').style.display='none';
+  showToast('Payment recorded!');
+}
+
+function renderPayments() {
+  const tb=document.getElementById('paymentBody');
+  if(!payments.length){tb.innerHTML='<tr><td colspan="6" class="text-center text-muted py-4"><i class="fa-solid fa-money-bill-wave fa-2x mb-2 d-block" style="opacity:.2"></i>No payments recorded</td></tr>';return;}
+  tb.innerHTML=[...payments].reverse().map(p=>`<tr><td><strong style="color:var(--col-orange)">${p.invNo||p.invId}</strong></td><td>${p.date||'—'}</td><td><strong style="color:var(--col-emerald)">₹${p.amount.toLocaleString('en-IN')}</strong></td><td><span class="badge-status badge-paid">${p.mode}</span></td><td>${p.ref||'—'}</td><td><button class="btn-icon del" onclick="deletePayment(${p.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
+}
+
+function deletePayment(id) {
+  if(!confirm('Delete this payment record?')) return;
+  const p=payments.find(pay=>pay.id===id);
+  payments=payments.filter(pay=>pay.id!==id);
+  if(p){ const inv=invoices.find(i=>i.id==p.invId); if(inv){ const total=parseFloat((inv.total||'₹0').replace('₹',''))||0; const paid=payments.filter(pay=>pay.invId==p.invId).reduce((s,pay)=>s+parseFloat(pay.amount||0),0); inv.status=paid>=total?'Paid':paid>0?'Partial':'Pending'; } }
+  save('pt_payments',payments); save('pt_invoices',invoices);
+  renderPayments(); renderDashboard(); renderInvoiceList(); updatePaymentDropdown();
+  showToast('Payment deleted');
+}
+
+// ===== BANK =====
+function handleBankUpload(event) {
+  const file=event.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const wb=XLSX.read(e.target.result,{type:'binary'});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      const data=XLSX.utils.sheet_to_json(ws,{header:1});
+      bankTx=data.slice(1).filter(r=>r.length>2).map((r,i)=>({id:i,date:r[0],desc:r[1],ref:r[2],debit:r[3]||'',credit:r[4]||'',balance:r[5]||''}));
+      save('pt_bank',bankTx); renderBank();
+      document.getElementById('bankUploadStatus').innerHTML=`<div class="alert alert-success py-2 mt-2"><i class="fa-solid fa-check-circle me-2"></i>${bankTx.length} transactions loaded.</div>`;
+    }catch{showToast('Error reading file','danger');}
+  };
+  reader.readAsBinaryString(file);
+}
+
+function renderBank(list=bankTx) {
+  const tb=document.getElementById('bankBody');
+  if(!list.length){tb.innerHTML='<tr><td colspan="6" class="text-center text-muted py-4">No transactions</td></tr>';return;}
+  tb.innerHTML=list.map(t=>`<tr><td>${t.date||'—'}</td><td>${t.desc||'—'}</td><td>${t.ref||'—'}</td><td style="color:var(--col-rose)">${t.debit?'₹'+t.debit:'—'}</td><td style="color:var(--col-emerald)">${t.credit?'₹'+t.credit:'—'}</td><td><strong>${t.balance?'₹'+t.balance:'—'}</strong></td></tr>`).join('');
+}
+
+function filterBank() {
+  const from=document.getElementById('bankFrom').value, to=document.getElementById('bankTo').value, type=document.getElementById('bankType').value;
+  renderBank(bankTx.filter(t=>{if(from&&t.date<from)return false;if(to&&t.date>to)return false;if(type==='Credit'&&!t.credit)return false;if(type==='Debit'&&!t.debit)return false;return true;}));
+}
+
+// ===== REPORTS =====
+function generateReport(type) {
+  const titles={'profit-loss':'Profit & Loss Report','party-ledger':'Party Ledger','transport':'Transport Report','gst':'GST Report','outstanding':'Outstanding Report','vehicle':'Vehicle-wise Report'};
+  document.getElementById('reportTitle').textContent=titles[type]||'Report';
+  let html='';
+  const mkTable=(headers,rows)=>`<table class="table table-hover" id="reportTable"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table>`;
+  if(type==='outstanding'){const pending=invoices.filter(i=>i.status!=='Paid');html=pending.length?mkTable(['Invoice#','Party','Date','Amount','Status'],pending.map(inv=>`<tr><td><strong style="color:var(--col-orange)">${inv.no}</strong></td><td>${inv.party||'—'}</td><td>${inv.date||'—'}</td><td><strong>${inv.total}</strong></td><td>${statusBadge(inv.status)}</td></tr>`)):'<p class="text-center text-muted py-4">No outstanding invoices!</p>';}
+  else if(type==='party-ledger'){const grouped={};invoices.forEach(inv=>{if(inv.party){if(!grouped[inv.party])grouped[inv.party]=[];grouped[inv.party].push(inv);}});html=Object.keys(grouped).length?Object.entries(grouped).map(([party,invs])=>`<div class="mb-3 p-3" style="border:1.5px solid var(--border);border-radius:10px"><strong style="font-family:'Clash Display',sans-serif">${party}</strong><small class="text-muted ms-2">${invs.length} invoice(s)</small>${mkTable(['Invoice#','Date','Amount','Status'],invs.map(inv=>`<tr><td>${inv.no}</td><td>${inv.date||'—'}</td><td>${inv.total}</td><td>${statusBadge(inv.status)}</td></tr>`))}</div>`).join(''):'<p class="text-center text-muted py-4">No data</p>';}
+  else if(type==='gst'){html=invoices.length?mkTable(['Invoice#','Date','Party','Taxable','GST%','GST Amt','Total'],invoices.map(inv=>{const gcData=inv.lrGoodsCharges||[]; let sub=0,gstAmt=0,gstPct=5; if(gcData.length){gcData.forEach(gc=>{const fr=parseFloat(gc.freight)||0;const ld=parseFloat(gc.loading)||0;const ul=parseFloat(gc.unloading)||0;const dt=parseFloat(gc.detention)||0;gstPct=parseFloat(gc.gst)||5;const s=fr+ld+ul+dt;sub+=s;gstAmt+=s*gstPct/100;});}else{sub=parseFloat(inv.freight||0)+parseFloat(inv.loading||0)+parseFloat(inv.unloading||0)+parseFloat(inv.detention||0);gstPct=parseFloat(inv.gst||5);gstAmt=sub*gstPct/100;} return `<tr><td><strong style="color:var(--col-orange)">${inv.no}</strong></td><td>${inv.date||'—'}</td><td>${inv.party||'—'}</td><td>₹${sub.toFixed(2)}</td><td>${gstPct}%</td><td style="color:var(--col-violet)">₹${gstAmt.toFixed(2)}</td><td><strong>${inv.total}</strong></td></tr>`;})):'<p class="text-center text-muted py-4">No invoices</p>';}
+  else{html=`<p class="text-center text-muted py-4">Report data for <strong>${titles[type]}</strong> will appear here once data is available.</p>`;}
+  document.getElementById('reportContent').innerHTML=html;
+  document.getElementById('reportOutput').style.display='block';
+  document.getElementById('reportOutput').scrollIntoView({behavior:'smooth'});
+}
+
+// ===== SETTINGS =====
+function saveSettings() {
+  settings={name:document.getElementById('cName').value,address:document.getElementById('cAddress').value,phone:document.getElementById('cPhone').value,email:document.getElementById('cEmail').value,gstin:document.getElementById('cGSTIN').value,pan:document.getElementById('cPAN').value};
+  save('pt_settings',settings); showToast('Settings saved!');
+}
+function saveBankSettings() {
+  bankSettings={name:document.getElementById('bName').value,acc:document.getElementById('bAccNo').value,ifsc:document.getElementById('bIFSC').value,branch:document.getElementById('bBranch').value,holder:document.getElementById('bHolder').value};
+  save('pt_bankSettings',bankSettings); showToast('Bank details saved!');
+}
+
+// ===== INIT =====
+function init() {
+  if(settings.name) document.getElementById('cName').value=settings.name;
+  if(settings.address) document.getElementById('cAddress').value=settings.address;
+  if(settings.phone) document.getElementById('cPhone').value=settings.phone;
+  if(settings.email) document.getElementById('cEmail').value=settings.email;
+  if(settings.gstin) document.getElementById('cGSTIN').value=settings.gstin;
+  if(settings.pan) document.getElementById('cPAN').value=settings.pan;
+  if(bankSettings.name) document.getElementById('bName').value=bankSettings.name;
+  if(bankSettings.acc) document.getElementById('bAccNo').value=bankSettings.acc;
+  if(bankSettings.ifsc) document.getElementById('bIFSC').value=bankSettings.ifsc;
+  if(bankSettings.branch) document.getElementById('bBranch').value=bankSettings.branch;
+  if(bankSettings.holder) document.getElementById('bHolder').value=bankSettings.holder;
+
+  document.getElementById('invDate').value=new Date().toISOString().split('T')[0];
+  document.getElementById('payDate').value=new Date().toISOString().split('T')[0];
+  document.getElementById('invNo').value=getNextInvoiceNo();
+
+  updatePartyDropdown(); updateTransportDropdown(); updatePaymentDropdown();
+  syncAllLRSections();
+  renderDashboard(); renderInvoiceList(); renderParties(); renderTransports(); renderPayments(); renderBank();
+}
+init();
+</script>
+</body>
+</html>
