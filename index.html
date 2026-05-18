@@ -43,7 +43,6 @@
       overflow-x: hidden;
     }
 
-    /* SIDEBAR */
     .sidebar {
       width: var(--sidebar-w);
       background: var(--white);
@@ -97,12 +96,11 @@
     .nav-item.active.emerald { color: var(--col-emerald); background: linear-gradient(135deg, #ECFDF5,#F8FFFE); border-color: var(--col-emerald); }
     .nav-item.active.pink { color: var(--col-pink); background: linear-gradient(135deg, #FDF2F8,#FFF8FC); border-color: var(--col-pink); }
     .nav-item.active.amber { color: var(--col-amber); background: linear-gradient(135deg, #FFFBEB,#FFFDF5); border-color: var(--col-amber); }
+    .nav-item.active.teal { color: #14B8A6; background: linear-gradient(135deg, #F0FDFA,#F5FFFE); border-color: #14B8A6; }
 
-    /* MAIN */
     .main-content { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; transition: margin-left 0.3s cubic-bezier(.4,0,.2,1); }
     .main-content.expanded { margin-left: 0; }
 
-    /* TOPBAR */
     .topbar { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 28px; height: 64px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; }
     .sidebar-toggle { background: none; border: none; width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; color: var(--text-muted); font-size: 16px; cursor: pointer; transition: all 0.15s; }
     .sidebar-toggle:hover { background: var(--bg); color: var(--text); }
@@ -110,7 +108,6 @@
     .topbar-badge { display: flex; align-items: center; gap: 6px; background: linear-gradient(135deg, var(--col-orange), var(--col-rose)); color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; box-shadow: 0 4px 12px rgba(255,107,44,0.3); }
     .user-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, var(--col-violet), var(--col-indigo)); border-radius: 50%; display: grid; place-items: center; color: white; font-size: 14px; box-shadow: 0 4px 10px rgba(124,58,237,0.3); }
 
-    /* MODULES */
     .module { display: none; padding: 28px; animation: fadeSlide 0.25s ease; }
     .module.active { display: block; }
     @keyframes fadeSlide { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
@@ -118,7 +115,6 @@
     .page-header h2 { font-family: 'Clash Display', sans-serif; font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
     .page-header p { color: var(--text-muted); font-size: 14px; }
 
-    /* STAT CARDS */
     .stat-card { background: var(--white); border-radius: var(--radius); padding: 20px 22px; display: flex; align-items: center; gap: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
     .stat-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
     .stat-card.c1::after { background: linear-gradient(90deg, var(--col-orange), var(--col-rose)); }
@@ -134,34 +130,29 @@
     .stat-value { font-family: 'Clash Display', sans-serif; font-size: 26px; font-weight: 700; color: var(--text); line-height: 1; }
     .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
 
-    /* CARDS */
     .card-white { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); padding: 22px; margin-bottom: 4px; }
     .card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
     .card-head h5 { font-family: 'Clash Display', sans-serif; font-size: 15px; font-weight: 600; color: var(--text); margin: 0; }
 
-    /* TABLES */
     .table { font-size: 13.5px; }
     .table thead th { background: var(--bg); color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; border: none; padding: 10px 14px; }
     .table tbody td { padding: 12px 14px; vertical-align: middle; border-color: var(--border); }
     .table-hover tbody tr:hover { background: #F8F9FF; }
 
-    /* STATUS BADGES */
     .badge-status { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
     .badge-paid { background: #ECFDF5; color: var(--col-emerald); }
     .badge-pending { background: #FFF1F2; color: var(--col-rose); }
     .badge-partial { background: #FFFBEB; color: var(--col-amber); }
 
-    /* FORM CONTROLS */
-    .form-label { font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
-    .form-control, .form-select { border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; padding: 10px 14px; color: var(--text); background: var(--white); transition: border-color 0.15s, box-shadow 0.15s; }
+    .form-label { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .form-control, .form-select { border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; padding: 8px 12px; color: var(--text); background: var(--white); transition: border-color 0.15s, box-shadow 0.15s; }
     .form-control:focus, .form-select:focus { border-color: var(--col-orange); box-shadow: 0 0 0 3px rgba(255,107,44,0.12); outline: none; }
     textarea.form-control { resize: none; }
     .invalid-feedback-custom { font-size: 11px; color: var(--col-rose); margin-top: 4px; display: none; }
     .is-invalid-custom { border-color: var(--col-rose) !important; }
     .is-invalid-custom + .invalid-feedback-custom { display: block; }
 
-    /* BUTTONS */
-    .btn { border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 600; padding: 10px 20px; transition: all 0.18s; }
+    .btn { border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; padding: 8px 16px; transition: all 0.18s; }
     .btn-orange { background: linear-gradient(135deg, var(--col-orange), #FF4500); border: none; color: white; box-shadow: 0 4px 12px rgba(255,107,44,0.3); }
     .btn-orange:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,107,44,0.4); color: white; }
     .btn-violet { background: linear-gradient(135deg, var(--col-violet), var(--col-indigo)); border: none; color: white; box-shadow: 0 4px 12px rgba(124,58,237,0.3); }
@@ -170,51 +161,59 @@
     .btn-sky:hover { color: white; transform: translateY(-1px); }
     .btn-emerald { background: linear-gradient(135deg, var(--col-emerald), #059669); border: none; color: white; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
     .btn-emerald:hover { color: white; transform: translateY(-1px); }
+    .btn-teal { background: linear-gradient(135deg, #14B8A6, #0D9488); border: none; color: white; box-shadow: 0 4px 12px rgba(20,184,166,0.3); }
+    .btn-teal:hover { color: white; transform: translateY(-1px); }
     .btn-outline-secondary { border-color: var(--border); color: var(--text-muted); background: var(--white); }
     .btn-outline-secondary:hover { background: var(--bg); color: var(--text); border-color: #CBD5E1; }
     .btn-outline-danger { border-color: #FECDD3; color: var(--col-rose); background: #FFF1F2; }
     .btn-outline-danger:hover { background: var(--col-rose); color: white; }
 
-    /* TOTAL BOX */
     .total-box { background: linear-gradient(135deg, #F8F9FF, #FFFBF5); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 20px; }
     .total-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
     .total-val { font-family: 'Clash Display', sans-serif; font-size: 20px; font-weight: 700; color: var(--text); }
     .total-val.grand { color: var(--col-orange); font-size: 26px; }
-    .total-val.highlight { color: var(--col-emerald); font-size: 24px; }
 
-    /* PER-LR SECTION BOX */
-    .lr-section-box {
-      background: linear-gradient(135deg,#FFF8F5,#FFFBF5);
-      border: 1.5px solid #FDBA74;
+    .lr-master-row {
+      background: #fff;
+      border: 1.5px solid var(--border);
       border-radius: var(--radius);
       padding: 16px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      position: relative;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
     }
-    .lr-section-header {
-      display: flex; align-items: center; gap: 8px;
-      font-family: 'Clash Display',sans-serif;
-      font-size: 13px; font-weight: 700;
-      color: var(--col-orange);
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #FDBA74;
+    .lr-master-row:hover { border-color: #CBD5E1; }
+    .lr-master-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border);
     }
+    .lr-master-header h6 { margin: 0; font-family: 'Clash Display'; font-weight: 700; color: var(--col-orange); }
+    .lr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .lr-full-width { grid-column: 1 / -1; }
+    .lr-section-title {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted);
+      margin-bottom: 8px; margin-top: 8px; letter-spacing: 0.5px;
+      grid-column: 1 / -1; border-bottom: 1px solid #f0f0f0; padding-bottom: 4px;
+    }
+    .lr-section-title:first-child { margin-top: 0; }
 
-    /* REPORT CARDS */
     .report-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow); }
     .report-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--col-orange); }
     .report-card h6 { font-family: 'Clash Display', sans-serif; font-weight: 600; color: var(--text); margin: 10px 0 4px; font-size: 15px; }
     .report-card p { color: var(--text-muted); font-size: 12.5px; margin: 0; }
 
-    /* UPLOAD ZONE */
     .upload-zone { border: 2.5px dashed #CBD5E1; border-radius: var(--radius); padding: 40px; text-align: center; cursor: pointer; transition: all 0.2s; background: #FAFBFF; }
     .upload-zone:hover { border-color: var(--col-orange); background: #FFF8F5; }
     .upload-zone h5 { font-family: 'Clash Display', sans-serif; color: var(--text); margin: 0 0 4px; }
 
-    /* COLOR DOTS */
     .color-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
-    /* ACTION BUTTONS TABLE */
     .btn-icon { width: 32px; height: 32px; border-radius: 8px; border: none; display: inline-grid; place-items: center; font-size: 13px; cursor: pointer; transition: all 0.15s; }
     .btn-icon.edit { background: #EFF6FF; color: var(--col-sky); }
     .btn-icon.edit:hover { background: var(--col-sky); color: white; }
@@ -225,17 +224,14 @@
     .btn-icon.print { background: #F0F9FF; color: var(--col-indigo); }
     .btn-icon.print:hover { background: var(--col-indigo); color: white; }
 
-    /* QUICK ACTION BUTTONS */
     .quick-btn { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--white); color: var(--text); font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.18s; text-align: left; width: 100%; }
     .quick-btn:hover { transform: translateX(4px); box-shadow: var(--shadow); }
     .quick-btn .q-icon { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-size: 15px; flex-shrink: 0; }
 
-    /* TOAST */
     #appToast { border-radius: 12px !important; box-shadow: var(--shadow-lg) !important; }
     #appToast.bg-success { background: linear-gradient(135deg, var(--col-emerald), #059669) !important; }
     #appToast.bg-danger { background: linear-gradient(135deg, var(--col-rose), #DC2626) !important; }
 
-    /* SCROLLBAR */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 20px; }
@@ -260,7 +256,129 @@
       .table th, .table td { border: 1px solid #000; color: black; padding: 8px; }
     }
 
-    /* PDF TEMPLATE */
+    #lrExpandModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(15,23,42,0.55);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.18s ease;
+    }
+    #lrExpandModal.show { display: flex; }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    #lrExpandModalBox {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.22);
+      width: 100%;
+      max-width: 960px;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: slideUp 0.22s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes slideUp { from{transform:translateY(32px);opacity:0} to{transform:translateY(0);opacity:1} }
+    #lrExpandModalHeader {
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      border-bottom: 1.5px solid var(--border);
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    #lrExpandModalHeader h5 { font-family: 'Clash Display',sans-serif; font-size:16px; font-weight:700; color:var(--col-orange); margin:0; }
+    #lrExpandModalBody { padding: 22px; }
+    .btn-close-modal { width:34px;height:34px;border-radius:50%;border:none;background:#FFF1F2;color:var(--col-rose);display:grid;place-items:center;font-size:15px;cursor:pointer;transition:all .15s; }
+    .btn-close-modal:hover { background:var(--col-rose);color:white; }
+    .btn-save-modal { background:linear-gradient(135deg,var(--col-emerald),#059669);color:white;border:none;border-radius:var(--radius-sm);padding:8px 20px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(16,185,129,.3); }
+    .btn-save-modal:hover { transform:translateY(-1px); }
+
+    .lr-collapsed-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .lr-collapsed-card:hover { border-color: var(--col-orange); box-shadow: var(--shadow-lg); transform: translateY(-1px); }
+    .lr-collapsed-badge { background: linear-gradient(135deg,var(--col-violet),var(--col-indigo)); color:white; border-radius:8px; padding:6px 12px; font-family:'Clash Display',sans-serif; font-size:13px; font-weight:700; white-space:nowrap; flex-shrink:0; }
+    .lr-collapsed-info { flex:1; display:flex; gap:20px; flex-wrap:wrap; align-items:center; }
+    .lr-collapsed-chip { display:flex; flex-direction:column; }
+    .lr-collapsed-chip .chip-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--text-muted); }
+    .lr-collapsed-chip .chip-val { font-size:13px; font-weight:600; color:var(--text); }
+    .lr-collapsed-actions { display:flex; gap:6px; flex-shrink:0; }
+    .btn-lr-expand { background:#F0F9FF; color:var(--col-sky); border:none; border-radius:8px; padding:6px 14px; font-size:12px; font-weight:600; cursor:pointer; display:flex;align-items:center;gap:5px; transition:all .15s; }
+    .btn-lr-expand:hover { background:var(--col-sky); color:white; }
+    .btn-lr-del { background:#FFF1F2; color:var(--col-rose); border:none; border-radius:8px; width:32px;height:32px; display:grid;place-items:center; font-size:13px; cursor:pointer; transition:all .15s; }
+    .btn-lr-del:hover { background:var(--col-rose); color:white; }
+
+    .lr-hidden-store { display:none !important; }
+
+    .searchable-select-wrap { position: relative; }
+    .searchable-select-display {
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      padding: 8px 12px; background: var(--white); cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 13px; color: var(--text); min-height: 38px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      user-select: none;
+    }
+    .searchable-select-display:focus,
+    .searchable-select-display.open { border-color: var(--col-orange); box-shadow: 0 0 0 3px rgba(255,107,44,0.12); outline: none; }
+    .ss-selected { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ss-arrow { color: var(--text-muted); font-size: 11px; transition: transform 0.2s; flex-shrink: 0; margin-left: 6px; }
+    .searchable-select-display.open .ss-arrow { transform: rotate(180deg); }
+    .searchable-select-dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm); box-shadow: var(--shadow-lg);
+      z-index: 1000; overflow: hidden;
+    }
+    .ss-search-wrap { padding: 8px 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+    .ss-search-icon { color: var(--text-muted); font-size: 12px; flex-shrink: 0; }
+    .ss-search { border: none; outline: none; font-size: 13px; color: var(--text); background: transparent; flex: 1; padding: 0; font-family: inherit; }
+    .ss-list { max-height: 220px; overflow-y: auto; }
+    .ss-option {
+      padding: 9px 14px; font-size: 13px; cursor: pointer;
+      color: var(--text); transition: background 0.12s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ss-option:hover { background: var(--bg); }
+    .ss-option.selected { background: #FFF1EB; color: var(--col-orange); font-weight: 600; }
+    .ss-option.empty { color: var(--text-muted); font-style: italic; cursor: default; }
+    .ss-option.empty:hover { background: transparent; }
+    .ss-option .ss-inv-no { font-weight:700; color:var(--col-orange); }
+    .ss-option .ss-inv-party { color:var(--col-violet); font-weight:600; }
+    .ss-option .ss-inv-amt { color:var(--col-emerald); font-weight:600; margin-left:auto; white-space:nowrap; font-size:12px; }
+
+    .outstanding-range-wrap { padding: 6px 0; }
+    .range-track { position: relative; height: 6px; background: var(--border); border-radius: 3px; margin: 20px 8px 8px; }
+    .range-fill { position: absolute; height: 100%; background: linear-gradient(90deg, var(--col-sky), var(--col-indigo)); border-radius: 3px; pointer-events: none; }
+    .range-thumb {
+      position: absolute; top: 50%; width: 18px; height: 18px;
+      background: white; border: 2.5px solid var(--col-sky); border-radius: 50%;
+      transform: translate(-50%, -50%); cursor: grab;
+      box-shadow: 0 2px 8px rgba(14,165,233,0.35); z-index: 2;
+    }
+    .range-thumb:active { cursor: grabbing; border-color: var(--col-indigo); }
+    .range-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin: 0 0 4px; }
+    .range-values { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 8px; }
+    .range-val-badge { background: linear-gradient(135deg,var(--col-sky),var(--col-indigo)); color: white; border-radius: 8px; padding: 3px 10px; font-size: 12px; font-weight: 700; font-family: 'Clash Display', sans-serif; }
+    .range-sep { font-size: 11px; color: var(--text-muted); }
+
     #pdfTemplate {
       display: none;
       width: 190mm;
@@ -272,11 +390,63 @@
       box-sizing: border-box;
     }
 
-    /* Misc */
     .text-orange { color: var(--col-orange); }
     .gradient-text { background: linear-gradient(135deg, var(--col-orange), var(--col-rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     hr { border-color: var(--border); opacity: 1; }
     .separator { height: 1px; background: var(--border); margin: 16px 0; }
+
+    .report-summary-box {
+      background: linear-gradient(135deg, #F8F9FF, #FFFBF5);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin-bottom: 16px;
+    }
+    .report-summary-box .rsb-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 4px 0;
+    }
+    .report-summary-box .rsb-label { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+    .report-summary-box .rsb-val { font-family: 'Clash Display', sans-serif; font-size: 16px; font-weight: 700; }
+
+    /* ===== RECEIVED MODULE STYLES ===== */
+    .received-preview-table { max-height: 420px; overflow-y: auto; }
+    .received-step-badge {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 14px; font-weight: 700; flex-shrink: 0;
+    }
+    .received-stat-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 12px; font-size: 13px; font-weight: 600;
+      border: 1.5px solid var(--border); background: var(--white);
+    }
+    .received-stat-pill .rsp-val { font-family: 'Clash Display', sans-serif; font-size: 18px; font-weight: 700; }
+    .import-progress-bar {
+      height: 6px; border-radius: 3px; background: var(--border);
+      overflow: hidden; margin-top: 8px;
+    }
+    .import-progress-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, #14B8A6, var(--col-emerald));
+      transition: width 0.3s ease;
+    }
+    .received-row-status { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 12px; }
+    .received-row-status.new { background: #ECFDF5; color: var(--col-emerald); }
+    .received-row-status.duplicate { background: #FFFBEB; color: var(--col-amber); }
+    .received-row-status.error { background: #FFF1F2; color: var(--col-rose); }
+    .mapping-card {
+      background: linear-gradient(135deg, #F0FDFA, #F5FFFE);
+      border: 1.5px solid #99F6E4;
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+    .mapping-card .form-label { color: #0D9488; }
+    .received-column-tag {
+      display: inline-block; padding: 3px 10px; border-radius: 6px;
+      font-size: 11px; font-weight: 700; background: #F0FDFA; color: #0D9488;
+      border: 1px solid #99F6E4;
+    }
   </style>
 </head>
 <body>
@@ -296,9 +466,9 @@
     <button class="nav-item" data-module="invoice" onclick="showModule('invoice',this)"><i class="fa-solid fa-file-invoice"></i><span>Create Invoice</span></button>
     <button class="nav-item" data-module="invoices" onclick="showModule('invoices',this)"><i class="fa-solid fa-list-check"></i><span>Invoice List</span></button>
     <div class="nav-section-label">Management</div>
-    <button class="nav-item" data-module="transport" onclick="showModule('transport',this)"><i class="fa-solid fa-truck"></i><span>Transport</span></button>
     <button class="nav-item" data-module="parties" onclick="showModule('parties',this)"><i class="fa-solid fa-users"></i><span>Parties / Clients</span></button>
     <button class="nav-item" data-module="payments" onclick="showModule('payments',this)"><i class="fa-solid fa-money-bill-wave"></i><span>Payments</span></button>
+    <button class="nav-item" data-module="received" onclick="showModule('received',this)"><i class="fa-solid fa-file-import"></i><span>Received Data</span></button>
     <div class="nav-section-label">Finance</div>
     <button class="nav-item" data-module="bank" onclick="showModule('bank',this)"><i class="fa-solid fa-building-columns"></i><span>Bank Statement</span></button>
     <button class="nav-item" data-module="reports" onclick="showModule('reports',this)"><i class="fa-solid fa-chart-bar"></i><span>Reports</span></button>
@@ -350,10 +520,10 @@
           <div class="card-head"><h5>Quick Actions</h5></div>
           <div class="d-flex flex-column gap-2">
             <button class="quick-btn" onclick="showModule('invoice',null)"><div class="q-icon" style="background:#FFF1EB;color:var(--col-orange)"><i class="fa-solid fa-plus"></i></div><span>New Invoice</span></button>
+            <button class="quick-btn" onclick="showModule('received',null)"><div class="q-icon" style="background:#F0FDFA;color:#14B8A6"><i class="fa-solid fa-file-import"></i></div><span>Import Received Data</span></button>
             <button class="quick-btn" onclick="showModule('bank',null)"><div class="q-icon" style="background:#F0F9FF;color:var(--col-sky)"><i class="fa-solid fa-upload"></i></div><span>Upload Bank Statement</span></button>
             <button class="quick-btn" onclick="showModule('parties',null)"><div class="q-icon" style="background:#F5F3FF;color:var(--col-violet)"><i class="fa-solid fa-user-plus"></i></div><span>Add Party</span></button>
-            <button class="quick-btn" onclick="showModule('transport',null)"><div class="q-icon" style="background:#ECFDF5;color:var(--col-emerald)"><i class="fa-solid fa-truck"></i></div><span>Add Transport</span></button>
-            <button class="quick-btn" onclick="showModule('reports',null)"><div class="q-icon" style="background:#FFFBEB;color:var(--col-amber)"><i class="fa-solid fa-chart-bar"></i></div><span>View Reports</span></button>
+            <button class="quick-btn" onclick="showModule('payments',null)"><div class="q-icon" style="background:#FFFBEB;color:var(--col-amber)"><i class="fa-solid fa-money-bill-wave"></i></div><span>Record Payment</span></button>
           </div>
         </div>
       </div>
@@ -369,68 +539,51 @@
     <div class="card-white" id="invoicePrintArea">
       <input type="hidden" id="editInvoiceId" value="" />
 
-      <!-- Section 1: Invoice Info -->
       <div class="d-flex align-items-center gap-2 mb-3">
         <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-orange),var(--col-rose));display:grid;place-items:center;color:white;font-size:12px;font-weight:700">1</div>
         <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">Invoice Details</span>
       </div>
       <div class="row g-3 mb-4">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label class="form-label">Invoice Number</label>
           <input type="text" class="form-control" id="invNo" placeholder="Auto-generated" readonly style="background:#f1f5f9" />
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+          <label class="form-label">Shipment No</label>
+          <input type="text" class="form-control" id="invShipNo" placeholder="SHIP-XXXX" />
+        </div>
+        <div class="col-md-3">
           <label class="form-label">Invoice Date</label>
           <input type="date" class="form-control" id="invDate" />
         </div>
-        <div class="col-md-4">
-          <label class="form-label d-flex align-items-center justify-content-between">
-            <span>LR / GR / Ship</span>
-            <button type="button" class="btn btn-sm btn-orange py-0 px-2" style="font-size:11px;height:22px;" onclick="addLRField()"><i class="fa-solid fa-plus me-1"></i>Add LR</button>
-          </label>
-          <div id="lrContainer">
-            <div class="d-flex gap-1 mb-1 lr-row">
-              <input type="text" class="form-control" placeholder="LR / GR Number" oninput="syncAllLRSections()" />
-              <button type="button" class="btn btn-outline-danger btn-sm px-2" onclick="removeLRField(this)" style="display:none"><i class="fa-solid fa-minus"></i></button>
+        <div class="col-md-3">
+          <label class="form-label">Bill To (Party / Client)</label>
+          <div class="searchable-select-wrap" id="invPartyWrap">
+            <div class="searchable-select-display" id="invPartyDisplay" onclick="toggleSearchableSelect('invParty')" tabindex="0">
+              <span class="ss-selected" id="invPartySelected">— Select Party —</span>
+              <i class="fa-solid fa-chevron-down ss-arrow" id="invPartyArrow"></i>
             </div>
+            <div class="searchable-select-dropdown" id="invPartyDropdown" style="display:none">
+              <div class="ss-search-wrap"><i class="fa-solid fa-magnifying-glass ss-search-icon"></i><input type="text" class="ss-search" id="invPartySearch" placeholder="Search party..." oninput="filterSearchableSelect('invParty')" onclick="event.stopPropagation()" /></div>
+              <div class="ss-list" id="invPartyList"></div>
+            </div>
+            <input type="hidden" id="invParty" value="" />
           </div>
         </div>
-        <div class="col-md-4">
-          <label class="form-label">Bill To (Party / Client)</label>
-          <select class="form-select" id="invParty"><option value="">— Select Party —</option></select>
+      </div>
+
+      <div class="separator"></div>
+      <div class="d-flex align-items-center justify-content-between mb-3 mt-3">
+        <div class="d-flex align-items-center gap-2">
+          <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-violet),var(--col-indigo));display:grid;place-items:center;color:white;font-size:12px;font-weight:700">2</div>
+          <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">LR & Shipment Details (All-in-One)</span>
         </div>
-        <div class="col-md-4">
-          <label class="form-label">Transport Name</label>
-          <select class="form-select" id="invTransport"><option value="Prahar Trucking">Prahar Trucking</option></select>
-        </div>
+        <button class="btn btn-sm btn-emerald" onclick="addLRMasterRow()"><i class="fa-solid fa-plus me-1"></i>Add LR Row</button>
       </div>
+      
+      <div id="lrMasterContainer"></div>
 
-      <!-- CONSIGNOR / CONSIGNEE PER LR -->
-      <div class="separator"></div>
-      <div class="d-flex align-items-center gap-2 mb-3 mt-3">
-        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-violet),var(--col-indigo));display:grid;place-items:center;color:white;font-size:12px;font-weight:700">📦</div>
-        <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">Consignor (Sender) &amp; Consignee (Receiver) — Per LR</span>
-      </div>
-      <div id="lrConsignorConsigneeContainer"></div>
-
-      <!-- *** NEW: ROUTE & VEHICLE PER LR *** -->
-      <div class="separator"></div>
-      <div class="d-flex align-items-center gap-2 mb-3 mt-3">
-        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-sky),var(--col-indigo));display:grid;place-items:center;color:white;font-size:12px;font-weight:700">2</div>
-        <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">Route &amp; Vehicle — Per LR</span>
-      </div>
-      <div id="lrRouteVehicleContainer"></div>
-
-      <!-- *** NEW: GOODS & CHARGES PER LR *** -->
-      <div class="separator"></div>
-      <div class="d-flex align-items-center gap-2 mb-3 mt-3">
-        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-violet),var(--col-pink));display:grid;place-items:center;color:white;font-size:12px;font-weight:700">3</div>
-        <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">Goods &amp; Charges — Per LR</span>
-      </div>
-      <div id="lrGoodsChargesContainer"></div>
-
-      <!-- GRAND TOTALS (computed across all LR rows) -->
-      <div class="total-box mb-4">
+      <div class="total-box mb-4 mt-4">
         <div class="row text-center g-2">
           <div class="col-6 col-md-3"><div class="total-label">Sub Total</div><div class="total-val" id="subTotal">₹0.00</div></div>
           <div class="col-6 col-md-3"><div class="total-label">GST Amount</div><div class="total-val" id="gstAmt">₹0.00</div></div>
@@ -438,13 +591,6 @@
           <div class="col-6 col-md-3"><div class="total-label" style="color:var(--col-orange)">Grand Total</div><div class="total-val grand" id="grandTotal">₹0.00</div></div>
         </div>
       </div>
-
-      <!-- *** NEW: REMARKS PER LR *** -->
-      <div class="d-flex align-items-center gap-2 mb-3">
-        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--col-emerald),#059669);display:grid;place-items:center;color:white;font-size:12px;font-weight:700">📝</div>
-        <span style="font-family:'Clash Display',sans-serif;font-weight:600;font-size:15px">Remarks / Notes — Per LR</span>
-      </div>
-      <div id="lrRemarksContainer"></div>
 
       <div class="row g-3">
         <div class="col-12 d-flex gap-2 flex-wrap no-print">
@@ -456,7 +602,7 @@
     </div>
   </div>
 
-  <!-- INVOICE LIST -->
+  <!-- INVOICE LIST (UPDATED: Added Print button per row) -->
   <div class="module" id="mod-invoices">
     <div class="page-header d-flex justify-content-between align-items-start align-items-sm-center flex-column flex-sm-row gap-2">
       <div><h2>Invoice List</h2><p class="text-muted">All billing records</p></div>
@@ -464,48 +610,30 @@
     </div>
     <div class="card-white">
       <div class="row g-2 mb-3">
-        <div class="col-md-5"><input type="text" class="form-control" id="invSearch" placeholder="🔍 Search invoice, party, route..." oninput="filterInvoices()" /></div>
-        <div class="col-md-3"><select class="form-select" id="invStatusFilter" onchange="filterInvoices()"><option value="">All Status</option><option>Paid</option><option>Pending</option><option>Partial</option></select></div>
+        <div class="col-md-4"><input type="text" class="form-control" id="invSearch" placeholder="🔍 Search invoice, party, route..." oninput="filterInvoices()" /></div>
+        <div class="col-md-3">
+          <label class="form-label d-md-none">Party Filter</label>
+          <div class="searchable-select-wrap" id="invPartyFilterWrap">
+            <div class="searchable-select-display" id="invPartyFilterDisplay" onclick="toggleSearchableSelect('invPartyFilter')" tabindex="0">
+              <span class="ss-selected" id="invPartyFilterSelected">All Parties</span>
+              <i class="fa-solid fa-chevron-down ss-arrow" id="invPartyFilterArrow"></i>
+            </div>
+            <div class="searchable-select-dropdown" id="invPartyFilterDropdown" style="display:none">
+              <div class="ss-search-wrap"><i class="fa-solid fa-magnifying-glass ss-search-icon"></i><input type="text" class="ss-search" id="invPartyFilterSearch" placeholder="Search party..." oninput="filterSearchableSelect('invPartyFilter')" onclick="event.stopPropagation()" /></div>
+              <div class="ss-list" id="invPartyFilterList"></div>
+            </div>
+            <input type="hidden" id="invPartyFilter" value="" />
+          </div>
+        </div>
+        <div class="col-md-2"><select class="form-select" id="invStatusFilter" onchange="filterInvoices()"><option value="">All Status</option><option>Paid</option><option>Pending</option><option>Partial</option></select></div>
         <div class="col-md-2"><button class="btn btn-emerald w-100" onclick="exportAllExcel()"><i class="fa-solid fa-file-excel me-1"></i>Export</button></div>
-        <div class="col-md-2"><button class="btn btn-sky w-100" onclick="printTable('invTableBody')"><i class="fa-solid fa-print me-1"></i>Print List</button></div>
+        <div class="col-md-1"><button class="btn btn-sky w-100" onclick="printTable('invTableBody')"><i class="fa-solid fa-print"></i></button></div>
       </div>
       <div class="table-responsive">
         <table class="table table-hover">
-          <thead><tr><th>Invoice#</th><th>Date</th><th>Party</th><th>Route</th><th>Vehicle</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
-          <tbody id="invTableBody"><tr><td colspan="8" class="text-center text-muted py-5"><i class="fa-solid fa-list-check fa-2x mb-2 d-block" style="opacity:.2"></i>No invoices yet. <a href="#" onclick="showModule('invoice',null)" style="color:var(--col-orange)">Create one →</a></td></tr></tbody>
+          <thead><tr><th>Invoice#</th><th>Shipment#</th><th>Date</th><th>Party</th><th>Route</th><th>Vehicle</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="invTableBody"><tr><td colspan="9" class="text-center text-muted py-5"><i class="fa-solid fa-list-check fa-2x mb-2 d-block" style="opacity:.2"></i>No invoices yet. <a href="#" onclick="showModule('invoice',null)" style="color:var(--col-orange)">Create one →</a></td></tr></tbody>
         </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- TRANSPORT -->
-  <div class="module" id="mod-transport">
-    <div class="page-header"><h2>Transport Management</h2><p class="text-muted">Manage transport companies and vehicles</p></div>
-    <div class="row g-3">
-      <div class="col-lg-5">
-        <div class="card-white">
-          <div class="card-head"><h5>Add Transport</h5><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--col-emerald),#059669);display:grid;place-items:center;color:white;font-size:13px"><i class="fa-solid fa-truck"></i></div></div>
-          <div class="row g-2">
-            <div class="col-12"><label class="form-label">Transport Name</label><input type="text" class="form-control" id="tName" placeholder="e.g. Prahar Trucking" /></div>
-            <div class="col-md-6"><label class="form-label">Contact Person</label><input type="text" class="form-control" id="tContact" placeholder="Name" /></div>
-            <div class="col-md-6"><label class="form-label">Phone</label><input type="text" class="form-control" id="tPhone" placeholder="+91 XXXXXXXXXX" /></div>
-            <div class="col-12"><label class="form-label">Address</label><textarea class="form-control" id="tAddress" rows="2" placeholder="Full Address"></textarea></div>
-            <div class="col-md-6"><label class="form-label">PAN</label><input type="text" class="form-control" id="tPAN" placeholder="PAN Number" /></div>
-            <div class="col-md-6"><label class="form-label">GST No.</label><input type="text" class="form-control" id="tGST" placeholder="GSTIN" onblur="validateGST(this)" /><div class="invalid-feedback-custom">Invalid GST Format (e.g., 22AAAAA0000A1Z5)</div></div>
-            <div class="col-12"><button class="btn btn-emerald w-100" onclick="saveTransport()"><i class="fa-solid fa-plus me-2"></i>Add Transport</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-7">
-        <div class="card-white">
-          <div class="card-head"><h5>Transport List</h5></div>
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead><tr><th>Transport Name</th><th>Contact</th><th>Phone</th><th>GST</th><th>Action</th></tr></thead>
-              <tbody id="transportBody"><tr><td colspan="5" class="text-center text-muted py-4"><i class="fa-solid fa-truck fa-2x mb-2 d-block" style="opacity:.2"></i>No transports added</td></tr></tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -547,7 +675,7 @@
     </div>
   </div>
 
-  <!-- PAYMENTS -->
+  <!-- PAYMENTS (UPDATED: Added Excel export button) -->
   <div class="module" id="mod-payments">
     <div class="page-header"><h2>Payment Receipts</h2><p class="text-muted">Record and track payments</p></div>
     <div class="row g-3">
@@ -555,7 +683,20 @@
         <div class="card-white">
           <div class="card-head"><h5>Record Payment</h5><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--col-amber),#D97706);display:grid;place-items:center;color:white;font-size:13px"><i class="fa-solid fa-money-bill-wave"></i></div></div>
           <div class="row g-2">
-            <div class="col-12"><label class="form-label">Invoice Number</label><select class="form-select" id="payInv" onchange="updatePaymentBalance()"><option value="">— Select Invoice —</option></select></div>
+            <div class="col-12">
+              <label class="form-label">Invoice Number <small class="text-muted" style="text-transform:none;font-weight:400">(Search by Party Name)</small></label>
+              <div class="searchable-select-wrap" id="payInvWrap">
+                <div class="searchable-select-display" id="payInvDisplay" onclick="toggleSearchableSelect('payInv')" tabindex="0">
+                  <span class="ss-selected" id="payInvSelected">— Select Invoice —</span>
+                  <i class="fa-solid fa-chevron-down ss-arrow" id="payInvArrow"></i>
+                </div>
+                <div class="searchable-select-dropdown" id="payInvDropdown" style="display:none">
+                  <div class="ss-search-wrap"><i class="fa-solid fa-magnifying-glass ss-search-icon"></i><input type="text" class="ss-search" id="payInvSearch" placeholder="Search by party name, invoice no..." oninput="filterSearchableSelect('payInv')" onclick="event.stopPropagation()" /></div>
+                  <div class="ss-list" id="payInvList"></div>
+                </div>
+                <input type="hidden" id="payInv" value="" />
+              </div>
+            </div>
             <div class="col-md-6"><label class="form-label">Payment Date</label><input type="date" class="form-control" id="payDate" /></div>
             <div class="col-md-6"><label class="form-label">Amount (₹)</label><input type="number" class="form-control" id="payAmt" placeholder="0.00" /></div>
             <div class="col-12"><label class="form-label">Payment Mode</label><select class="form-select" id="payMode"><option>Cash</option><option>NEFT / RTGS</option><option>UPI</option><option>Cheque</option><option>IMPS</option></select></div>
@@ -573,14 +714,156 @@
       </div>
       <div class="col-lg-7">
         <div class="card-white">
-          <div class="card-head"><h5>Payment History</h5></div>
+          <div class="card-head">
+            <h5>Payment History</h5>
+            <button class="btn btn-emerald btn-sm" onclick="exportPaymentExcel()"><i class="fa-solid fa-file-excel me-1"></i>Export Excel</button>
+          </div>
+          <div class="row g-2 mb-3 bg-light p-2 rounded align-items-end">
+            <div class="col-md-4">
+              <label class="form-label mb-1" style="font-size:10px">Filter Party</label>
+              <div class="searchable-select-wrap" id="payFilterPartyWrap">
+                <div class="searchable-select-display" id="payFilterPartyDisplay" onclick="toggleSearchableSelect('payFilterParty')" tabindex="0">
+                  <span class="ss-selected" id="payFilterPartySelected">All Parties</span>
+                  <i class="fa-solid fa-chevron-down ss-arrow" id="payFilterPartyArrow"></i>
+                </div>
+                <div class="searchable-select-dropdown" id="payFilterPartyDropdown" style="display:none">
+                  <div class="ss-search-wrap"><i class="fa-solid fa-magnifying-glass ss-search-icon"></i><input type="text" class="ss-search" id="payFilterPartySearch" placeholder="Search party..." oninput="filterSearchableSelect('payFilterParty')" onclick="event.stopPropagation()" /></div>
+                  <div class="ss-list" id="payFilterPartyList"></div>
+                </div>
+                <input type="hidden" id="payFilterParty" value="" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label mb-1" style="font-size:10px">Outstanding Amount Range (₹)</label>
+              <div class="outstanding-range-wrap" id="outstandingRangeWrap">
+                <div class="range-track" id="outRangeTrack">
+                  <div class="range-fill" id="outRangeFill"></div>
+                  <div class="range-thumb" id="outThumbMin" onmousedown="startRangeDrag(event,'min')" ontouchstart="startRangeDrag(event,'min')"></div>
+                  <div class="range-thumb" id="outThumbMax" onmousedown="startRangeDrag(event,'max')" ontouchstart="startRangeDrag(event,'max')"></div>
+                </div>
+                <div class="range-values">
+                  <span class="range-val-badge" id="outRangeMinLabel">₹0</span>
+                  <span class="range-sep">to</span>
+                  <span class="range-val-badge" id="outRangeMaxLabel">Any</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 d-flex align-items-end"><button class="btn btn-sm btn-outline-secondary w-100" onclick="resetPaymentFilters()"><i class="fa-solid fa-rotate-left"></i></button></div>
+          </div>
           <div class="table-responsive">
             <table class="table table-hover">
-              <thead><tr><th>Invoice#</th><th>Date</th><th>Amount</th><th>Mode</th><th>Reference</th><th>Action</th></tr></thead>
-              <tbody id="paymentBody"><tr><td colspan="6" class="text-center text-muted py-4"><i class="fa-solid fa-money-bill-wave fa-2x mb-2 d-block" style="opacity:.2"></i>No payments recorded</td></tr></tbody>
+              <thead><tr><th>Invoice#</th><th>Party Name</th><th>Date</th><th>Amount</th><th>Outstanding</th><th>Mode</th><th>Action</th></tr></thead>
+              <tbody id="paymentBody"><tr><td colspan="7" class="text-center text-muted py-4"><i class="fa-solid fa-money-bill-wave fa-2x mb-2 d-block" style="opacity:.2"></i>No payments recorded</td></tr></tbody>
             </table>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NEW: RECEIVED DATA MODULE ===== -->
+  <div class="module" id="mod-received">
+    <div class="page-header">
+      <h2>Received Data Import</h2>
+      <p class="text-muted">Import logistics data from Excel — auto-assigns to Invoice & LR modules</p>
+    </div>
+
+    <!-- STEP 1: Upload -->
+    <div class="card-white mb-3">
+      <div class="card-head">
+        <h5><i class="fa-solid fa-cloud-arrow-up me-2" style="color:#14B8A6"></i>Step 1: Upload Logistics Excel</h5>
+        <span class="received-column-tag">Expected Columns: Invoice Date, Vehicle No., From, To, LR No., Unloading, Detention</span>
+      </div>
+      <div class="upload-zone" id="receivedUploadZone" onclick="document.getElementById('receivedFile').click()">
+        <i class="fa-solid fa-file-excel fa-3x mb-3" style="color:#14B8A6"></i>
+        <h5>Click or Drag & Drop Excel File</h5>
+        <p class="text-muted" style="font-size:13px">Upload .xlsx / .xls logistics data file</p>
+        <input type="file" id="receivedFile" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleReceivedUpload(event)" />
+      </div>
+      <div id="receivedUploadStatus" class="mt-2"></div>
+    </div>
+
+    <!-- STEP 2: Column Mapping & Preview -->
+    <div class="card-white mb-3" id="receivedMappingCard" style="display:none">
+      <div class="card-head">
+        <h5><i class="fa-solid fa-table-columns me-2" style="color:#14B8A6"></i>Step 2: Column Mapping & Preview</h5>
+        <div class="d-flex gap-2">
+          <span class="received-stat-pill"><i class="fa-solid fa-table" style="color:#14B8A6"></i>Rows: <span class="rsp-val" id="receivedRowCount">0</span></span>
+          <span class="received-stat-pill"><i class="fa-solid fa-columns" style="color:var(--col-violet)"></i>Columns: <span class="rsp-val" id="receivedColCount">0</span></span>
+        </div>
+      </div>
+
+      <div class="row g-2 mb-3">
+        <div class="col-md-2">
+          <label class="form-label">Date Column</label>
+          <select class="form-select" id="mapDate" onchange="refreshReceivedPreview()"></select>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Vehicle No. Column</label>
+          <select class="form-select" id="mapVehicle" onchange="refreshReceivedPreview()"></select>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">From (Origin) Column</label>
+          <select class="form-select" id="mapFrom" onchange="refreshReceivedPreview()"></select>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">To (Destination) Column</label>
+          <select class="form-select" id="mapTo" onchange="refreshReceivedPreview()"></select>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">LR No. Column</label>
+          <select class="form-select" id="mapLR" onchange="refreshReceivedPreview()"></select>
+        </div>
+        <div class="col-md-1">
+          <label class="form-label">Unloading Col</label>
+          <select class="form-select" id="mapUnloading" onchange="refreshReceivedPreview()"></select>
+        </div>
+        <div class="col-md-1">
+          <label class="form-label">Detention Col</label>
+          <select class="form-select" id="mapDetention" onchange="refreshReceivedPreview()"></select>
+        </div>
+      </div>
+
+      <div class="received-preview-table">
+        <table class="table table-hover table-sm" style="font-size:12px">
+          <thead id="receivedPreviewHead"></thead>
+          <tbody id="receivedPreviewBody"></tbody>
+        </table>
+      </div>
+
+      <div class="d-flex gap-2 mt-3">
+        <button class="btn btn-teal" onclick="importReceivedData()"><i class="fa-solid fa-file-import me-2"></i>Import All Rows as Invoices</button>
+        <button class="btn btn-violet" onclick="importReceivedAsLR()"><i class="fa-solid fa-truck-moving me-2"></i>Import as Single Invoice (Multi LR)</button>
+        <button class="btn btn-outline-secondary" onclick="clearReceivedData()"><i class="fa-solid fa-rotate-left me-2"></i>Clear</button>
+      </div>
+      <div id="importProgressWrap" style="display:none" class="mt-3">
+        <div class="d-flex justify-content-between mb-1">
+          <span class="small fw-bold" id="importProgressLabel">Importing...</span>
+          <span class="small fw-bold" id="importProgressPct">0%</span>
+        </div>
+        <div class="import-progress-bar"><div class="import-progress-fill" id="importProgressFill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Imported Data List -->
+    <div class="card-white" id="receivedListCard">
+      <div class="card-head">
+        <h5><i class="fa-solid fa-list me-2" style="color:#14B8A6"></i>Imported Data History</h5>
+        <div class="d-flex gap-2">
+          <button class="btn btn-emerald btn-sm" onclick="exportReceivedExcel()"><i class="fa-solid fa-file-excel me-1"></i>Export</button>
+          <button class="btn btn-outline-danger btn-sm" onclick="clearAllReceived()"><i class="fa-solid fa-trash me-1"></i>Clear All</button>
+        </div>
+      </div>
+      <div class="row g-2 mb-3">
+        <div class="col-md-4"><input type="text" class="form-control" id="receivedSearch" placeholder="🔍 Search vehicle, LR, route..." oninput="filterReceived()" /></div>
+        <div class="col-md-3"><input type="date" class="form-control" id="receivedDateFrom" onchange="filterReceived()" /></div>
+        <div class="col-md-3"><input type="date" class="form-control" id="receivedDateTo" onchange="filterReceived()" /></div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead><tr><th>#</th><th>Date</th><th>Vehicle No.</th><th>From</th><th>To</th><th>LR No.</th><th>Unloading</th><th>Detention</th><th>Invoice#</th><th>Status</th></tr></thead>
+          <tbody id="receivedBody"><tr><td colspan="10" class="text-center text-muted py-4"><i class="fa-solid fa-file-import fa-2x mb-2 d-block" style="opacity:.2"></i>No imported data yet</td></tr></tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -622,13 +905,35 @@
   <!-- REPORTS -->
   <div class="module" id="mod-reports">
     <div class="page-header"><h2>Reports</h2><p class="text-muted">Business analytics and reports</p></div>
+    <div class="card-white mb-3">
+      <div class="card-head">
+        <h5><i class="fa-solid fa-filter me-2 text-orange"></i>Report Filters</h5>
+        <button class="btn btn-sm btn-outline-secondary" onclick="resetReportFilters()"><i class="fa-solid fa-rotate-left me-1"></i>Reset</button>
+      </div>
+      <div class="row g-2 align-items-end">
+        <div class="col-md-5">
+          <label class="form-label">Filter by Party Name</label>
+          <div class="searchable-select-wrap" id="reportPartyWrap">
+            <div class="searchable-select-display" id="reportPartyDisplay" onclick="toggleSearchableSelect('reportParty')" tabindex="0">
+              <span class="ss-selected" id="reportPartySelected">All Parties</span>
+              <i class="fa-solid fa-chevron-down ss-arrow" id="reportPartyArrow"></i>
+            </div>
+            <div class="searchable-select-dropdown" id="reportPartyDropdown" style="display:none">
+              <div class="ss-search-wrap"><i class="fa-solid fa-magnifying-glass ss-search-icon"></i><input type="text" class="ss-search" id="reportPartySearch" placeholder="Search party name..." oninput="filterSearchableSelect('reportParty')" onclick="event.stopPropagation()" /></div>
+              <div class="ss-list" id="reportPartyList"></div>
+            </div>
+            <input type="hidden" id="reportParty" value="" />
+          </div>
+        </div>
+        <div class="col-md-3"><label class="form-label">Date From</label><input type="date" class="form-control" id="reportDateFrom" /></div>
+        <div class="col-md-3"><label class="form-label">Date To</label><input type="date" class="form-control" id="reportDateTo" /></div>
+      </div>
+    </div>
     <div class="row g-3">
-      <div class="col-md-4"><div class="report-card" onclick="generateReport('profit-loss')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#FFF1EB,#FFE4D6);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-chart-line fa-xl text-orange"></i></div><h6>Profit & Loss</h6><p class="text-muted small">Monthly income & expense</p></div></div>
-      <div class="col-md-4"><div class="report-card" onclick="generateReport('party-ledger')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-book fa-xl text-violet"></i></div><h6>Party Ledger</h6><p class="text-muted small">Outstanding per client</p></div></div>
-      <div class="col-md-4"><div class="report-card" onclick="generateReport('transport')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#ECFDF5,#D1FAE5);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-truck fa-xl text-emerald"></i></div><h6>Transport Report</h6><p class="text-muted small">Trip-wise summary</p></div></div>
-      <div class="col-md-4"><div class="report-card" onclick="generateReport('gst')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#F0F9FF,#E0F2FE);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-percent fa-xl text-sky"></i></div><h6>GST Report</h6><p class="text-muted small">GSTR-1 / Tax summary</p></div></div>
-      <div class="col-md-4"><div class="report-card" onclick="generateReport('outstanding')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#FFF1F2,#FFE4E6);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-clock fa-xl text-rose"></i></div><h6>Outstanding Report</h6><p class="text-muted small">Pending receivables</p></div></div>
-      <div class="col-md-4"><div class="report-card" onclick="generateReport('vehicle')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#FFFBEB,#FEF3C7);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-car fa-xl" style="color:var(--col-amber)"></i></div><h6>Vehicle-wise Report</h6><p class="text-muted small">Trip details per vehicle</p></div></div>
+      <div class="col-md-3"><div class="report-card" onclick="generateReport('profit-loss')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#FFF1EB,#FFE4D6);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-chart-line fa-xl text-orange"></i></div><h6>Profit & Loss</h6><p class="text-muted small">Monthly income & expense</p></div></div>
+      <div class="col-md-3"><div class="report-card" onclick="generateReport('party-ledger')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-book fa-xl text-violet"></i></div><h6>Party Ledger</h6><p class="text-muted small">Outstanding per client</p></div></div>
+      <div class="col-md-3"><div class="report-card" onclick="generateReport('gst')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#F0F9FF,#E0F2FE);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-percent fa-xl text-sky"></i></div><h6>GST Report</h6><p class="text-muted small">GSTR-1 / Tax summary</p></div></div>
+      <div class="col-md-3"><div class="report-card" onclick="generateReport('outstanding')"><div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#FFF1F2,#FFE4E6);display:grid;place-items:center;margin:0 auto 12px"><i class="fa-solid fa-clock fa-xl text-rose"></i></div><h6>Outstanding Report</h6><p class="text-muted small">Pending receivables</p></div></div>
     </div>
     <div class="card-white mt-3" id="reportOutput" style="display:none">
       <div class="card-head"><h5 id="reportTitle">Report</h5><div class="d-flex gap-2"><button class="btn btn-emerald btn-sm" onclick="exportTableToExcel('reportTable','Report')"><i class="fa-solid fa-file-excel me-1"></i>Excel</button><button class="btn btn-orange btn-sm" onclick="printTable('reportTable')"><i class="fa-solid fa-print me-1"></i>Print</button></div></div>
@@ -643,7 +948,7 @@
       <div class="col-md-6">
         <div class="card-white">
           <div class="card-head"><h5><i class="fa-solid fa-file-export me-2 text-emerald"></i>Export All Data</h5></div>
-          <p class="text-muted small">Download a complete backup of all Invoices, Parties, Transports, Payments, and Bank data.</p>
+          <p class="text-muted small">Download a complete backup of all Invoices, Parties, Payments, and Bank data.</p>
           <button class="btn btn-emerald w-100" onclick="exportConsolidatedData()"><i class="fa-solid fa-download me-2"></i>Download Consolidated Excel</button>
         </div>
       </div>
@@ -698,6 +1003,38 @@
 
 </div><!-- /main-content -->
 
+<!-- LR EXPAND MODAL -->
+<div id="lrExpandModal" onclick="lrModalBackdropClose(event)">
+  <div id="lrExpandModalBox">
+    <div id="lrExpandModalHeader">
+      <div class="d-flex align-items-center gap-3">
+        <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--col-violet),var(--col-indigo));display:grid;place-items:center;color:white;font-size:15px;"><i class="fa-solid fa-truck-moving"></i></div>
+        <h5 id="lrExpandModalTitle">LR Row Details</h5>
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <button class="btn-save-modal" onclick="saveLRFromModal()"><i class="fa-solid fa-floppy-disk"></i>Save & Close</button>
+        <button class="btn-close-modal" onclick="closeLRModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div id="lrExpandModalBody"></div>
+  </div>
+</div>
+
+<!-- INVOICE PRINT MODAL -->
+<div id="invoicePrintModal" onclick="invoicePrintModalClose(event)" style="display:none;position:fixed;inset:0;z-index:6000;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px;">
+  <div style="background:white;border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,0.25);width:100%;max-width:900px;max-height:90vh;overflow-y:auto;animation:slideUp 0.22s cubic-bezier(.4,0,.2,1);">
+    <div style="position:sticky;top:0;background:white;border-bottom:1.5px solid var(--border);padding:16px 22px;display:flex;align-items:center;justify-content:space-between;z-index:10;border-radius:16px 16px 0 0;">
+      <h5 style="font-family:'Clash Display',sans-serif;font-size:16px;font-weight:700;color:var(--col-orange);margin:0;"><i class="fa-solid fa-print me-2"></i>Invoice Print Preview</h5>
+      <div class="d-flex gap-2">
+        <button class="btn btn-orange btn-sm" onclick="doPrintInvoiceModal()"><i class="fa-solid fa-print me-1"></i>Print</button>
+        <button class="btn btn-emerald btn-sm" onclick="doDownloadPDFModal()"><i class="fa-solid fa-file-pdf me-1"></i>PDF</button>
+        <button class="btn-close-modal" onclick="closeInvoicePrintModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div id="invoicePrintModalBody" style="padding:22px;"></div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:9999">
   <div id="appToast" class="toast align-items-center text-white border-0" role="alert">
@@ -710,9 +1047,8 @@
 
 <div id="print-area"></div>
 
-<!-- PDF TEMPLATE (Hidden) -->
+<!-- PDF TEMPLATE -->
 <div id="pdfTemplate">
-  <!-- HEADER -->
   <div style="border-bottom:3px solid #FF6B2C;padding-bottom:14px;margin-bottom:0;display:flex;justify-content:space-between;align-items:flex-start;">
     <div style="display:flex;flex-direction:column;justify-content:center;">
       <svg width="200" height="64" viewBox="0 0 420 130" xmlns="http://www.w3.org/2000/svg" style="display:block;">
@@ -729,13 +1065,12 @@
       <div style="font-size:42px;font-weight:900;color:#111;letter-spacing:2px;line-height:1;">INVOICE</div>
       <table style="margin-top:14px;margin-left:auto;border-collapse:collapse;">
         <tr><td style="padding:3px 10px 3px 0;color:#555;font-size:11px;">Invoice No.</td><td style="font-weight:700;font-size:13px;color:#111;" id="pdfInvNo"></td></tr>
+        <tr><td style="padding:3px 10px 3px 0;color:#555;font-size:11px;">Shipment No.</td><td style="font-weight:700;font-size:13px;color:#111;" id="pdfShipNo"></td></tr>
         <tr><td style="padding:3px 10px 3px 0;color:#555;font-size:11px;">Invoice Date</td><td style="font-weight:700;font-size:13px;color:#111;" id="pdfInvDate"></td></tr>
         <tr><td style="padding:3px 10px 3px 0;color:#555;font-size:11px;">Due Date</td><td style="font-weight:700;font-size:13px;color:#111;" id="pdfDueDate"></td></tr>
       </table>
     </div>
   </div>
-
-  <!-- Company Info + Truck -->
   <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0 10px;border-bottom:1px solid #ddd;margin-bottom:10px;">
     <div>
       <div style="color:#FF6B2C;font-weight:800;font-size:14px;margin-bottom:3px;">PRAHAR TRUCKING</div>
@@ -757,67 +1092,29 @@
       </svg>
     </div>
   </div>
-
-  <!-- Bill To + Trip Details (From/To REMOVED from trip details) -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px;">
-    <div>
-      <div style="background:#FF6B2C;color:white;font-weight:700;font-size:12px;padding:6px 10px;border-radius:4px 4px 0 0;">👤 BILL TO</div>
-      <div style="border:1px solid #ddd;border-top:none;border-radius:0 0 4px 4px;padding:12px;">
-        <div style="font-weight:800;font-size:13px;color:#111;margin-bottom:4px;" id="pdfParty"></div>
-        <div style="font-size:11px;color:#555;line-height:1.7;" id="pdfPartyAddress"></div>
-        <div style="margin-top:6px;font-size:11px;color:#333;"><strong>GSTIN:</strong> <span id="pdfPartyGST"></span></div>
-      </div>
-    </div>
-    <div>
-      <div style="background:#FF6B2C;color:white;font-weight:700;font-size:12px;padding:6px 10px;border-radius:4px 4px 0 0;">🚚 TRIP DETAILS</div>
-      <div style="border:1px solid #ddd;border-top:none;border-radius:0 0 4px 4px;padding:10px;">
-        <table style="width:100%;border-collapse:collapse;font-size:11px;">
-          <!-- FROM and TO columns REMOVED as requested -->
-          <tr><td style="padding:3px 6px;font-weight:700;color:#333;width:45%;">Vehicle No.</td><td style="color:#555;" id="pdfVehicle"></td></tr>
-          <tr id="pdfServiceTypeRow" style="display:none;"><td style="padding:3px 6px;font-weight:700;color:#333;">Type of Service</td><td style="color:#555;" id="pdfServiceType"></td></tr>
-          <tr><td style="padding:3px 6px;font-weight:700;color:#333;">Date of Transport</td><td style="color:#555;" id="pdfTransportDate"></td></tr>
-          <tr><td style="padding:3px 6px;font-weight:700;color:#333;">LR / Waybill No.</td><td style="color:#555;font-weight:600;" id="pdfLrNo"></td></tr>
-          <tr><td style="padding:3px 6px;font-weight:700;color:#333;">Driver Name</td><td style="color:#555;" id="pdfDriver">—</td></tr>
-        </table>
-      </div>
+  <div style="margin-bottom:12px;">
+    <div style="background:#FF6B2C;color:white;font-weight:700;font-size:12px;padding:6px 10px;border-radius:4px 4px 0 0;">👤 BILL TO</div>
+    <div style="border:1px solid #ddd;border-top:none;border-radius:0 0 4px 4px;padding:12px;">
+      <div style="font-weight:800;font-size:13px;color:#111;margin-bottom:4px;" id="pdfParty"></div>
+      <div style="font-size:11px;color:#555;line-height:1.7;" id="pdfPartyAddress"></div>
+      <div style="margin-top:6px;font-size:11px;color:#333;"><strong>GSTIN:</strong> <span id="pdfPartyGST"></span></div>
     </div>
   </div>
-
-  <!-- Consignor / Consignee per LR -->
-  <div id="pdfLrDetailsSection" style="margin-bottom:12px;display:none;">
-    <div style="background:#7C3AED;color:white;font-weight:700;font-size:12px;padding:6px 10px;border-radius:4px 4px 0 0;">📦 CONSIGNOR (SENDER) &amp; CONSIGNEE (RECEIVER) — LR WISE</div>
-    <div style="border:1px solid #C4B5FD;border-top:none;border-radius:0 0 4px 4px;overflow:hidden;">
-      <table style="width:100%;border-collapse:collapse;font-size:11px;">
-        <thead>
-          <tr style="background:#F5F3FF;">
-            <th style="padding:6px 10px;font-weight:700;color:#7C3AED;border-bottom:1px solid #E9D5FF;width:20%;">LR No.</th>
-            <th style="padding:6px 10px;font-weight:700;color:#FF6B2C;border-bottom:1px solid #E9D5FF;width:40%;">Consignor (Sender)</th>
-            <th style="padding:6px 10px;font-weight:700;color:#7C3AED;border-bottom:1px solid #E9D5FF;width:40%;">Consignee (Receiver)</th>
-          </tr>
-        </thead>
-        <tbody id="pdfLrDetailsBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Service Table — S.No + LR/Ship column + other columns -->
   <table style="width:100%;border-collapse:collapse;margin-bottom:0;">
     <thead>
       <tr>
-        <th style="width:35px;background:#FF6B2C;color:white;padding:10px 6px;text-align:center;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);">S.NO.</th>
-        <th style="background:#FF6B2C;color:white;padding:10px 8px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);width:80px;">LR / SHIP NO.</th>
-        <th style="background:#FF6B2C;color:white;padding:10px 8px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);">DESCRIPTION OF SERVICE</th>
-        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:center;width:80px;">VEHICLE TYPE</th>
-        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:center;width:65px;">QTY</th>
-        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:right;width:90px;">FREIGHT (₹)</th>
-        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:right;width:80px;">OTHER CHG (₹)</th>
-        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;text-align:right;width:80px;">AMOUNT (₹)</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;text-align:center;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);width:80px;">SHIP NO</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 8px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);width:70px;">LR NO.</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 8px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);">DESCRIPTION</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:center;width:70px;">VEHICLE</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:center;width:50px;">QTY</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:right;width:80px;">RATE</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;border-right:1px solid rgba(255,255,255,0.3);text-align:right;width:80px;">FREIGHT</th>
+        <th style="background:#FF6B2C;color:white;padding:10px 6px;font-size:11px;text-align:right;width:80px;">TOTAL</th>
       </tr>
     </thead>
     <tbody id="pdfItemsBody"></tbody>
   </table>
-
-  <!-- Totals -->
   <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
     <table style="border-collapse:collapse;min-width:220px;">
       <tr style="background:#f9f9f9;"><td style="padding:7px 14px;font-size:12px;font-weight:600;color:#444;border:1px solid #ddd;">SUB TOTAL</td><td style="padding:7px 14px;font-size:12px;font-weight:700;color:#111;text-align:right;border:1px solid #ddd;" id="pdfSubTotal"></td></tr>
@@ -825,8 +1122,6 @@
       <tr style="background:#FF6B2C;"><td style="padding:9px 14px;font-size:13px;font-weight:800;color:white;border:1px solid #FF6B2C;">TOTAL AMOUNT</td><td style="padding:9px 14px;font-size:13px;font-weight:800;color:white;text-align:right;border:1px solid #FF6B2C;" id="pdfGrandTotal"></td></tr>
     </table>
   </div>
-
-  <!-- Terms + Bank + Signatory -->
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:8px;">
     <div>
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;"><strong style="color:#FF6B2C;font-size:12px;">📋 TERMS &amp; CONDITIONS</strong></div>
@@ -851,7 +1146,6 @@
       <div style="border-top:1px solid #aaa;padding-top:6px;font-size:11px;color:#555;">Authorized Signatory</div>
     </div>
   </div>
-
   <div style="text-align:center;margin-top:20px;border-top:2px solid #FF6B2C;padding-top:12px;">
     <strong style="color:#FF6B2C;font-size:14px;letter-spacing:1px;">THANK YOU FOR YOUR BUSINESS!</strong>
   </div>
@@ -860,6 +1154,144 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
+// ===== SEARCHABLE SELECT =====
+const _ssData = {};
+
+function initSearchableSelect(id, options, placeholder='— Select —') {
+  const wasInit = !!_ssData[id]?._listenerAdded;
+  _ssData[id] = { options, placeholder, value: _ssData[id]?.value || '', _listenerAdded: wasInit };
+  renderSSList(id, '');
+  if (!wasInit) {
+    _ssData[id]._listenerAdded = true;
+    document.addEventListener('click', (e) => {
+      const wrap = document.getElementById(id + 'Wrap');
+      if (wrap && !wrap.contains(e.target)) closeSearchableSelect(id);
+    }, { capture: false });
+  }
+}
+
+function renderSSList(id, query) {
+  const list = document.getElementById(id + 'List');
+  if (!list) return;
+  const opts = _ssData[id]?.options || [];
+  const cur = _ssData[id]?.value || '';
+  const filtered = opts.filter(o => !query || o.label.toLowerCase().includes(query.toLowerCase()) || (o.searchExtra||'').toLowerCase().includes(query.toLowerCase()));
+  let html = '';
+  if (id === 'reportParty' || id === 'payFilterParty' || id === 'invPartyFilter') {
+    html += `<div class="ss-option ${cur===''?'selected':''}" onclick="selectSSOption('${id}','','All Parties')"><i class="fa-solid fa-users" style="font-size:10px;opacity:.5;"></i> All Parties</div>`;
+  } else if (id !== 'payInv') {
+    html += `<div class="ss-option ${cur===''?'selected':''}" onclick="selectSSOption('${id}','','${(_ssData[id]?.placeholder||'— Select —').replace(/'/g,"\\'")}')"><i class="fa-solid fa-xmark" style="font-size:10px;opacity:.5;"></i> ${_ssData[id]?.placeholder||'— Select —'}</div>`;
+  }
+  if (!filtered.length) html += `<div class="ss-option empty">No results found</div>`;
+  else html += filtered.map(o => {
+    if (id === 'payInv') {
+      return `<div class="ss-option ${o.value===cur?'selected':''}" onclick="selectSSOption('${id}','${o.value.replace(/'/g,"\\'")}','${o.label.replace(/'/g,"\\'")}')">
+        <div style="display:flex;flex-direction:column;gap:2px;flex:1;">
+          <div><span class="ss-inv-no">${o.invNo||o.value}</span> <span style="color:var(--text-muted);font-size:11px;">|</span> <span class="ss-inv-party">${o.partyName||''}</span></div>
+          <div style="font-size:11px;color:var(--text-muted);">${o.date||''} ${o.route?'• '+o.route:''}</div>
+        </div>
+        <span class="ss-inv-amt">${o.amount||''}</span>
+      </div>`;
+    }
+    return `<div class="ss-option ${o.value===cur?'selected':''}" onclick="selectSSOption('${id}','${o.value.replace(/'/g,"\\'")}','${o.label.replace(/'/g,"\\'")}')">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--col-orange);display:inline-block;flex-shrink:0;"></span>${o.label}</div>`;
+  }).join('');
+  list.innerHTML = html;
+}
+
+function filterSearchableSelect(id) {
+  const q = document.getElementById(id + 'Search')?.value || '';
+  renderSSList(id, q);
+}
+
+function selectSSOption(id, value, label) {
+  if (_ssData[id]) _ssData[id].value = value;
+  document.getElementById(id).value = value;
+  document.getElementById(id + 'Selected').textContent = label || _ssData[id]?.placeholder || '— Select —';
+  renderSSList(id, '');
+  closeSearchableSelect(id);
+  if (id === 'payInv') updatePaymentBalance();
+  if (id === 'payFilterParty') renderPayments();
+  if (id === 'invPartyFilter') filterInvoices();
+}
+
+function toggleSearchableSelect(id) {
+  const dd = document.getElementById(id + 'Dropdown');
+  const disp = document.getElementById(id + 'Display');
+  if (!dd) return;
+  const isOpen = dd.style.display !== 'none';
+  if (isOpen) { closeSearchableSelect(id); }
+  else {
+    dd.style.display = 'block';
+    disp.classList.add('open');
+    const si = document.getElementById(id + 'Search');
+    if (si) { si.value = ''; si.focus(); renderSSList(id, ''); }
+  }
+}
+
+function closeSearchableSelect(id) {
+  const dd = document.getElementById(id + 'Dropdown');
+  const disp = document.getElementById(id + 'Display');
+  if (dd) dd.style.display = 'none';
+  if (disp) disp.classList.remove('open');
+}
+
+// ===== RANGE SLIDER =====
+let _rangeState = { min: 0, max: Infinity, dragging: null, trackMax: 100000 };
+
+function initOutstandingRange() {
+  let maxOut = 0;
+  invoices.forEach(inv => {
+    const out = getInvoiceOutstanding(inv.id);
+    if (out > maxOut) maxOut = out;
+  });
+  _rangeState.trackMax = maxOut > 0 ? Math.ceil(maxOut / 1000) * 1000 : 100000;
+  _rangeState.min = 0;
+  _rangeState.max = Infinity;
+  updateRangeUI();
+}
+
+function updateRangeUI() {
+  const track = document.getElementById('outRangeTrack');
+  if (!track) return;
+  const max = _rangeState.trackMax;
+  const minPct = (_rangeState.min / max) * 100;
+  const maxPct = _rangeState.max === Infinity ? 100 : (Math.min(_rangeState.max, max) / max) * 100;
+  document.getElementById('outThumbMin').style.left = minPct + '%';
+  document.getElementById('outThumbMax').style.left = maxPct + '%';
+  document.getElementById('outRangeFill').style.left = minPct + '%';
+  document.getElementById('outRangeFill').style.width = (maxPct - minPct) + '%';
+  document.getElementById('outRangeMinLabel').textContent = '₹' + _rangeState.min.toLocaleString('en-IN');
+  document.getElementById('outRangeMaxLabel').textContent = _rangeState.max === Infinity ? 'Any' : '₹' + _rangeState.max.toLocaleString('en-IN');
+}
+
+function startRangeDrag(e, which) {
+  e.preventDefault();
+  _rangeState.dragging = which;
+  const move = (ev) => {
+    const track = document.getElementById('outRangeTrack');
+    if (!track) return;
+    const rect = track.getBoundingClientRect();
+    const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+    let pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    let val = Math.round(pct * _rangeState.trackMax / 1000) * 1000;
+    if (which === 'min') {
+      const maxVal = _rangeState.max === Infinity ? _rangeState.trackMax : _rangeState.max;
+      _rangeState.min = Math.min(val, maxVal - 1000);
+    } else {
+      if (val >= _rangeState.trackMax) { _rangeState.max = Infinity; }
+      else { _rangeState.max = Math.max(val, _rangeState.min + 1000); }
+    }
+    updateRangeUI();
+    renderPayments();
+  };
+  const up = () => { document.removeEventListener('mousemove', move); document.removeEventListener('mouseup', up); document.removeEventListener('touchmove', move); document.removeEventListener('touchend', up); };
+  document.addEventListener('mousemove', move);
+  document.addEventListener('mouseup', up);
+  document.addEventListener('touchmove', move);
+  document.addEventListener('touchend', up);
+}
+
 // ===== CORE UI =====
 let sidebarOpen = true;
 function toggleSidebar() {
@@ -869,17 +1301,19 @@ function toggleSidebar() {
   else { sidebarOpen = !sidebarOpen; s.classList.toggle('collapsed', !sidebarOpen); m.classList.toggle('expanded', !sidebarOpen); }
 }
 
-const navColors = { dashboard:'', invoice:'', invoices:'', transport:'emerald', parties:'violet', payments:'amber', bank:'sky', reports:'amber', consolidated:'pink', settings:'' };
+const navColors = { dashboard:'', invoice:'', invoices:'', parties:'violet', payments:'amber', received:'teal', bank:'sky', reports:'amber', consolidated:'pink', settings:'' };
 
 function showModule(name, btn) {
   document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
   document.getElementById('mod-' + name).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active','violet','sky','emerald','pink','amber'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active','violet','sky','emerald','pink','amber','teal'));
   if (btn) { btn.classList.add('active'); const col=navColors[name]; if(col) btn.classList.add(col); }
   else { const match=document.querySelector(`.nav-item[data-module="${name}"]`); if(match){ match.classList.add('active'); const col=navColors[name]; if(col) match.classList.add(col); } }
-  const titles = { dashboard:'Dashboard', invoice:'Create Invoice', invoices:'Invoice List', transport:'Transport', parties:'Parties / Clients', payments:'Payments', bank:'Bank Statement', reports:'Reports', consolidated:'Consolidated Data', settings:'Settings' };
+  const titles = { dashboard:'Dashboard', invoice:'Create Invoice', invoices:'Invoice List', parties:'Parties / Clients', payments:'Payments', received:'Received Data', bank:'Bank Statement', reports:'Reports', consolidated:'Consolidated Data', settings:'Settings' };
   document.getElementById('pageTitle').textContent = titles[name] || name;
   if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+  if (name === 'payments') setTimeout(initOutstandingRange, 100);
+  if (name === 'reports') initReportPartyFilter();
 }
 
 function showToast(msg, type='success') {
@@ -893,11 +1327,11 @@ function showToast(msg, type='success') {
 // ===== DATA =====
 let invoices = JSON.parse(localStorage.getItem('pt_invoices') || '[]');
 let parties = JSON.parse(localStorage.getItem('pt_parties') || '[]');
-let transports = JSON.parse(localStorage.getItem('pt_transports') || '[]');
 let payments = JSON.parse(localStorage.getItem('pt_payments') || '[]');
 let bankTx = JSON.parse(localStorage.getItem('pt_bank') || '[]');
 let settings = JSON.parse(localStorage.getItem('pt_settings') || '{}');
 let bankSettings = JSON.parse(localStorage.getItem('pt_bankSettings') || '{}');
+let receivedData = JSON.parse(localStorage.getItem('pt_received') || '[]');
 
 function save(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
 
@@ -916,355 +1350,316 @@ function getNextInvoiceNo() {
   return `PT-${year}-${(Math.max(...nums)+1).toString().padStart(3,'0')}`;
 }
 
-// ===== LR FIELD MANAGEMENT =====
-function addLRField() {
-  const container = document.getElementById('lrContainer');
-  const row = document.createElement('div');
-  row.className = 'd-flex gap-1 mb-1 lr-row';
-  row.innerHTML = `<input type="text" class="form-control" placeholder="LR / GR Number" oninput="syncAllLRSections()" /><button type="button" class="btn btn-outline-danger btn-sm px-2" onclick="removeLRField(this)"><i class="fa-solid fa-minus"></i></button>`;
-  container.appendChild(row);
-  updateFirstLRRemoveBtn();
-  syncAllLRSections();
+function getNextShipNo() {
+  return 'SHIP-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
 }
 
-function removeLRField(btn) {
-  btn.closest('.lr-row').remove();
-  updateFirstLRRemoveBtn();
-  syncAllLRSections();
-}
+// ===== MASTER LR ROW SYSTEM =====
+function addLRMasterRow(data = null) {
+  const container = document.getElementById('lrMasterContainer');
+  const idx = container.children.length;
+  const d = data || {};
+  const uid = 'lr_' + Date.now() + '_' + idx;
 
-function updateFirstLRRemoveBtn() {
-  const rows = document.querySelectorAll('#lrContainer .lr-row');
-  rows.forEach(row => { const b=row.querySelector('button'); if(b) b.style.display = rows.length>1?'':'none'; });
-}
+  const wrapper = document.createElement('div');
+  wrapper.className = 'lr-row-wrapper';
+  wrapper.dataset.uid = uid;
 
-function getLRNumbers() {
-  return [...document.querySelectorAll('#lrContainer .lr-row input')].map(i=>i.value.trim()).filter(Boolean);
-}
+  const lrNoDisplay = d.lrNo || '—';
+  const fromDisplay = d.from || '—';
+  const toDisplay = d.to || '—';
+  const vehicleDisplay = d.vehicle || '—';
+  const freightDisplay = d.freight ? '₹' + parseFloat(d.freight).toFixed(2) : '₹0.00';
 
-function setLRNumbers(lrs) {
-  const container = document.getElementById('lrContainer');
-  container.innerHTML = '';
-  const list = Array.isArray(lrs) ? lrs : (lrs?[lrs]:['']);
-  if (!list.length) list.push('');
-  list.forEach(lr => {
-    const row = document.createElement('div');
-    row.className = 'd-flex gap-1 mb-1 lr-row';
-    row.innerHTML = `<input type="text" class="form-control" placeholder="LR / GR Number" value="${lr}" oninput="syncAllLRSections()" /><button type="button" class="btn btn-outline-danger btn-sm px-2" onclick="removeLRField(this)" style="display:none"><i class="fa-solid fa-minus"></i></button>`;
-    container.appendChild(row);
-  });
-  updateFirstLRRemoveBtn();
-}
-
-// ===== MASTER SYNC — syncs all 4 per-LR sections =====
-function syncAllLRSections() {
-  syncLRConsignorConsignee();
-  syncLRRouteVehicle();
-  syncLRGoodsCharges();
-  syncLRRemarks();
-}
-
-// ===== SECTION A: CONSIGNOR / CONSIGNEE =====
-function getConsignorOptions() { return parties.filter(p => !p.role||p.role==='Consignor'||p.role==='Both'); }
-function getConsigneeOptions() { return parties.filter(p => !p.role||p.role==='Consignee'||p.role==='Both'); }
-function buildPartyOptions(list, selectedName) {
-  return '<option value="">— Select —</option>' + list.map(p=>`<option value="${p.name}"${p.name===selectedName?' selected':''}>${p.name}</option>`).join('');
-}
-function updateConsignorConsigneeDropdowns() {
-  document.querySelectorAll('#lrConsignorConsigneeContainer .lr-cc-row').forEach(row => {
-    const cSel=row.querySelector('.consignor-sel'), ceSel=row.querySelector('.consignee-sel');
-    if(cSel) cSel.innerHTML=buildPartyOptions(getConsignorOptions(),cSel.value);
-    if(ceSel) ceSel.innerHTML=buildPartyOptions(getConsigneeOptions(),ceSel.value);
-  });
-}
-
-function syncLRConsignorConsignee() {
-  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
-  const ccContainer = document.getElementById('lrConsignorConsigneeContainer');
-  const existing = [...ccContainer.querySelectorAll('.lr-cc-row')];
-  const consignorOpts = getConsignorOptions();
-  const consigneeOpts = getConsigneeOptions();
-
-  while (existing.length < lrInputs.length) {
-    const idx = existing.length;
-    const row = document.createElement('div');
-    row.className = 'row g-2 mb-2 lr-cc-row';
-    row.setAttribute('data-lr-idx', idx);
-    row.innerHTML = `
-      <div class="col-12">
-        <div style="background:linear-gradient(135deg,#F5F3FF,#FAF9FF);border:1.5px solid #E9D5FF;border-radius:10px;padding:10px 14px;">
-          <div style="font-size:11px;font-weight:700;color:#7C3AED;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">
-            <i class="fa-solid fa-truck-ramp-box me-1"></i>LR #<span class="lr-label">${idx+1}</span>: <span class="lr-no-display" style="color:#111"></span>
-          </div>
-          <div class="row g-2">
-            <div class="col-md-6">
-              <label class="form-label" style="font-size:11px;color:#FF6B2C;"><i class="fa-solid fa-arrow-up-from-bracket me-1"></i>Consignor (Sender)</label>
-              <select class="form-select form-select-sm consignor-sel" style="border-color:#FDBA74;">${buildPartyOptions(consignorOpts,'')}</select>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label" style="font-size:11px;color:#7C3AED;"><i class="fa-solid fa-arrow-down-to-bracket me-1"></i>Consignee (Receiver)</label>
-              <select class="form-select form-select-sm consignee-sel" style="border-color:#C4B5FD;">${buildPartyOptions(consigneeOpts,'')}</select>
-            </div>
-          </div>
-        </div>
-      </div>`;
-    ccContainer.appendChild(row);
-    existing.push(row);
-  }
-  while (existing.length > lrInputs.length) { existing.pop().remove(); }
-  ccContainer.querySelectorAll('.lr-cc-row').forEach((row, i) => {
-    row.querySelector('.lr-label').textContent = i+1;
-    const lrVal = lrInputs[i]?lrInputs[i].value.trim():'';
-    row.querySelector('.lr-no-display').textContent = lrVal?`(${lrVal})`:'';
-  });
-}
-
-function getLRConsignorConsigneeData() {
-  const rows = document.querySelectorAll('#lrConsignorConsigneeContainer .lr-cc-row');
-  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
-  return [...rows].map((row,i)=>({ lr: lrInputs[i]?lrInputs[i].value.trim():'', consignor: row.querySelector('.consignor-sel')?.value||'', consignee: row.querySelector('.consignee-sel')?.value||'' }));
-}
-
-function setLRConsignorConsigneeData(lrCCData) {
-  setTimeout(() => {
-    const rows = document.querySelectorAll('#lrConsignorConsigneeContainer .lr-cc-row');
-    lrCCData.forEach((d,i)=>{ if(rows[i]){ const cSel=rows[i].querySelector('.consignor-sel'); const ceSel=rows[i].querySelector('.consignee-sel'); if(cSel) cSel.value=d.consignor||''; if(ceSel) ceSel.value=d.consignee||''; } });
-  }, 60);
-}
-
-// ===== SECTION B: ROUTE & VEHICLE PER LR =====
-function syncLRRouteVehicle() {
-  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
-  const container = document.getElementById('lrRouteVehicleContainer');
-  const existing = [...container.querySelectorAll('.lr-rv-row')];
-
-  while (existing.length < lrInputs.length) {
-    const idx = existing.length;
-    const row = document.createElement('div');
-    row.className = 'mb-2 lr-rv-row lr-section-box';
-    row.setAttribute('data-lr-idx', idx);
-    row.innerHTML = `
-      <div class="lr-section-header">
-        <i class="fa-solid fa-route"></i>
-        LR #<span class="lr-label">${idx+1}</span>: <span class="lr-no-display" style="color:#111;font-weight:600;margin-left:4px;"></span>
+  wrapper.innerHTML = `
+    <div class="lr-hidden-store" data-uid="${uid}">
+      <input class="lr-no" value="${d.lrNo||''}" />
+      <select class="lr-consignor">${getPartyOptions(d.consignor||'')}</select>
+      <select class="lr-consignee">${getPartyOptions(d.consignee||'')}</select>
+      <input class="lr-from" value="${d.from||''}" />
+      <input class="lr-to" value="${d.to||''}" />
+      <input class="lr-vehicle" value="${d.vehicle||''}" />
+      <select class="lr-service">
+        <option value="">— Select —</option>
+        <option value="FTL" ${d.service==='FTL'?'selected':''}>Full Truck Load (FTL)</option>
+        <option value="PTL" ${d.service==='PTL'?'selected':''}>Part Truck Load (PTL)</option>
+        <option value="Container" ${d.service==='Container'?'selected':''}>Container</option>
+      </select>
+      <input class="lr-desc" value="${d.goods||''}" />
+      <input class="lr-qty" type="number" value="${d.qty||''}" />
+      <input class="lr-rate" type="number" value="${d.rate||''}" />
+      <input class="lr-freight" type="number" value="${d.freight||''}" ${d.freight?'data-manual="1"':''} />
+      <input class="lr-loading" type="number" value="${d.loading||'0'}" />
+      <input class="lr-unloading" type="number" value="${d.unloading||'0'}" />
+      <input class="lr-detention" type="number" value="${d.detention||'0'}" />
+      <input class="lr-gst" type="number" value="${d.gst||'5'}" />
+      <textarea class="lr-remarks">${d.remarks||''}</textarea>
+    </div>
+    <div class="lr-collapsed-card" onclick="openLRModal('${uid}', ${idx})">
+      <div class="lr-collapsed-badge">Row #${idx+1}</div>
+      <div class="lr-collapsed-info">
+        <div class="lr-collapsed-chip"><span class="chip-label">LR No</span><span class="chip-val lr-summary-lrno">${lrNoDisplay}</span></div>
+        <div class="lr-collapsed-chip"><span class="chip-label">From → To</span><span class="chip-val lr-summary-route">${fromDisplay} → ${toDisplay}</span></div>
+        <div class="lr-collapsed-chip"><span class="chip-label">Vehicle</span><span class="chip-val lr-summary-vehicle">${vehicleDisplay}</span></div>
+        <div class="lr-collapsed-chip"><span class="chip-label">Freight</span><span class="chip-val lr-summary-freight" style="color:var(--col-orange);font-family:'Clash Display',sans-serif">${freightDisplay}</span></div>
       </div>
-      <div class="row g-3">
-        <div class="col-md-3">
-          <label class="form-label">From (Origin)</label>
-          <input type="text" class="form-control rv-from" placeholder="City / State" />
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">To (Destination)</label>
-          <input type="text" class="form-control rv-to" placeholder="City / State" />
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Vehicle Number</label>
-          <input type="text" class="form-control rv-vehicle" placeholder="e.g. TN 01 AB 1234" />
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Type of Service <span style="font-size:10px;color:var(--text-muted);font-weight:400">(shown in PDF)</span></label>
-          <select class="form-select rv-service">
-            <option value="">— Select —</option>
-            <option value="Full Truck Load (FTL)">Full Truck Load (FTL)</option>
-            <option value="Part Truck Load (PTL)">Part Truck Load (PTL)</option>
-            <option value="Container">Container</option>
-            <option value="Express Delivery">Express Delivery</option>
-            <option value="Cold Chain">Cold Chain</option>
-            <option value="ODC (Over Dimension Cargo)">ODC (Over Dimension Cargo)</option>
-          </select>
-        </div>
-      </div>`;
-    container.appendChild(row);
-    existing.push(row);
-  }
-  while (existing.length > lrInputs.length) { existing.pop().remove(); }
-  container.querySelectorAll('.lr-rv-row').forEach((row, i) => {
-    row.querySelector('.lr-label').textContent = i+1;
-    const lrVal = lrInputs[i]?lrInputs[i].value.trim():'';
-    row.querySelector('.lr-no-display').textContent = lrVal?`(${lrVal})`:'';
-  });
-}
-
-function getLRRouteVehicleData() {
-  const rows = document.querySelectorAll('#lrRouteVehicleContainer .lr-rv-row');
-  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
-  return [...rows].map((row,i)=>({
-    lr: lrInputs[i]?lrInputs[i].value.trim():'',
-    from: row.querySelector('.rv-from')?.value||'',
-    to: row.querySelector('.rv-to')?.value||'',
-    vehicle: row.querySelector('.rv-vehicle')?.value||'',
-    service: row.querySelector('.rv-service')?.value||''
-  }));
-}
-
-function setLRRouteVehicleData(data) {
-  setTimeout(() => {
-    const rows = document.querySelectorAll('#lrRouteVehicleContainer .lr-rv-row');
-    data.forEach((d,i)=>{ if(rows[i]){ if(rows[i].querySelector('.rv-from')) rows[i].querySelector('.rv-from').value=d.from||''; if(rows[i].querySelector('.rv-to')) rows[i].querySelector('.rv-to').value=d.to||''; if(rows[i].querySelector('.rv-vehicle')) rows[i].querySelector('.rv-vehicle').value=d.vehicle||''; if(rows[i].querySelector('.rv-service')) rows[i].querySelector('.rv-service').value=d.service||''; } });
-  }, 80);
-}
-
-// ===== SECTION C: GOODS & CHARGES PER LR =====
-function syncLRGoodsCharges() {
-  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
-  const container = document.getElementById('lrGoodsChargesContainer');
-  const existing = [...container.querySelectorAll('.lr-gc-row')];
-
-  while (existing.length < lrInputs.length) {
-    const idx = existing.length;
-    const row = document.createElement('div');
-    row.className = 'mb-2 lr-gc-row lr-section-box';
-    row.setAttribute('data-lr-idx', idx);
-    row.innerHTML = `
-      <div class="lr-section-header">
-        <i class="fa-solid fa-boxes-stacked"></i>
-        LR #<span class="lr-label">${idx+1}</span>: <span class="lr-no-display" style="color:#111;font-weight:600;margin-left:4px;"></span>
+      <div class="lr-collapsed-actions" onclick="event.stopPropagation()">
+        <button class="btn-lr-expand" onclick="openLRModal('${uid}', ${idx})"><i class="fa-solid fa-expand"></i>Edit</button>
+        <button class="btn-lr-del" onclick="removeLRRow('${uid}')"><i class="fa-solid fa-trash"></i></button>
       </div>
-      <div class="row g-3">
-        <div class="col-md-4">
-          <label class="form-label">Description of Goods</label>
-          <input type="text" class="form-control gc-goods" placeholder="Goods / Commodity" />
+    </div>
+  `;
+  container.appendChild(wrapper);
+  calcAllTotals();
+}
+
+let _activeModalUID = null;
+
+function getPartyOptions(selected='') {
+  return '<option value="">— Select Party —</option>' + parties.map(p=>`<option value="${p.name}" ${p.name===selected?'selected':''}>${p.name}</option>`).join('');
+}
+
+function openLRModal(uid, idx) {
+  _activeModalUID = uid;
+  const store = document.querySelector(`.lr-hidden-store[data-uid="${uid}"]`);
+  if (!store) return;
+
+  const d = {
+    lrNo: store.querySelector('.lr-no').value,
+    consignor: store.querySelector('.lr-consignor').value,
+    consignee: store.querySelector('.lr-consignee').value,
+    from: store.querySelector('.lr-from').value,
+    to: store.querySelector('.lr-to').value,
+    vehicle: store.querySelector('.lr-vehicle').value,
+    service: store.querySelector('.lr-service').value,
+    goods: store.querySelector('.lr-desc').value,
+    qty: store.querySelector('.lr-qty').value,
+    rate: store.querySelector('.lr-rate').value,
+    freight: store.querySelector('.lr-freight').value,
+    loading: store.querySelector('.lr-loading').value,
+    unloading: store.querySelector('.lr-unloading').value,
+    detention: store.querySelector('.lr-detention').value,
+    gst: store.querySelector('.lr-gst').value,
+    remarks: store.querySelector('.lr-remarks').value,
+  };
+
+  const wrapper = document.querySelector(`.lr-row-wrapper[data-uid="${uid}"]`);
+  const rowNum = wrapper ? ([...wrapper.parentElement.children].indexOf(wrapper) + 1) : (idx+1);
+  document.getElementById('lrExpandModalTitle').textContent = `LR Row #${rowNum} — Details`;
+
+  document.getElementById('lrExpandModalBody').innerHTML = `
+    <div class="lr-grid" id="lrModalGrid">
+      <div class="lr-section-title">1. LR Details & Parties</div>
+      <div><label class="form-label">LR No.</label><input type="text" class="form-control m-lr-no" placeholder="LR Number" value="${d.lrNo}" /></div>
+      <div><label class="form-label">Consignor (Sender)</label><select class="form-select m-lr-consignor">${getPartyOptions(d.consignor)}</select></div>
+      <div><label class="form-label">Consignee (Receiver)</label><select class="form-select m-lr-consignee">${getPartyOptions(d.consignee)}</select></div>
+      
+      <div class="lr-section-title">2. Route & Vehicle</div>
+      <div><label class="form-label">From (Origin)</label><input type="text" class="form-control m-lr-from" value="${d.from}" /></div>
+      <div><label class="form-label">To (Destination)</label><input type="text" class="form-control m-lr-to" value="${d.to}" /></div>
+      <div><label class="form-label">Vehicle No.</label><input type="text" class="form-control m-lr-vehicle" value="${d.vehicle}" /></div>
+      <div><label class="form-label">Service Type</label>
+        <select class="form-select m-lr-service">
+          <option value="">— Select —</option>
+          <option value="FTL" ${d.service==='FTL'?'selected':''}>Full Truck Load (FTL)</option>
+          <option value="PTL" ${d.service==='PTL'?'selected':''}>Part Truck Load (PTL)</option>
+          <option value="Container" ${d.service==='Container'?'selected':''}>Container</option>
+        </select>
+      </div>
+
+      <div class="lr-section-title">3. Goods & Charges</div>
+      <div><label class="form-label">Description</label><input type="text" class="form-control m-lr-desc" value="${d.goods}" /></div>
+      <div><label class="form-label">Qty</label><input type="number" class="form-control m-lr-qty" value="${d.qty}" oninput="modalFreightAutoCalc()" /></div>
+      <div><label class="form-label">Rate (₹)</label><input type="number" class="form-control m-lr-rate" value="${d.rate}" oninput="modalFreightAutoCalc()" /></div>
+      <div>
+        <label class="form-label">Freight (Calc / Manual) 
+          <span id="modalFreightBadge" style="font-size:10px;padding:2px 6px;border-radius:8px;background:${d.freight && parseFloat(d.freight)!==(parseFloat(d.qty||0)*parseFloat(d.rate||0))?'var(--col-orange)':'#ECFDF5'};color:${d.freight && parseFloat(d.freight)!==(parseFloat(d.qty||0)*parseFloat(d.rate||0))?'white':'var(--col-emerald)'};font-weight:700;">${d.freight && parseFloat(d.freight)!==(parseFloat(d.qty||0)*parseFloat(d.rate||0))?'Manual':'Auto'}</span>
+        </label>
+        <input type="number" class="form-control m-lr-freight" value="${d.freight}" oninput="modalMarkFreightManual()" placeholder="Auto-calc or type manually" />
+      </div>
+      
+      <div class="lr-section-title">4. Extra Charges & Tax</div>
+      <div><label class="form-label">Loading (₹)</label><input type="number" class="form-control m-lr-loading" value="${d.loading||'0'}" /></div>
+      <div><label class="form-label">Unloading (₹)</label><input type="number" class="form-control m-lr-unloading" value="${d.unloading||'0'}" /></div>
+      <div><label class="form-label">Detention (₹)</label><input type="number" class="form-control m-lr-detention" value="${d.detention||'0'}" /></div>
+      <div><label class="form-label">GST %</label><input type="number" class="form-control m-lr-gst" value="${d.gst||'5'}" /></div>
+
+      <div class="lr-section-title">5. Remarks</div>
+      <div class="lr-full-width"><label class="form-label">Notes</label><textarea class="form-control m-lr-remarks" rows="3">${d.remarks}</textarea></div>
+
+      <div class="lr-full-width">
+        <div style="background:linear-gradient(135deg,#F8F9FF,#FFF8F5);border:1.5px solid var(--border);border-radius:12px;padding:16px;margin-top:8px;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:10px;">Row Total Preview</div>
+          <div class="d-flex gap-4 flex-wrap">
+            <div><div style="font-size:10px;color:var(--text-muted)">Freight</div><div style="font-size:16px;font-family:'Clash Display',sans-serif;font-weight:700;color:var(--col-indigo)" id="modalPreviewFreight">₹0</div></div>
+            <div><div style="font-size:10px;color:var(--text-muted)">+Extra</div><div style="font-size:16px;font-family:'Clash Display',sans-serif;font-weight:700;color:var(--col-amber)" id="modalPreviewExtra">₹0</div></div>
+            <div><div style="font-size:10px;color:var(--text-muted)">+GST</div><div style="font-size:16px;font-family:'Clash Display',sans-serif;font-weight:700;color:var(--col-violet)" id="modalPreviewGST">₹0</div></div>
+            <div><div style="font-size:10px;color:var(--text-muted);font-weight:700">Row Total</div><div style="font-size:20px;font-family:'Clash Display',sans-serif;font-weight:700;color:var(--col-orange)" id="modalPreviewTotal">₹0</div></div>
+          </div>
         </div>
-        <div class="col-md-2">
-          <label class="form-label">Qty</label>
-          <input type="number" class="form-control gc-qty" placeholder="0" oninput="calcAllTotals()" />
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Weight (MT)</label>
-          <input type="number" class="form-control gc-weight" placeholder="0.00" />
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Rate (₹)</label>
-          <input type="number" class="form-control gc-rate" placeholder="0.00" oninput="calcAllTotals()" />
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Freight (₹)</label>
-          <input type="number" class="form-control gc-freight" placeholder="0.00" readonly style="background:#F8F9FF" />
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Loading Charges (₹)</label>
-          <input type="number" class="form-control gc-loading" value="0" oninput="calcAllTotals()" />
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Unloading Charges (₹)</label>
-          <input type="number" class="form-control gc-unloading" value="0" oninput="calcAllTotals()" />
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">Detention / Extra (₹)</label>
-          <input type="number" class="form-control gc-detention" value="0" oninput="calcAllTotals()" />
-        </div>
-        <div class="col-md-3">
-          <label class="form-label">GST % <small style="color:var(--text-muted);font-weight:400">(5/12/18)</small></label>
-          <input type="number" class="form-control gc-gst" value="5" oninput="calcAllTotals()" />
-        </div>
-      </div>`;
-    container.appendChild(row);
-    existing.push(row);
+      </div>
+    </div>
+  `;
+
+  document.getElementById('lrExpandModalBody').querySelectorAll('input,select,textarea').forEach(el => {
+    el.addEventListener('input', updateModalPreview);
+    el.addEventListener('change', updateModalPreview);
+  });
+  updateModalPreview();
+
+  document.getElementById('lrExpandModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function modalFreightAutoCalc() {
+  const body = document.getElementById('lrExpandModalBody');
+  const qty = parseFloat(body.querySelector('.m-lr-qty').value)||0;
+  const rate = parseFloat(body.querySelector('.m-lr-rate').value)||0;
+  const freightEl = body.querySelector('.m-lr-freight');
+  if (!freightEl.dataset.manual) {
+    freightEl.value = (qty*rate) ? (qty*rate).toFixed(2) : '';
+    const badge = document.getElementById('modalFreightBadge');
+    if(badge){badge.style.background='#ECFDF5';badge.style.color='var(--col-emerald)';badge.textContent='Auto';}
   }
-  while (existing.length > lrInputs.length) { existing.pop().remove(); }
-  container.querySelectorAll('.lr-gc-row').forEach((row, i) => {
-    row.querySelector('.lr-label').textContent = i+1;
-    const lrVal = lrInputs[i]?lrInputs[i].value.trim():'';
-    row.querySelector('.lr-no-display').textContent = lrVal?`(${lrVal})`:'';
+  updateModalPreview();
+}
+
+function modalMarkFreightManual() {
+  const freightEl = document.getElementById('lrExpandModalBody').querySelector('.m-lr-freight');
+  freightEl.dataset.manual = '1';
+  const badge = document.getElementById('modalFreightBadge');
+  if(badge){badge.style.background='var(--col-orange)';badge.style.color='white';badge.textContent='Manual';}
+  updateModalPreview();
+}
+
+function updateModalPreview() {
+  const body = document.getElementById('lrExpandModalBody');
+  if(!body) return;
+  const freight = parseFloat(body.querySelector('.m-lr-freight')?.value)||0;
+  const loading = parseFloat(body.querySelector('.m-lr-loading')?.value)||0;
+  const unloading = parseFloat(body.querySelector('.m-lr-unloading')?.value)||0;
+  const detention = parseFloat(body.querySelector('.m-lr-detention')?.value)||0;
+  const gstPct = parseFloat(body.querySelector('.m-lr-gst')?.value)||0;
+  const extra = loading+unloading+detention;
+  const sub = freight+extra;
+  const gstAmt = sub*gstPct/100;
+  const total = sub+gstAmt;
+  const fmt = v=>'₹'+v.toFixed(2);
+  const el = id=>document.getElementById(id);
+  if(el('modalPreviewFreight')) el('modalPreviewFreight').textContent=fmt(freight);
+  if(el('modalPreviewExtra')) el('modalPreviewExtra').textContent=fmt(extra);
+  if(el('modalPreviewGST')) el('modalPreviewGST').textContent=fmt(gstAmt);
+  if(el('modalPreviewTotal')) el('modalPreviewTotal').textContent=fmt(total);
+}
+
+function saveLRFromModal() {
+  const uid = _activeModalUID;
+  if(!uid) return;
+  const store = document.querySelector(`.lr-hidden-store[data-uid="${uid}"]`);
+  const body = document.getElementById('lrExpandModalBody');
+  if(!store||!body) {closeLRModal();return;}
+
+  const map = [
+    ['m-lr-no','lr-no'],['m-lr-consignor','lr-consignor'],['m-lr-consignee','lr-consignee'],
+    ['m-lr-from','lr-from'],['m-lr-to','lr-to'],['m-lr-vehicle','lr-vehicle'],
+    ['m-lr-service','lr-service'],['m-lr-desc','lr-desc'],['m-lr-qty','lr-qty'],
+    ['m-lr-rate','lr-rate'],['m-lr-freight','lr-freight'],['m-lr-loading','lr-loading'],
+    ['m-lr-unloading','lr-unloading'],['m-lr-detention','lr-detention'],
+    ['m-lr-gst','lr-gst'],['m-lr-remarks','lr-remarks']
+  ];
+  map.forEach(([mc,sc])=>{
+    const mEl=body.querySelector('.'+mc), sEl=store.querySelector('.'+sc);
+    if(mEl&&sEl) sEl.value=mEl.value;
+  });
+
+  const freightStoreEl = store.querySelector('.lr-freight');
+  freightStoreEl.dataset.manual = '1';
+
+  const wrapper = document.querySelector(`.lr-row-wrapper[data-uid="${uid}"]`);
+  if(wrapper){
+    const lrNo = store.querySelector('.lr-no').value||'—';
+    const from = store.querySelector('.lr-from').value||'—';
+    const to = store.querySelector('.lr-to').value||'—';
+    const vehicle = store.querySelector('.lr-vehicle').value||'—';
+    const freight = parseFloat(store.querySelector('.lr-freight').value)||0;
+    wrapper.querySelector('.lr-summary-lrno').textContent = lrNo;
+    wrapper.querySelector('.lr-summary-route').textContent = from+' → '+to;
+    wrapper.querySelector('.lr-summary-vehicle').textContent = vehicle;
+    wrapper.querySelector('.lr-summary-freight').textContent = '₹'+freight.toFixed(2);
+  }
+
+  calcAllTotals();
+  closeLRModal();
+  showToast('LR Row saved!');
+}
+
+function closeLRModal() {
+  document.getElementById('lrExpandModal').classList.remove('show');
+  document.body.style.overflow = '';
+  _activeModalUID = null;
+}
+
+function lrModalBackdropClose(e) {
+  if(e.target === document.getElementById('lrExpandModal')) closeLRModal();
+}
+
+function removeLRRow(uid) {
+  if(!confirm('Remove this LR row?')) return;
+  const wrapper = document.querySelector(`.lr-row-wrapper[data-uid="${uid}"]`);
+  if(wrapper) wrapper.remove();
+  document.querySelectorAll('.lr-row-wrapper').forEach((w,i)=>{
+    w.querySelector('.lr-collapsed-badge').textContent = 'Row #'+(i+1);
   });
   calcAllTotals();
 }
 
-function getLRGoodsChargesData() {
-  const rows = document.querySelectorAll('#lrGoodsChargesContainer .lr-gc-row');
-  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
-  return [...rows].map((row,i)=>({
-    lr: lrInputs[i]?lrInputs[i].value.trim():'',
-    goods: row.querySelector('.gc-goods')?.value||'',
-    qty: row.querySelector('.gc-qty')?.value||'',
-    weight: row.querySelector('.gc-weight')?.value||'',
-    rate: row.querySelector('.gc-rate')?.value||'',
-    freight: row.querySelector('.gc-freight')?.value||'',
-    loading: row.querySelector('.gc-loading')?.value||'0',
-    unloading: row.querySelector('.gc-unloading')?.value||'0',
-    detention: row.querySelector('.gc-detention')?.value||'0',
-    gst: row.querySelector('.gc-gst')?.value||'5'
+function getLRMasterData() {
+  const stores = document.querySelectorAll('.lr-hidden-store');
+  return [...stores].map(store => ({
+    lrNo: store.querySelector('.lr-no')?.value || '',
+    consignor: store.querySelector('.lr-consignor')?.value || '',
+    consignee: store.querySelector('.lr-consignee')?.value || '',
+    from: store.querySelector('.lr-from')?.value || '',
+    to: store.querySelector('.lr-to')?.value || '',
+    vehicle: store.querySelector('.lr-vehicle')?.value || '',
+    service: store.querySelector('.lr-service')?.value || '',
+    goods: store.querySelector('.lr-desc')?.value || '',
+    qty: parseFloat(store.querySelector('.lr-qty')?.value) || 0,
+    rate: parseFloat(store.querySelector('.lr-rate')?.value) || 0,
+    freight: parseFloat(store.querySelector('.lr-freight')?.value) || 0,
+    loading: parseFloat(store.querySelector('.lr-loading')?.value) || 0,
+    unloading: parseFloat(store.querySelector('.lr-unloading')?.value) || 0,
+    detention: parseFloat(store.querySelector('.lr-detention')?.value) || 0,
+    gst: parseFloat(store.querySelector('.lr-gst')?.value) || 0,
+    remarks: store.querySelector('.lr-remarks')?.value || ''
   }));
 }
 
-function setLRGoodsChargesData(data) {
-  setTimeout(() => {
-    const rows = document.querySelectorAll('#lrGoodsChargesContainer .lr-gc-row');
-    data.forEach((d,i)=>{ if(rows[i]){
-      const f=s=>rows[i].querySelector(s);
-      if(f('.gc-goods')) f('.gc-goods').value=d.goods||'';
-      if(f('.gc-qty')) f('.gc-qty').value=d.qty||'';
-      if(f('.gc-weight')) f('.gc-weight').value=d.weight||'';
-      if(f('.gc-rate')) f('.gc-rate').value=d.rate||'';
-      if(f('.gc-loading')) f('.gc-loading').value=d.loading||'0';
-      if(f('.gc-unloading')) f('.gc-unloading').value=d.unloading||'0';
-      if(f('.gc-detention')) f('.gc-detention').value=d.detention||'0';
-      if(f('.gc-gst')) f('.gc-gst').value=d.gst||'5';
-      calcAllTotals();
-    }});
-  }, 100);
-}
-
-// ===== SECTION D: REMARKS PER LR =====
-function syncLRRemarks() {
-  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
-  const container = document.getElementById('lrRemarksContainer');
-  const existing = [...container.querySelectorAll('.lr-rem-row')];
-
-  while (existing.length < lrInputs.length) {
-    const idx = existing.length;
-    const row = document.createElement('div');
-    row.className = 'mb-2 lr-rem-row lr-section-box';
-    row.setAttribute('data-lr-idx', idx);
-    row.innerHTML = `
-      <div class="lr-section-header">
-        <i class="fa-solid fa-note-sticky"></i>
-        LR #<span class="lr-label">${idx+1}</span>: <span class="lr-no-display" style="color:#111;font-weight:600;margin-left:4px;"></span>
-      </div>
-      <div class="row g-2">
-        <div class="col-12">
-          <label class="form-label">Remarks / Notes</label>
-          <textarea class="form-control rem-text" rows="2" placeholder="Any additional notes for this LR..."></textarea>
-        </div>
-      </div>`;
-    container.appendChild(row);
-    existing.push(row);
-  }
-  while (existing.length > lrInputs.length) { existing.pop().remove(); }
-  container.querySelectorAll('.lr-rem-row').forEach((row, i) => {
-    row.querySelector('.lr-label').textContent = i+1;
-    const lrVal = lrInputs[i]?lrInputs[i].value.trim():'';
-    row.querySelector('.lr-no-display').textContent = lrVal?`(${lrVal})`:'';
-  });
-}
-
-function getLRRemarksData() {
-  const rows = document.querySelectorAll('#lrRemarksContainer .lr-rem-row');
-  const lrInputs = [...document.querySelectorAll('#lrContainer .lr-row input')];
-  return [...rows].map((row,i)=>({ lr: lrInputs[i]?lrInputs[i].value.trim():'', remarks: row.querySelector('.rem-text')?.value||'' }));
-}
-
-function setLRRemarksData(data) {
-  setTimeout(() => {
-    const rows = document.querySelectorAll('#lrRemarksContainer .lr-rem-row');
-    data.forEach((d,i)=>{ if(rows[i]&&rows[i].querySelector('.rem-text')) rows[i].querySelector('.rem-text').value=d.remarks||''; });
-  }, 120);
-}
-
-// ===== CALC TOTALS (across all LR rows) =====
+// ===== CALC TOTALS =====
 function calcAllTotals() {
   let totalSub = 0, totalGstAmt = 0;
-  document.querySelectorAll('#lrGoodsChargesContainer .lr-gc-row').forEach(row => {
-    const qty = parseFloat(row.querySelector('.gc-qty')?.value)||0;
-    const rate = parseFloat(row.querySelector('.gc-rate')?.value)||0;
-    const freight = qty * rate;
-    if(row.querySelector('.gc-freight')) row.querySelector('.gc-freight').value = freight.toFixed(2);
-    const load = parseFloat(row.querySelector('.gc-loading')?.value)||0;
-    const unload = parseFloat(row.querySelector('.gc-unloading')?.value)||0;
-    const det = parseFloat(row.querySelector('.gc-detention')?.value)||0;
-    const gstPct = parseFloat(row.querySelector('.gc-gst')?.value)||0;
+  document.querySelectorAll('.lr-hidden-store').forEach(store => {
+    const qty = parseFloat(store.querySelector('.lr-qty')?.value)||0;
+    const rate = parseFloat(store.querySelector('.lr-rate')?.value)||0;
+    const freightEl = store.querySelector('.lr-freight');
+    let freight;
+    if (freightEl.dataset.manual === '1') {
+      freight = parseFloat(freightEl.value)||0;
+    } else {
+      freight = qty * rate;
+      freightEl.value = freight ? freight.toFixed(2) : '';
+    }
+    freightEl.style.borderColor = freightEl.dataset.manual === '1' ? 'var(--col-orange)' : '';
+    freightEl.style.background = freightEl.dataset.manual === '1' ? '#FFF8F5' : '';
+    
+    const load = parseFloat(store.querySelector('.lr-loading')?.value)||0;
+    const unload = parseFloat(store.querySelector('.lr-unloading')?.value)||0;
+    const det = parseFloat(store.querySelector('.lr-detention')?.value)||0;
+    const gstPct = parseFloat(store.querySelector('.lr-gst')?.value)||0;
+    
     const sub = freight + load + unload + det;
     const gst = sub * gstPct / 100;
+    
     totalSub += sub;
     totalGstAmt += gst;
   });
@@ -1281,31 +1676,23 @@ function calcAllTotals() {
 function saveInvoice() {
   const id = document.getElementById('editInvoiceId').value;
   const no = document.getElementById('invNo').value.trim();
+  const shipNo = document.getElementById('invShipNo').value.trim();
+  
   if (!no) { showToast('Invoice Number error', 'danger'); return; }
-
-  const lrCCData = getLRConsignorConsigneeData();
-  const lrRVData = getLRRouteVehicleData();
-  const lrGCData = getLRGoodsChargesData();
-  const lrRemData = getLRRemarksData();
-
-  // Get first LR's route/vehicle for summary columns
-  const firstRV = lrRVData[0] || {};
+  
+  const lrItems = getLRMasterData();
+  if (!lrItems.length) { showToast('Add at least one LR Row', 'danger'); return; }
 
   const invData = {
     id: id ? parseInt(id) : Date.now(),
     no,
+    shipNo: shipNo || getNextShipNo(),
     date: document.getElementById('invDate').value,
-    lr: getLRNumbers(),
-    lrDetails: lrCCData,
-    lrRouteVehicle: lrRVData,
-    lrGoodsCharges: lrGCData,
-    lrRemarks: lrRemData,
     party: document.getElementById('invParty').value,
-    transport: document.getElementById('invTransport').value,
-    // summary fields from first LR for list display
-    from: firstRV.from || '',
-    to: firstRV.to || '',
-    vehicle: firstRV.vehicle || '',
+    lrItems: lrItems,
+    from: lrItems[0].from || '',
+    to: lrItems[0].to || '',
+    vehicle: lrItems[0].vehicle || '',
     total: document.getElementById('grandTotal').textContent,
     status: id ? (invoices.find(i=>i.id==id)?.status||'Pending') : 'Pending'
   };
@@ -1320,7 +1707,7 @@ function saveInvoice() {
   }
 
   save('pt_invoices', invoices);
-  renderDashboard(); renderInvoiceList(); updatePaymentDropdown();
+  renderDashboard(); renderInvoiceList(); updatePaymentDropdown(); updateInvPartyFilter();
   if (!id) clearForm();
 }
 
@@ -1332,22 +1719,44 @@ function editInvoice(id) {
   document.getElementById('editInvoiceId').value = inv.id;
   document.getElementById('invoiceFormTitle').textContent = 'Edit Invoice';
   document.getElementById('invNo').value = inv.no;
+  document.getElementById('invShipNo').value = inv.shipNo || '';
   document.getElementById('invDate').value = inv.date;
-  document.getElementById('invParty').value = inv.party||'';
-  document.getElementById('invTransport').value = inv.transport||'Prahar Trucking';
+  setInvPartyValue(inv.party||'');
 
-  setLRNumbers(inv.lr||['']);
-  // After LR numbers set, sync all sections then populate data
-  setTimeout(() => {
-    syncAllLRSections();
-    setTimeout(() => {
-      if (inv.lrDetails?.length) setLRConsignorConsigneeData(inv.lrDetails);
-      if (inv.lrRouteVehicle?.length) setLRRouteVehicleData(inv.lrRouteVehicle);
-      if (inv.lrGoodsCharges?.length) setLRGoodsChargesData(inv.lrGoodsCharges);
-      if (inv.lrRemarks?.length) setLRRemarksData(inv.lrRemarks);
-    }, 50);
-  }, 30);
+  document.getElementById('lrMasterContainer').innerHTML = '';
+  
+  let items = inv.lrItems;
+  if (!items && inv.lrDetails) {
+    items = [];
+    const count = inv.lrDetails.length;
+    for(let i=0; i<count; i++) {
+      items.push({
+        lrNo: inv.lr ? inv.lr[i] : '',
+        consignor: inv.lrDetails[i]?.consignor || '',
+        consignee: inv.lrDetails[i]?.consignee || '',
+        from: inv.lrRouteVehicle?.[i]?.from || '',
+        to: inv.lrRouteVehicle?.[i]?.to || '',
+        vehicle: inv.lrRouteVehicle?.[i]?.vehicle || '',
+        service: inv.lrRouteVehicle?.[i]?.service || '',
+        goods: inv.lrGoodsCharges?.[i]?.goods || '',
+        qty: inv.lrGoodsCharges?.[i]?.qty || 0,
+        rate: inv.lrGoodsCharges?.[i]?.rate || 0,
+        freight: inv.lrGoodsCharges?.[i]?.freight || 0,
+        loading: inv.lrGoodsCharges?.[i]?.loading || 0,
+        unloading: inv.lrGoodsCharges?.[i]?.unloading || 0,
+        detention: inv.lrGoodsCharges?.[i]?.detention || 0,
+        gst: inv.lrGoodsCharges?.[i]?.gst || 5,
+        remarks: inv.lrRemarks?.[i]?.remarks || ''
+      });
+    }
+  }
 
+  if (items && items.length) {
+    items.forEach(item => addLRMasterRow(item));
+  } else {
+    addLRMasterRow();
+  }
+  
   calcAllTotals();
   showModule('invoice', null);
 }
@@ -1357,24 +1766,182 @@ function clearForm() {
   document.getElementById('editInvoiceId').value = '';
   document.getElementById('invoiceFormTitle').textContent = 'Create Invoice';
   document.getElementById('invNo').value = getNextInvoiceNo();
+  document.getElementById('invShipNo').value = getNextShipNo();
   document.getElementById('invDate').value = new Date().toISOString().split('T')[0];
-  document.getElementById('invParty').selectedIndex = 0;
-
-  // Reset LR container to single empty row
-  const container = document.getElementById('lrContainer');
-  container.innerHTML = `<div class="d-flex gap-1 mb-1 lr-row"><input type="text" class="form-control" placeholder="LR / GR Number" oninput="syncAllLRSections()" /><button type="button" class="btn btn-outline-danger btn-sm px-2" onclick="removeLRField(this)" style="display:none"><i class="fa-solid fa-minus"></i></button></div>`;
-
-  // Clear all per-LR section containers
-  document.getElementById('lrConsignorConsigneeContainer').innerHTML='';
-  document.getElementById('lrRouteVehicleContainer').innerHTML='';
-  document.getElementById('lrGoodsChargesContainer').innerHTML='';
-  document.getElementById('lrRemarksContainer').innerHTML='';
-
-  syncAllLRSections();
+  setInvPartyValue('');
+  document.getElementById('lrMasterContainer').innerHTML = '';
+  addLRMasterRow();
   ['subTotal','gstAmt','roundOff','grandTotal'].forEach(id=>document.getElementById(id).textContent='₹0.00');
 }
 
-// ===== PRINT =====
+// ===== PRINT INVOICE FROM LIST (NEW - Opens Print Modal) =====
+let _printModalInvId = null;
+
+function printInvoiceFromList(id) {
+  const inv = invoices.find(i=>i.id===id);
+  if (!inv) return;
+  _printModalInvId = id;
+
+  const party = parties.find(p=>p.name===inv.party);
+  const items = inv.lrItems || [];
+
+  let itemsHtml = '';
+  let totalSub = 0, totalGstAmt = 0, usedGstPct = 5;
+
+  if (items.length) {
+    items.forEach((item, idx) => {
+      const freight = parseFloat(item.freight)||0;
+      const load = parseFloat(item.loading)||0;
+      const unload = parseFloat(item.unloading)||0;
+      const det = parseFloat(item.detention)||0;
+      const gstPct = parseFloat(item.gst)||5;
+      usedGstPct = gstPct;
+      const sub = freight+load+unload+det;
+      const gst = sub*gstPct/100;
+      totalSub += sub;
+      totalGstAmt += gst;
+
+      const desc = `${item.goods || 'Goods'} (${item.consignor||'?'} → ${item.consignee||'?'})`;
+
+      itemsHtml += `<tr>
+        <td style="padding:8px;border:1px solid #e2e8f0;font-weight:700;color:var(--col-orange)">${inv.shipNo||'-'}</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;font-weight:700;color:var(--col-violet)">${item.lrNo||'-'}</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">${desc}<br><small style="color:#64748B">${item.from||''} to ${item.to||''}</small></td>
+        <td style="padding:8px;border:1px solid #e2e8f0;text-align:center;font-size:12px;">${item.vehicle||'-'}</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;text-align:center;">${item.qty||'-'}</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;text-align:right;">${item.rate?item.rate.toFixed(2):'-'}</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;text-align:right;">${freight>0?freight.toFixed(2):'-'}</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;text-align:right;font-weight:700;">₹${sub.toFixed(2)}</td>
+      </tr>`;
+    });
+  }
+
+  const rounded = Math.round(totalSub+totalGstAmt);
+
+  let dueDate = '-';
+  if (inv.date) {
+    const d=new Date(inv.date); d.setDate(d.getDate()+14);
+    dueDate = d.toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
+  }
+
+  const html = `
+    <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#0F172A;font-size:12px;">
+      <!-- Header -->
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #FF6B2C;padding-bottom:14px;margin-bottom:16px;">
+        <div>
+          <div style="font-size:28px;font-weight:900;color:#FF6B2C;letter-spacing:2px;">PRAHAR</div>
+          <div style="font-size:14px;font-weight:700;color:#111;letter-spacing:4px;">TRUCKING</div>
+          <div style="font-size:10px;color:#64748B;margin-top:4px;">${(settings.address||'').replace(/\n/g,'<br>')}</div>
+          <div style="font-size:10px;color:#64748B;margin-top:2px;">📞 ${settings.phone||''} &nbsp; ✉ ${settings.email||''}</div>
+          ${settings.gstin?`<div style="font-size:10px;color:#333;margin-top:2px;"><strong>GSTIN:</strong> ${settings.gstin}</div>`:''}
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:32px;font-weight:900;color:#111;letter-spacing:2px;">INVOICE</div>
+          <table style="margin-top:10px;margin-left:auto;border-collapse:collapse;font-size:12px;">
+            <tr><td style="padding:2px 10px 2px 0;color:#64748B;">Invoice No.</td><td style="font-weight:700;">${inv.no}</td></tr>
+            <tr><td style="padding:2px 10px 2px 0;color:#64748B;">Shipment No.</td><td style="font-weight:700;">${inv.shipNo||'-'}</td></tr>
+            <tr><td style="padding:2px 10px 2px 0;color:#64748B;">Invoice Date</td><td style="font-weight:700;">${inv.date||'-'}</td></tr>
+            <tr><td style="padding:2px 10px 2px 0;color:#64748B;">Due Date</td><td style="font-weight:700;">${dueDate}</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bill To -->
+      <div style="margin-bottom:16px;">
+        <div style="background:#FF6B2C;color:white;font-weight:700;font-size:11px;padding:5px 10px;border-radius:6px 6px 0 0;">👤 BILL TO</div>
+        <div style="border:1px solid #e2e8f0;border-top:none;border-radius:0 0 6px 6px;padding:10px;">
+          <div style="font-weight:800;font-size:14px;">${inv.party||'Unknown'}</div>
+          <div style="font-size:11px;color:#64748B;margin-top:2px;">${party?(party.address||''):'-'}</div>
+          ${party&&party.gstin?`<div style="font-size:11px;margin-top:4px;"><strong>GSTIN:</strong> ${party.gstin}</div>`:''}
+        </div>
+      </div>
+
+      <!-- Items Table -->
+      <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
+        <thead>
+          <tr>
+            <th style="background:#FF6B2C;color:white;padding:8px 6px;text-align:center;font-size:10px;border-right:1px solid rgba(255,255,255,.3);">SHIP#</th>
+            <th style="background:#FF6B2C;color:white;padding:8px 6px;font-size:10px;border-right:1px solid rgba(255,255,255,.3);">LR NO.</th>
+            <th style="background:#FF6B2C;color:white;padding:8px 6px;font-size:10px;border-right:1px solid rgba(255,255,255,.3);">DESCRIPTION</th>
+            <th style="background:#FF6B2C;color:white;padding:8px 6px;font-size:10px;border-right:1px solid rgba(255,255,255,.3);text-align:center;">VEHICLE</th>
+            <th style="background:#FF6B2C;color:white;padding:8px 6px;font-size:10px;border-right:1px solid rgba(255,255,255,.3);text-align:center;">QTY</th>
+            <th style="background:#FF6B2C;color:white;padding:8px 6px;font-size:10px;border-right:1px solid rgba(255,255,255,.3);text-align:right;">RATE</th>
+            <th style="background:#FF6B2C;color:white;padding:8px 6px;font-size:10px;border-right:1px solid rgba(255,255,255,.3);text-align:right;">FREIGHT</th>
+            <th style="background:#FF6B2C;color:white;padding:8px 6px;font-size:10px;text-align:right;">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>${itemsHtml}</tbody>
+      </table>
+
+      <!-- Totals -->
+      <div style="display:flex;justify-content:flex-end;margin-bottom:20px;">
+        <table style="border-collapse:collapse;min-width:240px;font-size:12px;">
+          <tr><td style="padding:6px 12px;font-weight:600;color:#64748B;border:1px solid #e2e8f0;">SUB TOTAL</td><td style="padding:6px 12px;font-weight:700;text-align:right;border:1px solid #e2e8f0;">₹${totalSub.toFixed(2)}</td></tr>
+          <tr><td style="padding:6px 12px;font-weight:600;color:#64748B;border:1px solid #e2e8f0;">GST @ ${usedGstPct}%</td><td style="padding:6px 12px;font-weight:700;text-align:right;border:1px solid #e2e8f0;">₹${totalGstAmt.toFixed(2)}</td></tr>
+          <tr style="background:#FF6B2C;"><td style="padding:8px 12px;font-weight:800;color:white;border:1px solid #FF6B2C;">TOTAL AMOUNT</td><td style="padding:8px 12px;font-weight:800;color:white;text-align:right;border:1px solid #FF6B2C;font-size:16px;">₹${rounded.toFixed(2)}</td></tr>
+        </table>
+      </div>
+
+      <!-- Bank Details & Signature -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px;">
+        <div>
+          <div style="font-weight:700;color:#FF6B2C;font-size:11px;margin-bottom:6px;">📋 TERMS</div>
+          <ul style="font-size:10px;color:#64748B;padding-left:14px;line-height:1.8;margin:0;">
+            <li>Payment within 14 days.</li>
+            <li>Interest @ 18% p.a. on overdue.</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;color:#FF6B2C;font-size:11px;margin-bottom:6px;">🏦 BANK DETAILS</div>
+          <div style="font-size:10px;color:#64748B;line-height:1.7;">
+            ${bankSettings.name?`Bank: ${bankSettings.name}<br>`:''}
+            ${bankSettings.acc?`A/C: ${bankSettings.acc}<br>`:''}
+            ${bankSettings.ifsc?`IFSC: ${bankSettings.ifsc}<br>`:''}
+            ${bankSettings.branch?`Branch: ${bankSettings.branch}`:''}
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:12px;font-weight:600;color:#333;margin-bottom:40px;">For Prahar Trucking</div>
+          <div style="border-top:1px solid #aaa;padding-top:6px;font-size:10px;color:#64748B;">Authorized Signatory</div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:20px;border-top:2px solid #FF6B2C;padding-top:10px;">
+        <strong style="color:#FF6B2C;font-size:13px;letter-spacing:1px;">THANK YOU FOR YOUR BUSINESS!</strong>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('invoicePrintModalBody').innerHTML = html;
+  document.getElementById('invoicePrintModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeInvoicePrintModal() {
+  document.getElementById('invoicePrintModal').style.display = 'none';
+  document.body.style.overflow = '';
+  _printModalInvId = null;
+}
+
+function invoicePrintModalClose(e) {
+  if (e.target === document.getElementById('invoicePrintModal')) closeInvoicePrintModal();
+}
+
+function doPrintInvoiceModal() {
+  const content = document.getElementById('invoicePrintModalBody').innerHTML;
+  const printArea = document.getElementById('print-area');
+  printArea.innerHTML = content;
+  window.print();
+  setTimeout(()=>printArea.innerHTML='',1000);
+}
+
+function doDownloadPDFModal() {
+  if (_printModalInvId) {
+    downloadInvoicePDF(_printModalInvId);
+  }
+}
+
+// ===== PRINT CURRENT INVOICE =====
 function printCurrentInvoice() {
   const content = document.getElementById('invoicePrintArea').innerHTML;
   const printArea = document.getElementById('print-area');
@@ -1397,6 +1964,7 @@ function downloadInvoicePDF(id) {
   if (!inv) return;
 
   document.getElementById('pdfInvNo').textContent = inv.no;
+  document.getElementById('pdfShipNo').textContent = inv.shipNo || '-';
   document.getElementById('pdfInvDate').textContent = inv.date||'-';
   if (inv.date) {
     const d=new Date(inv.date); d.setDate(d.getDate()+14);
@@ -1413,94 +1981,36 @@ function downloadInvoicePDF(id) {
   document.getElementById('pdfPartyAddress').innerHTML=(party?(party.address||'-'):'-').replace(/\n/g,'<br>');
   document.getElementById('pdfPartyGST').textContent=party?(party.gstin||'-'):'-';
 
-  // TRIP DETAILS — FROM and TO removed
-  const firstRV = inv.lrRouteVehicle?.[0] || {};
-  document.getElementById('pdfVehicle').textContent=firstRV.vehicle||inv.vehicle||'-';
-  document.getElementById('pdfTransportDate').textContent=inv.date||'-';
-
-  // Type of Service — show only if provided
-  const serviceVal = firstRV.service||'';
-  if (serviceVal) {
-    document.getElementById('pdfServiceType').textContent = serviceVal;
-    document.getElementById('pdfServiceTypeRow').style.display='';
-  } else {
-    document.getElementById('pdfServiceTypeRow').style.display='none';
-  }
-
-  const lrs = Array.isArray(inv.lr)?inv.lr.filter(Boolean):(inv.lr?[inv.lr]:[]);
-  document.getElementById('pdfLrNo').textContent=lrs.length?lrs.join(', '):'-';
-
-  // Consignor/Consignee
-  const lrDetails = inv.lrDetails||[];
-  if (lrDetails.length && lrDetails.some(d=>d.consignor||d.consignee)) {
-    document.getElementById('pdfLrDetailsSection').style.display='';
-    document.getElementById('pdfLrDetailsBody').innerHTML = lrDetails.map(d=>`
-      <tr>
-        <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-weight:600;color:#333;">${d.lr||'-'}</td>
-        <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;color:#555;">${d.consignor||'-'}</td>
-        <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;color:#555;">${d.consignee||'-'}</td>
-      </tr>`).join('');
-  } else {
-    document.getElementById('pdfLrDetailsSection').style.display='none';
-  }
-
-  // Service table items — one row per LR with LR/Ship column
-  const gcData = inv.lrGoodsCharges || [];
-  const rvData = inv.lrRouteVehicle || [];
+  const items = inv.lrItems || [];
   let itemsHtml = '';
-  let rowNum = 1;
   let totalSub = 0, totalGstAmt = 0, usedGstPct = 5;
 
-  if (gcData.length) {
-    gcData.forEach((gc, i) => {
-      const lrNo = lrs[i] || (gc.lr||'-');
-      const rv = rvData[i] || {};
-      const freight = parseFloat(gc.freight)||0;
-      const load = parseFloat(gc.loading)||0;
-      const unload = parseFloat(gc.unloading)||0;
-      const det = parseFloat(gc.detention)||0;
-      const gstPct = parseFloat(gc.gst)||5;
+  if (items.length) {
+    items.forEach(item => {
+      const freight = parseFloat(item.freight)||0;
+      const load = parseFloat(item.loading)||0;
+      const unload = parseFloat(item.unloading)||0;
+      const det = parseFloat(item.detention)||0;
+      const gstPct = parseFloat(item.gst)||5;
       usedGstPct = gstPct;
       const sub = freight+load+unload+det;
       const gst = sub*gstPct/100;
       totalSub += sub;
       totalGstAmt += gst;
-      const otherChg = load+unload+det;
 
-      if (freight>0 || sub>0) {
-        itemsHtml += `<tr>
-          <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">${rowNum++}</td>
-          <td style="padding:9px 8px;border-bottom:1px solid #eee;font-weight:700;color:#7C3AED;">${lrNo}</td>
-          <td style="padding:9px 8px;border-bottom:1px solid #eee;">Transport Service${rv.from&&rv.to?' – '+rv.from+' to '+rv.to:''}</td>
-          <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;font-size:11px;">${gc.goods||'FTL'}</td>
-          <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">${gc.qty||'-'}</td>
-          <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;">${freight>0?freight.toFixed(2):'-'}</td>
-          <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;">${otherChg>0?otherChg.toFixed(2):'-'}</td>
-          <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;font-weight:700;">${sub.toFixed(2)}</td>
-        </tr>`;
-      }
+      const desc = `${item.goods || 'Goods'} (${item.consignor||'?'} → ${item.consignee||'?'})`;
+
+      itemsHtml += `<tr>
+        <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;font-weight:bold;">${inv.shipNo || '-'}</td>
+        <td style="padding:9px 8px;border-bottom:1px solid #eee;font-weight:700;color:#7C3AED;">${item.lrNo||'-'}</td>
+        <td style="padding:9px 8px;border-bottom:1px solid #eee;">${desc}<br><small style="color:#666">${item.from||''} to ${item.to||''}</small></td>
+        <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;font-size:11px;">${item.vehicle||'-'}</td>
+        <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">${item.qty||'-'}</td>
+        <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;">${item.rate?item.rate.toFixed(2):'-'}</td>
+        <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;">${freight>0?freight.toFixed(2):'-'}</td>
+        <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;font-weight:700;">${sub.toFixed(2)}</td>
+      </tr>`;
     });
-  } else {
-    // fallback for old invoice format
-    const freight=parseFloat(inv.freight)||0;
-    const load=parseFloat(inv.loading)||0;
-    const unload=parseFloat(inv.unloading)||0;
-    const det=parseFloat(inv.detention)||0;
-    const sub=freight+load+unload+det;
-    const gstPct=parseFloat(inv.gst)||5;
-    usedGstPct=gstPct;
-    totalSub=sub; totalGstAmt=sub*gstPct/100;
-    const otherChg=load+unload+det;
-    itemsHtml=`<tr>
-      <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">1</td>
-      <td style="padding:9px 8px;border-bottom:1px solid #eee;font-weight:700;color:#7C3AED;">${lrs[0]||'-'}</td>
-      <td style="padding:9px 8px;border-bottom:1px solid #eee;">Transport Service – ${inv.from||'?'} to ${inv.to||'?'}</td>
-      <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">${inv.goods||'FTL'}</td>
-      <td style="padding:9px 6px;text-align:center;border-bottom:1px solid #eee;">${inv.qty||'-'}</td>
-      <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;">${freight>0?freight.toFixed(2):'-'}</td>
-      <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;">${otherChg>0?otherChg.toFixed(2):'-'}</td>
-      <td style="padding:9px 6px;text-align:right;border-bottom:1px solid #eee;font-weight:700;">${sub.toFixed(2)}</td>
-    </tr>`;
   }
 
   document.getElementById('pdfItemsBody').innerHTML = itemsHtml;
@@ -1534,27 +2044,58 @@ function exportTableToExcel(tbodyId, filename) {
 
 function exportAllExcel() {
   if (!invoices.length) { showToast('No invoices to export','danger'); return; }
-  const ws = XLSX.utils.json_to_sheet(invoices);
+  const flatData = [];
+  invoices.forEach(inv => {
+    if(inv.lrItems && inv.lrItems.length) {
+      inv.lrItems.forEach(item => {
+        flatData.push({
+          InvoiceNo: inv.no, ShipmentNo: inv.shipNo, Date: inv.date, Party: inv.party,
+          LR: item.lrNo, From: item.from, To: item.to, Vehicle: item.vehicle,
+          Goods: item.goods, Qty: item.qty, Rate: item.rate, Freight: item.freight,
+          Unloading: item.unloading, Detention: item.detention, GST_Pct: item.gst, Total: inv.total
+        });
+      });
+    } else {
+      flatData.push({ InvoiceNo: inv.no, Date: inv.date, Party: inv.party, Total: inv.total });
+    }
+  });
+  const ws = XLSX.utils.json_to_sheet(flatData);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Invoices');
   XLSX.writeFile(wb, 'Prahar_Invoices.xlsx');
 }
 
-function downloadInvoiceExcelById(id) {
-  const inv = invoices.find(i=>i.id===id);
-  if (!inv) return;
-  const data=[{'Invoice No':inv.no,'Date':inv.date,'Party':inv.party,'From':inv.from,'To':inv.to,'Vehicle':inv.vehicle,'Grand Total':inv.total}];
+// ===== NEW: EXPORT PAYMENT HISTORY EXCEL =====
+function exportPaymentExcel() {
+  if (!payments.length) { showToast('No payments to export','danger'); return; }
+  const data = payments.map(p => {
+    const inv = invoices.find(i => i.id == p.invId);
+    const out = getInvoiceOutstanding(p.invId);
+    return {
+      'Invoice No': inv ? inv.no : p.invId || '-',
+      'Party Name': inv ? inv.party : 'Unknown',
+      'Payment Date': p.date || '-',
+      'Amount (₹)': parseFloat(p.amount) || 0,
+      'Outstanding (₹)': out,
+      'Payment Mode': p.mode || '-',
+      'Reference': p.ref || '-',
+      'Remarks': p.remarks || '-'
+    };
+  });
   const ws = XLSX.utils.json_to_sheet(data);
+  // Auto-size columns
+  const colWidths = Object.keys(data[0]).map(k => ({ wch: Math.max(k.length, 15) }));
+  ws['!cols'] = colWidths;
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Invoice');
-  XLSX.writeFile(wb, `Invoice_${inv.no.replace(/\//g,'-')}.xlsx`);
+  XLSX.utils.book_append_sheet(wb, ws, 'Payment_History');
+  XLSX.writeFile(wb, `Prahar_Payment_History_${new Date().toISOString().split('T')[0]}.xlsx`);
+  showToast('Payment History Excel downloaded!');
 }
 
-// ===== CONSOLIDATED =====
 function exportConsolidatedData() {
   const wb = XLSX.utils.book_new();
   const addSheet=(data,name)=>{ if(!data||!data.length) data=[{Info:'No Data'}]; XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),name); };
-  addSheet(invoices,'Invoices'); addSheet(parties,'Parties'); addSheet(transports,'Transports'); addSheet(payments,'Payments'); addSheet(bankTx,'Bank_Statement');
+  addSheet(invoices,'Invoices'); addSheet(parties,'Parties'); addSheet(payments,'Payments'); addSheet(bankTx,'Bank_Statement'); addSheet(receivedData,'Received_Data');
   XLSX.writeFile(wb, `Prahar_Backup_${new Date().toISOString().split('T')[0]}.xlsx`);
 }
 
@@ -1565,8 +2106,9 @@ function importConsolidatedData(event) {
     try {
       const wb=XLSX.read(e.target.result,{type:'binary'});
       const ps=name=>{ if(wb.Sheets[name]){ const d=XLSX.utils.sheet_to_json(wb.Sheets[name]); if(d.length&&Object.keys(d[0]).includes('Info')&&d[0].Info==='No Data') return []; return d; } return []; };
-      invoices=ps('Invoices'); parties=ps('Parties'); transports=ps('Transports'); payments=ps('Payments'); bankTx=ps('Bank_Statement');
-      save('pt_invoices',invoices); save('pt_parties',parties); save('pt_transports',transports); save('pt_payments',payments); save('pt_bank',bankTx);
+      invoices=ps('Invoices'); parties=ps('Parties'); payments=ps('Payments'); bankTx=ps('Bank_Statement');
+      if(wb.Sheets['Received_Data']) receivedData=ps('Received_Data');
+      save('pt_invoices',invoices); save('pt_parties',parties); save('pt_payments',payments); save('pt_bank',bankTx); save('pt_received',receivedData);
       document.getElementById('restoreStatus').innerHTML=`<div class="alert alert-success py-2 mt-2"><i class="fa-solid fa-check-circle me-2"></i>Data imported! Reloading...</div>`;
       setTimeout(()=>location.reload(),2000);
     } catch(err){ document.getElementById('restoreStatus').innerHTML=`<div class="alert alert-danger py-2 mt-2">Error reading file.</div>`; }
@@ -1577,7 +2119,7 @@ function importConsolidatedData(event) {
 // ===== DASHBOARD =====
 function renderDashboard() {
   document.getElementById('totalInvoices').textContent=invoices.length;
-  document.getElementById('totalTrips').textContent=invoices.length;
+  document.getElementById('totalTrips').textContent=invoices.reduce((acc, inv)=>acc + (inv.lrItems?inv.lrItems.length:0), 0);
   const paid=payments.reduce((s,p)=>s+parseFloat(p.amount||0),0);
   const totalAmt=invoices.reduce((s,inv)=>s+parseFloat((inv.total||'₹0').replace('₹','')||0),0);
   document.getElementById('paidAmt').textContent='₹'+paid.toLocaleString('en-IN');
@@ -1587,13 +2129,14 @@ function renderDashboard() {
   tb.innerHTML=invoices.slice(0,6).map(inv=>`<tr><td><strong style="color:var(--col-orange)">${inv.no}</strong></td><td>${inv.party||'—'}</td><td><small>${inv.from||'?'} → ${inv.to||'?'}</small></td><td><strong>${inv.total}</strong></td><td>${statusBadge(inv.status)}</td></tr>`).join('');
 }
 
-// ===== INVOICE LIST =====
+// ===== INVOICE LIST (UPDATED: Print button per row) =====
 function renderInvoiceList(list=invoices) {
   const tb=document.getElementById('invTableBody');
-  if(!list.length){tb.innerHTML='<tr><td colspan="8" class="text-center text-muted py-5"><i class="fa-solid fa-list-check fa-2x mb-2 d-block" style="opacity:.2"></i>No invoices found.</td></tr>';return;}
+  if(!list.length){tb.innerHTML='<tr><td colspan="9" class="text-center text-muted py-5"><i class="fa-solid fa-list-check fa-2x mb-2 d-block" style="opacity:.2"></i>No invoices found.</td></tr>';return;}
   tb.innerHTML=list.map(inv=>`
     <tr>
       <td><strong style="color:var(--col-orange)">${inv.no}</strong></td>
+      <td><small>${inv.shipNo||'-'}</small></td>
       <td>${inv.date||'—'}</td>
       <td>${inv.party||'—'}</td>
       <td><small>${inv.from||'?'} → ${inv.to||'?'}</small></td>
@@ -1601,11 +2144,10 @@ function renderInvoiceList(list=invoices) {
       <td><strong>${inv.total}</strong></td>
       <td>${statusBadge(inv.status)}</td>
       <td>
-        <button class="btn-icon edit me-1" onclick="editInvoice(${inv.id})"><i class="fa-solid fa-pen"></i></button>
-        <button class="btn-icon pdf me-1" onclick="downloadInvoicePDF(${inv.id})" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></button>
-        <button class="btn-icon print me-1" onclick="editInvoice(${inv.id});setTimeout(()=>printCurrentInvoice(),600)"><i class="fa-solid fa-print"></i></button>
-        <button class="btn-icon del me-1" onclick="downloadInvoiceExcelById(${inv.id})"><i class="fa-solid fa-file-excel"></i></button>
-        <button class="btn-icon del" onclick="deleteInvoice(${inv.id})"><i class="fa-solid fa-trash"></i></button>
+        <button class="btn-icon edit me-1" title="Edit" onclick="editInvoice(${inv.id})"><i class="fa-solid fa-pen"></i></button>
+        <button class="btn-icon print me-1" title="Print Invoice" onclick="printInvoiceFromList(${inv.id})"><i class="fa-solid fa-print"></i></button>
+        <button class="btn-icon pdf me-1" title="Download PDF" onclick="downloadInvoicePDF(${inv.id})"><i class="fa-solid fa-file-pdf"></i></button>
+        <button class="btn-icon del" title="Delete" onclick="deleteInvoice(${inv.id})"><i class="fa-solid fa-trash"></i></button>
       </td>
     </tr>`).join('');
 }
@@ -1613,14 +2155,26 @@ function renderInvoiceList(list=invoices) {
 function filterInvoices() {
   const q=document.getElementById('invSearch').value.toLowerCase();
   const st=document.getElementById('invStatusFilter').value;
-  renderInvoiceList(invoices.filter(inv=>(!q||[inv.no,inv.party,inv.from,inv.to,inv.vehicle].join(' ').toLowerCase().includes(q))&&(!st||inv.status===st)));
+  const partyF = document.getElementById('invPartyFilter')?.value || '';
+  renderInvoiceList(invoices.filter(inv=>{
+    if(q && ![inv.no,inv.shipNo,inv.party,inv.from,inv.to,inv.vehicle].join(' ').toLowerCase().includes(q)) return false;
+    if(st && inv.status!==st) return false;
+    if(partyF && inv.party !== partyF) return false;
+    return true;
+  }));
+}
+
+function updateInvPartyFilter() {
+  const partySet = new Set(invoices.map(i=>i.party).filter(Boolean));
+  const opts = [...partySet].map(p=>({value:p,label:p}));
+  initSearchableSelect('invPartyFilter', opts, 'All Parties');
 }
 
 function deleteInvoice(id) {
   if(!confirm('Delete this invoice?')) return;
   invoices=invoices.filter(i=>i.id!==id);
   save('pt_invoices',invoices);
-  renderInvoiceList(); renderDashboard();
+  renderInvoiceList(); renderDashboard(); updatePaymentDropdown(); updateInvPartyFilter();
   showToast('Invoice deleted');
 }
 
@@ -1638,7 +2192,7 @@ function saveParty() {
   if(!validateGST(gstInput)){showToast('Invalid GSTIN format','danger');return;}
   parties.push({id:Date.now(),name,role:document.getElementById('pRole').value||'Both',contact:document.getElementById('pContact').value,phone:document.getElementById('pPhone').value,address:document.getElementById('pAddress').value,gstin:gstInput.value,balance:document.getElementById('pBalance').value||'0'});
   save('pt_parties',parties);
-  renderParties(); updatePartyDropdown(); updateConsignorConsigneeDropdowns();
+  renderParties(); updatePartyDropdown(); updateReportPartyFilter(); updateInvPartyFilter();
   ['pName','pContact','pPhone','pAddress','pGSTIN','pBalance'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('pRole').value='Both';
   showToast('Party added!');
@@ -1660,52 +2214,45 @@ function filterParties() {
 function deleteParty(id) {
   parties=parties.filter(p=>p.id!==id);
   save('pt_parties',parties);
-  renderParties(); updatePartyDropdown(); updateConsignorConsigneeDropdowns();
+  renderParties(); updatePartyDropdown(); updateReportPartyFilter(); updateInvPartyFilter();
   showToast('Party deleted');
 }
 
 function updatePartyDropdown() {
-  const sel=document.getElementById('invParty');
-  let filtered=parties.filter(p=>!p.role||p.role==='Both'||p.role==='BillTo');
-  if(!filtered.length) filtered=parties;
-  sel.innerHTML='<option value="">— Select Party —</option>'+filtered.map(p=>`<option>${p.name}</option>`).join('');
+  let filtered = parties.filter(p=>!p.role||p.role==='Both'||p.role==='BillTo');
+  if(!filtered.length) filtered = parties;
+  const opts = filtered.map(p => ({ value: p.name, label: p.name }));
+  initSearchableSelect('invParty', opts, '— Select Party —');
 }
 
-// ===== TRANSPORT =====
-function saveTransport() {
-  const name=document.getElementById('tName').value.trim();
-  const gstInput=document.getElementById('tGST');
-  if(!name){showToast('Enter transport name','danger');return;}
-  if(!validateGST(gstInput)){showToast('Invalid GSTIN format','danger');return;}
-  transports.push({id:Date.now(),name,contact:document.getElementById('tContact').value,phone:document.getElementById('tPhone').value,address:document.getElementById('tAddress').value,pan:document.getElementById('tPAN').value,gst:gstInput.value});
-  save('pt_transports',transports);
-  renderTransports(); updateTransportDropdown();
-  ['tName','tContact','tPhone','tAddress','tPAN','tGST'].forEach(id=>document.getElementById(id).value='');
-  showToast('Transport added!');
-}
-
-function renderTransports() {
-  const tb=document.getElementById('transportBody');
-  if(!transports.length){tb.innerHTML='<tr><td colspan="5" class="text-center text-muted py-4">No transports added</td></tr>';return;}
-  tb.innerHTML=transports.map(t=>`<tr><td><strong>${t.name}</strong></td><td>${t.contact||'—'}</td><td>${t.phone||'—'}</td><td><small>${t.gst||'—'}</small></td><td><button class="btn-icon del" onclick="deleteTransport(${t.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
-}
-
-function deleteTransport(id) {
-  transports=transports.filter(t=>t.id!==id);
-  save('pt_transports',transports);
-  renderTransports(); updateTransportDropdown();
-  showToast('Transport deleted');
-}
-
-function updateTransportDropdown() {
-  const sel=document.getElementById('invTransport');
-  sel.innerHTML='<option value="Prahar Trucking">Prahar Trucking</option>'+transports.map(t=>`<option>${t.name}</option>`).join('');
+function setInvPartyValue(val) {
+  const opt = (_ssData['invParty']?.options || []).find(o => o.value === val);
+  selectSSOption('invParty', val, opt ? opt.label : val || '— Select Party —');
 }
 
 // ===== PAYMENTS =====
 function updatePaymentDropdown() {
-  const sel=document.getElementById('payInv');
-  sel.innerHTML='<option value="">— Select Invoice —</option>'+invoices.map(inv=>`<option value="${inv.id}">${inv.no} | ${inv.party||'No Party'} | ${inv.total}</option>`).join('');
+  const opts = invoices.map(inv => {
+    const total = parseFloat((inv.total||'₹0').replace('₹',''))||0;
+    const paid = payments.filter(p=>p.invId==inv.id).reduce((s,p)=>s+parseFloat(p.amount||0),0);
+    return {
+      value: String(inv.id),
+      label: `${inv.no} | ${inv.party||'No Party'}`,
+      invNo: inv.no,
+      partyName: inv.party || 'No Party',
+      date: inv.date || '',
+      route: inv.from && inv.to ? `${inv.from} → ${inv.to}` : '',
+      amount: inv.total || '₹0',
+      searchExtra: `${inv.party||''} ${inv.no||''} ${inv.date||''}`.toLowerCase()
+    };
+  });
+  initSearchableSelect('payInv', opts, '— Select Invoice —');
+
+  const partySet = new Set(invoices.map(i=>i.party).filter(Boolean));
+  const partyOpts = [...partySet].map(p=>({value:p,label:p}));
+  initSearchableSelect('payFilterParty', partyOpts, 'All Parties');
+
+  setTimeout(initOutstandingRange, 0);
 }
 
 function updatePaymentBalance() {
@@ -1722,6 +2269,60 @@ function updatePaymentBalance() {
   box.style.display='block';
 }
 
+function getInvoiceOutstanding(invId) {
+  const inv = invoices.find(i => i.id == invId);
+  if (!inv) return 0;
+  const total = parseFloat((inv.total || '₹0').replace('₹', '')) || 0;
+  const paid = payments.filter(p => p.invId == invId).reduce((s, p) => s + parseFloat(p.amount || 0), 0);
+  return total - paid;
+}
+
+function resetPaymentFilters() {
+  selectSSOption('payFilterParty', '', 'All Parties');
+  _rangeState.min = 0;
+  _rangeState.max = Infinity;
+  updateRangeUI();
+  renderPayments();
+}
+
+function renderPayments() {
+  const tb = document.getElementById('paymentBody');
+  const partyFilter = document.getElementById('payFilterParty')?.value || '';
+  const minOut = _rangeState.min || 0;
+  const maxOut = _rangeState.max;
+
+  if(!payments.length){tb.innerHTML='<tr><td colspan="7" class="text-center text-muted py-4"><i class="fa-solid fa-money-bill-wave fa-2x mb-2 d-block" style="opacity:.2"></i>No payments recorded</td></tr>';return;}
+  
+  let list = [...payments].reverse();
+
+  list = list.filter(p => {
+    const inv = invoices.find(i => i.id == p.invId);
+    if (!inv) return false;
+    if (partyFilter && inv.party !== partyFilter) return false;
+    const outstanding = getInvoiceOutstanding(p.invId);
+    if (outstanding < minOut) return false;
+    if (maxOut !== Infinity && outstanding > maxOut) return false;
+    return true;
+  });
+
+  if(!list.length){tb.innerHTML='<tr><td colspan="7" class="text-center text-muted py-4">No payments match the filter</td></tr>';return;}
+
+  tb.innerHTML=list.map(p=> {
+    const inv = invoices.find(i => i.id == p.invId);
+    const out = getInvoiceOutstanding(p.invId);
+    return `
+    <tr>
+      <td><strong style="color:var(--col-orange)">${inv?inv.no:p.invId}</strong></td>
+      <td>${inv?inv.party:'Unknown'}</td>
+      <td>${p.date||'—'}</td>
+      <td><strong style="color:var(--col-emerald)">₹${parseFloat(p.amount).toLocaleString('en-IN')}</strong></td>
+      <td style="color:${out>0?'var(--col-rose)':'var(--col-emerald)'}">₹${out.toLocaleString('en-IN')}</td>
+      <td><span class="badge-status badge-paid">${p.mode}</span></td>
+      <td><button class="btn-icon del" onclick="deletePayment(${p.id})"><i class="fa-solid fa-trash"></i></button></td>
+    </tr>`;
+  }).join('');
+}
+
 function savePayment() {
   const invId=document.getElementById('payInv').value;
   const amount=parseFloat(document.getElementById('payAmt').value);
@@ -1734,17 +2335,11 @@ function savePayment() {
     inv.status=paid>=total?'Paid':paid>0?'Partial':'Pending';
   }
   save('pt_payments',payments); save('pt_invoices',invoices);
-  renderPayments(); renderDashboard(); renderInvoiceList();
+  renderPayments(); renderDashboard(); renderInvoiceList(); updatePaymentDropdown(); updateInvPartyFilter();
   ['payAmt','payRef','payRemarks','payDate'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('payInv').value='';
+  selectSSOption('payInv', '', '— Select Invoice —');
   document.getElementById('paymentBalanceBox').style.display='none';
   showToast('Payment recorded!');
-}
-
-function renderPayments() {
-  const tb=document.getElementById('paymentBody');
-  if(!payments.length){tb.innerHTML='<tr><td colspan="6" class="text-center text-muted py-4"><i class="fa-solid fa-money-bill-wave fa-2x mb-2 d-block" style="opacity:.2"></i>No payments recorded</td></tr>';return;}
-  tb.innerHTML=[...payments].reverse().map(p=>`<tr><td><strong style="color:var(--col-orange)">${p.invNo||p.invId}</strong></td><td>${p.date||'—'}</td><td><strong style="color:var(--col-emerald)">₹${p.amount.toLocaleString('en-IN')}</strong></td><td><span class="badge-status badge-paid">${p.mode}</span></td><td>${p.ref||'—'}</td><td><button class="btn-icon del" onclick="deletePayment(${p.id})"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
 }
 
 function deletePayment(id) {
@@ -1753,7 +2348,7 @@ function deletePayment(id) {
   payments=payments.filter(pay=>pay.id!==id);
   if(p){ const inv=invoices.find(i=>i.id==p.invId); if(inv){ const total=parseFloat((inv.total||'₹0').replace('₹',''))||0; const paid=payments.filter(pay=>pay.invId==p.invId).reduce((s,pay)=>s+parseFloat(pay.amount||0),0); inv.status=paid>=total?'Paid':paid>0?'Partial':'Pending'; } }
   save('pt_payments',payments); save('pt_invoices',invoices);
-  renderPayments(); renderDashboard(); renderInvoiceList(); updatePaymentDropdown();
+  renderPayments(); renderDashboard(); renderInvoiceList(); updatePaymentDropdown(); updateInvPartyFilter();
   showToast('Payment deleted');
 }
 
@@ -1786,15 +2381,152 @@ function filterBank() {
 }
 
 // ===== REPORTS =====
+let _currentReportType = '';
+
+function initReportPartyFilter() {
+  const partySet = new Set(invoices.map(i=>i.party).filter(Boolean));
+  const opts = [...partySet].map(p=>({value:p,label:p}));
+  initSearchableSelect('reportParty', opts, 'All Parties');
+}
+
+function updateReportPartyFilter() {
+  initReportPartyFilter();
+}
+
+function resetReportFilters() {
+  selectSSOption('reportParty', '', 'All Parties');
+  document.getElementById('reportDateFrom').value = '';
+  document.getElementById('reportDateTo').value = '';
+  if(_currentReportType) generateReport(_currentReportType);
+}
+
+function getReportFilteredInvoices() {
+  const partyFilter = document.getElementById('reportParty')?.value || '';
+  const dateFrom = document.getElementById('reportDateFrom')?.value || '';
+  const dateTo = document.getElementById('reportDateTo')?.value || '';
+  
+  return invoices.filter(inv => {
+    if(partyFilter && inv.party !== partyFilter) return false;
+    if(dateFrom && inv.date < dateFrom) return false;
+    if(dateTo && inv.date > dateTo) return false;
+    return true;
+  });
+}
+
 function generateReport(type) {
-  const titles={'profit-loss':'Profit & Loss Report','party-ledger':'Party Ledger','transport':'Transport Report','gst':'GST Report','outstanding':'Outstanding Report','vehicle':'Vehicle-wise Report'};
+  _currentReportType = type;
+  const titles={'profit-loss':'Profit & Loss Report','party-ledger':'Party Ledger','gst':'GST Report','outstanding':'Outstanding Report'};
   document.getElementById('reportTitle').textContent=titles[type]||'Report';
   let html='';
   const mkTable=(headers,rows)=>`<table class="table table-hover" id="reportTable"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table>`;
-  if(type==='outstanding'){const pending=invoices.filter(i=>i.status!=='Paid');html=pending.length?mkTable(['Invoice#','Party','Date','Amount','Status'],pending.map(inv=>`<tr><td><strong style="color:var(--col-orange)">${inv.no}</strong></td><td>${inv.party||'—'}</td><td>${inv.date||'—'}</td><td><strong>${inv.total}</strong></td><td>${statusBadge(inv.status)}</td></tr>`)):'<p class="text-center text-muted py-4">No outstanding invoices!</p>';}
-  else if(type==='party-ledger'){const grouped={};invoices.forEach(inv=>{if(inv.party){if(!grouped[inv.party])grouped[inv.party]=[];grouped[inv.party].push(inv);}});html=Object.keys(grouped).length?Object.entries(grouped).map(([party,invs])=>`<div class="mb-3 p-3" style="border:1.5px solid var(--border);border-radius:10px"><strong style="font-family:'Clash Display',sans-serif">${party}</strong><small class="text-muted ms-2">${invs.length} invoice(s)</small>${mkTable(['Invoice#','Date','Amount','Status'],invs.map(inv=>`<tr><td>${inv.no}</td><td>${inv.date||'—'}</td><td>${inv.total}</td><td>${statusBadge(inv.status)}</td></tr>`))}</div>`).join(''):'<p class="text-center text-muted py-4">No data</p>';}
-  else if(type==='gst'){html=invoices.length?mkTable(['Invoice#','Date','Party','Taxable','GST%','GST Amt','Total'],invoices.map(inv=>{const gcData=inv.lrGoodsCharges||[]; let sub=0,gstAmt=0,gstPct=5; if(gcData.length){gcData.forEach(gc=>{const fr=parseFloat(gc.freight)||0;const ld=parseFloat(gc.loading)||0;const ul=parseFloat(gc.unloading)||0;const dt=parseFloat(gc.detention)||0;gstPct=parseFloat(gc.gst)||5;const s=fr+ld+ul+dt;sub+=s;gstAmt+=s*gstPct/100;});}else{sub=parseFloat(inv.freight||0)+parseFloat(inv.loading||0)+parseFloat(inv.unloading||0)+parseFloat(inv.detention||0);gstPct=parseFloat(inv.gst||5);gstAmt=sub*gstPct/100;} return `<tr><td><strong style="color:var(--col-orange)">${inv.no}</strong></td><td>${inv.date||'—'}</td><td>${inv.party||'—'}</td><td>₹${sub.toFixed(2)}</td><td>${gstPct}%</td><td style="color:var(--col-violet)">₹${gstAmt.toFixed(2)}</td><td><strong>${inv.total}</strong></td></tr>`;})):'<p class="text-center text-muted py-4">No invoices</p>';}
-  else{html=`<p class="text-center text-muted py-4">Report data for <strong>${titles[type]}</strong> will appear here once data is available.</p>`;}
+  
+  const filteredInvoices = getReportFilteredInvoices();
+
+  if(type==='outstanding'){
+    const pending = filteredInvoices.filter(i=>i.status!=='Paid');
+    let totalInvAmount = 0, totalPaidAmount = 0, totalOutstanding = 0;
+    pending.forEach(inv => {
+      const invAmt = parseFloat((inv.total||'₹0').replace('₹',''))||0;
+      const paidAmt = payments.filter(p=>p.invId==inv.id).reduce((s,p)=>s+parseFloat(p.amount||0),0);
+      const out = invAmt - paidAmt;
+      totalInvAmount += invAmt;
+      totalPaidAmount += paidAmt;
+      totalOutstanding += out;
+    });
+
+    html += `<div class="report-summary-box">
+      <div class="row g-2">
+        <div class="col-4 text-center"><div class="rsb-label">Total Invoice Amount</div><div class="rsb-val" style="color:var(--col-indigo)">₹${totalInvAmount.toLocaleString('en-IN')}</div></div>
+        <div class="col-4 text-center"><div class="rsb-label">Total Paid Amount</div><div class="rsb-val" style="color:var(--col-emerald)">₹${totalPaidAmount.toLocaleString('en-IN')}</div></div>
+        <div class="col-4 text-center"><div class="rsb-label">Total Outstanding</div><div class="rsb-val" style="color:var(--col-rose)">₹${totalOutstanding.toLocaleString('en-IN')}</div></div>
+      </div>
+    </div>`;
+
+    html += pending.length ? mkTable(['Invoice#','Party','Date','Invoice Amt','Paid Amt','Outstanding','Status'],
+      pending.map(inv => {
+        const invAmt = parseFloat((inv.total||'₹0').replace('₹',''))||0;
+        const paidAmt = payments.filter(p=>p.invId==inv.id).reduce((s,p)=>s+parseFloat(p.amount||0),0);
+        const out = invAmt - paidAmt;
+        return `<tr><td><strong style="color:var(--col-orange)">${inv.no}</strong></td><td>${inv.party||'—'}</td><td>${inv.date||'—'}</td><td><strong>₹${invAmt.toLocaleString('en-IN')}</strong></td><td style="color:var(--col-emerald)"><strong>₹${paidAmt.toLocaleString('en-IN')}</strong></td><td style="color:var(--col-rose)"><strong>₹${out.toLocaleString('en-IN')}</strong></td><td>${statusBadge(inv.status)}</td></tr>`;
+      })
+    ) : '<p class="text-center text-muted py-4">No outstanding invoices! 🎉</p>';
+  }
+  else if(type==='gst'){
+      html=filteredInvoices.length?mkTable(['Invoice#','Date','Party','Taxable','GST%','GST Amt','Total'],filteredInvoices.map(inv=>{
+        let sub=0, gstAmt=0, gstPct=5;
+        if(inv.lrItems){
+            inv.lrItems.forEach(it=>{
+                const f=parseFloat(it.freight)||0, l=parseFloat(it.loading)||0, u=parseFloat(it.unloading)||0, d=parseFloat(it.detention)||0;
+                const s=f+l+u+d; sub+=s; gstPct=parseFloat(it.gst)||5; gstAmt+=s*gstPct/100;
+            });
+        }
+        return `<tr><td><strong style="color:var(--col-orange)">${inv.no}</strong></td><td>${inv.date||'—'}</td><td>${inv.party||'—'}</td><td>₹${sub.toFixed(2)}</td><td>${gstPct}%</td><td style="color:var(--col-violet)">₹${gstAmt.toFixed(2)}</td><td><strong>${inv.total}</strong></td></tr>`;
+      })):'<p class="text-center text-muted py-4">No invoices</p>';
+  }
+  else if(type==='party-ledger'){
+      const grouped={};filteredInvoices.forEach(inv=>{if(inv.party){if(!grouped[inv.party])grouped[inv.party]=[];grouped[inv.party].push(inv);}});
+      let totalOutstanding = 0;
+      Object.values(grouped).forEach(invs => {
+        invs.forEach(inv => {
+          const invAmt = parseFloat((inv.total||'₹0').replace('₹',''))||0;
+          const paidAmt = payments.filter(p=>p.invId==inv.id).reduce((s,p)=>s+parseFloat(p.amount||0),0);
+          totalOutstanding += (invAmt - paidAmt);
+        });
+      });
+      html += `<div class="report-summary-box">
+        <div class="rsb-row"><span class="rsb-label">Total Parties:</span><span class="rsb-val" style="color:var(--col-violet)">${Object.keys(grouped).length}</span></div>
+        <div class="rsb-row"><span class="rsb-label">Total Outstanding:</span><span class="rsb-val" style="color:var(--col-rose)">₹${totalOutstanding.toLocaleString('en-IN')}</span></div>
+      </div>`;
+
+      html+=Object.keys(grouped).length?Object.entries(grouped).map(([party,invs])=>{
+        let partyTotal=0, partyPaid=0;
+        invs.forEach(inv=>{
+          partyTotal += parseFloat((inv.total||'₹0').replace('₹',''))||0;
+          partyPaid += payments.filter(p=>p.invId==inv.id).reduce((s,p)=>s+parseFloat(p.amount||0),0);
+        });
+        return `<div class="mb-3 p-3" style="border:1.5px solid var(--border);border-radius:10px">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <strong style="font-family:'Clash Display',sans-serif;font-size:15px">${party}</strong>
+            <div class="d-flex gap-3">
+              <span class="small text-muted">Total: <strong style="color:var(--col-indigo)">₹${partyTotal.toLocaleString('en-IN')}</strong></span>
+              <span class="small text-muted">Outstanding: <strong style="color:var(--col-rose)">₹${(partyTotal-partyPaid).toLocaleString('en-IN')}</strong></span>
+            </div>
+          </div>
+          ${mkTable(['Invoice#','Date','Amount','Paid','Outstanding','Status'],invs.map(inv=>{
+            const invAmt = parseFloat((inv.total||'₹0').replace('₹',''))||0;
+            const paidAmt = payments.filter(p=>p.invId==inv.id).reduce((s,p)=>s+parseFloat(p.amount||0),0);
+            return `<tr><td>${inv.no}</td><td>${inv.date||'—'}</td><td>${inv.total}</td><td style="color:var(--col-emerald)">₹${paidAmt.toLocaleString('en-IN')}</td><td style="color:var(--col-rose)">₹${(invAmt-paidAmt).toLocaleString('en-IN')}</td><td>${statusBadge(inv.status)}</td></tr>`;
+          }))}
+        </div>`;
+      }).join(''):'<p class="text-center text-muted py-4">No data</p>';
+  }
+  else if(type==='profit-loss'){
+      let totalIncome = 0, totalPaid = 0, totalOutstanding = 0;
+      filteredInvoices.forEach(inv => {
+        const invAmt = parseFloat((inv.total||'₹0').replace('₹',''))||0;
+        const paidAmt = payments.filter(p=>p.invId==inv.id).reduce((s,p)=>s+parseFloat(p.amount||0),0);
+        totalIncome += invAmt;
+        totalPaid += paidAmt;
+        totalOutstanding += (invAmt - paidAmt);
+      });
+
+      html += `<div class="report-summary-box">
+        <div class="row g-3 text-center">
+          <div class="col-md-4"><div class="rsb-label">Total Billed</div><div class="rsb-val" style="color:var(--col-indigo);font-size:22px">₹${totalIncome.toLocaleString('en-IN')}</div></div>
+          <div class="col-md-4"><div class="rsb-label">Total Received</div><div class="rsb-val" style="color:var(--col-emerald);font-size:22px">₹${totalPaid.toLocaleString('en-IN')}</div></div>
+          <div class="col-md-4"><div class="rsb-label">Receivable</div><div class="rsb-val" style="color:var(--col-rose);font-size:22px">₹${totalOutstanding.toLocaleString('en-IN')}</div></div>
+        </div>
+      </div>`;
+
+      html += filteredInvoices.length ? mkTable(['Invoice#','Date','Party','Billed','Received','Receivable','Status'],
+        filteredInvoices.map(inv => {
+          const invAmt = parseFloat((inv.total||'₹0').replace('₹',''))||0;
+          const paidAmt = payments.filter(p=>p.invId==inv.id).reduce((s,p)=>s+parseFloat(p.amount||0),0);
+          return `<tr><td><strong style="color:var(--col-orange)">${inv.no}</strong></td><td>${inv.date||'—'}</td><td>${inv.party||'—'}</td><td>₹${invAmt.toLocaleString('en-IN')}</td><td style="color:var(--col-emerald)">₹${paidAmt.toLocaleString('en-IN')}</td><td style="color:var(--col-rose)">₹${(invAmt-paidAmt).toLocaleString('en-IN')}</td><td>${statusBadge(inv.status)}</td></tr>`;
+        })
+      ) : '<p class="text-center text-muted py-4">No data</p>';
+  }
+  
   document.getElementById('reportContent').innerHTML=html;
   document.getElementById('reportOutput').style.display='block';
   document.getElementById('reportOutput').scrollIntoView({behavior:'smooth'});
@@ -1808,6 +2540,438 @@ function saveSettings() {
 function saveBankSettings() {
   bankSettings={name:document.getElementById('bName').value,acc:document.getElementById('bAccNo').value,ifsc:document.getElementById('bIFSC').value,branch:document.getElementById('bBranch').value,holder:document.getElementById('bHolder').value};
   save('pt_bankSettings',bankSettings); showToast('Bank details saved!');
+}
+
+// ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
+// ===== NEW: RECEIVED DATA MODULE (IMPORT LOGISTICS EXCEL) =====
+// ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
+
+let _receivedRawData = [];
+let _receivedHeaders = [];
+
+function handleReceivedUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const wb = XLSX.read(e.target.result, { type: 'binary' });
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rawData = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      
+      if (!rawData || rawData.length < 2) {
+        document.getElementById('receivedUploadStatus').innerHTML = '<div class="alert alert-danger py-2 mt-2">File is empty or has no data rows.</div>';
+        return;
+      }
+
+      // First row = headers, rest = data
+      _receivedHeaders = rawData[0].map(h => String(h || '').trim());
+      _receivedRawData = rawData.slice(1).filter(r => r.length > 0 && r.some(cell => cell !== undefined && cell !== ''));
+
+      document.getElementById('receivedUploadStatus').innerHTML = `<div class="alert alert-success py-2 mt-2"><i class="fa-solid fa-check-circle me-2"></i>File loaded: ${_receivedHeaders.length} columns, ${_receivedRawData.length} rows.</div>`;
+
+      // Show mapping card
+      document.getElementById('receivedMappingCard').style.display = 'block';
+      document.getElementById('receivedRowCount').textContent = _receivedRawData.length;
+      document.getElementById('receivedColCount').textContent = _receivedHeaders.length;
+
+      // Populate column mapping dropdowns
+      populateColumnMappings();
+
+      // Show preview
+      refreshReceivedPreview();
+
+    } catch (err) {
+      document.getElementById('receivedUploadStatus').innerHTML = `<div class="alert alert-danger py-2 mt-2">Error reading file: ${err.message}</div>`;
+    }
+  };
+  reader.readAsBinaryString(file);
+}
+
+function populateColumnMappings() {
+  const selects = ['mapDate', 'mapVehicle', 'mapFrom', 'mapTo', 'mapLR', 'mapUnloading', 'mapDetention'];
+  const labels = ['Invoice Date', 'Vehicle No', 'From', 'To', 'LR No', 'Unloading', 'Detention'];
+  
+  selects.forEach((selId, i) => {
+    const sel = document.getElementById(selId);
+    sel.innerHTML = '<option value="">— Skip —</option>';
+    _receivedHeaders.forEach((h, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = h;
+      // Auto-select by matching label
+      if (h.toLowerCase().includes(labels[i].toLowerCase())) {
+        opt.selected = true;
+      }
+      sel.appendChild(opt);
+    });
+  });
+}
+
+function refreshReceivedPreview() {
+  const head = document.getElementById('receivedPreviewHead');
+  const body = document.getElementById('receivedPreviewBody');
+
+  // Build preview header with mapped column highlights
+  const mapping = getReceivedMapping();
+  const mappedCols = new Set(Object.values(mapping).filter(v => v !== '' && v !== null));
+
+  let headHtml = '<tr>';
+  _receivedHeaders.forEach((h, i) => {
+    const isMapped = mappedCols.has(i);
+    headHtml += `<th style="${isMapped ? 'background:#F0FDFA;color:#0D9488;font-weight:700;' : ''}">${h} ${isMapped ? '<i class="fa-solid fa-check-circle" style="font-size:10px"></i>' : ''}</th>`;
+  });
+  headHtml += '</tr>';
+  head.innerHTML = headHtml;
+
+  // Show first 15 rows
+  let bodyHtml = '';
+  const previewRows = _receivedRawData.slice(0, 15);
+  previewRows.forEach(row => {
+    bodyHtml += '<tr>';
+    _receivedHeaders.forEach((_, i) => {
+      const val = row[i] !== undefined ? row[i] : '';
+      const isMapped = mappedCols.has(i);
+      bodyHtml += `<td style="${isMapped ? 'background:#F0FDFA44;font-weight:600;' : ''}">${val}</td>`;
+    });
+    bodyHtml += '</tr>';
+  });
+  if (_receivedRawData.length > 15) {
+    bodyHtml += `<tr><td colspan="${_receivedHeaders.length}" class="text-center text-muted" style="font-style:italic">... and ${_receivedRawData.length - 15} more rows</td></tr>`;
+  }
+  body.innerHTML = bodyHtml;
+}
+
+function getReceivedMapping() {
+  return {
+    dateCol: document.getElementById('mapDate').value !== '' ? parseInt(document.getElementById('mapDate').value) : null,
+    vehicleCol: document.getElementById('mapVehicle').value !== '' ? parseInt(document.getElementById('mapVehicle').value) : null,
+    fromCol: document.getElementById('mapFrom').value !== '' ? parseInt(document.getElementById('mapFrom').value) : null,
+    toCol: document.getElementById('mapTo').value !== '' ? parseInt(document.getElementById('mapTo').value) : null,
+    lrCol: document.getElementById('mapLR').value !== '' ? parseInt(document.getElementById('mapLR').value) : null,
+    unloadingCol: document.getElementById('mapUnloading').value !== '' ? parseInt(document.getElementById('mapUnloading').value) : null,
+    detentionCol: document.getElementById('mapDetention').value !== '' ? parseInt(document.getElementById('mapDetention').value) : null,
+  };
+}
+
+function parseReceivedRow(row, mapping) {
+  const getVal = (colIdx) => colIdx !== null && colIdx < row.length ? row[colIdx] : '';
+  const getNum = (colIdx) => {
+    const v = getVal(colIdx);
+    const n = parseFloat(String(v).replace(/[^0-9.\-]/g, ''));
+    return isNaN(n) ? 0 : n;
+  };
+
+  return {
+    date: String(getVal(mapping.dateCol)),
+    vehicle: String(getVal(mapping.vehicleCol)),
+    from: String(getVal(mapping.fromCol)),
+    to: String(getVal(mapping.toCol)),
+    lrNo: String(getVal(mapping.lrCol)),
+    unloading: getNum(mapping.unloadingCol),
+    detention: getNum(mapping.detentionCol),
+  };
+}
+
+// Import each row as a separate invoice
+function importReceivedData() {
+  if (!_receivedRawData.length) { showToast('No data to import', 'danger'); return; }
+  
+  const mapping = getReceivedMapping();
+  if (mapping.dateCol === null && mapping.vehicleCol === null) {
+    showToast('Please map at least Date or Vehicle column', 'danger');
+    return;
+  }
+
+  const progressWrap = document.getElementById('importProgressWrap');
+  const progressFill = document.getElementById('importProgressFill');
+  const progressLabel = document.getElementById('importProgressLabel');
+  const progressPct = document.getElementById('importProgressPct');
+  progressWrap.style.display = 'block';
+
+  let imported = 0;
+  const total = _receivedRawData.length;
+  const newInvoices = [];
+  const newReceived = [];
+
+  _receivedRawData.forEach((row, idx) => {
+    const parsed = parseReceivedRow(row, mapping);
+    
+    const invNo = getNextInvoiceNo();
+    // Increment invoice counter for next
+    const year = new Date().getFullYear();
+    const existingCount = invoices.length + newInvoices.length;
+    const nextNo = `PT-${year}-${(existingCount + 1).toString().padStart(3, '0')}`;
+
+    const lrItem = {
+      lrNo: parsed.lrNo || '',
+      consignor: '',
+      consignee: '',
+      from: parsed.from || '',
+      to: parsed.to || '',
+      vehicle: parsed.vehicle || '',
+      service: 'FTL',
+      goods: '',
+      qty: 1,
+      rate: 0,
+      freight: 0,
+      loading: 0,
+      unloading: parsed.unloading || 0,
+      detention: parsed.detention || 0,
+      gst: 5,
+      remarks: ''
+    };
+
+    const sub = lrItem.unloading + lrItem.detention;
+    const gst = sub * lrItem.gst / 100;
+    const total = Math.round(sub + gst);
+
+    const inv = {
+      id: Date.now() + idx + Math.floor(Math.random() * 1000),
+      no: nextNo,
+      shipNo: 'SHIP-' + year + '-' + Math.floor(1000 + Math.random() * 9000),
+      date: parsed.date || new Date().toISOString().split('T')[0],
+      party: '',
+      lrItems: [lrItem],
+      from: parsed.from || '',
+      to: parsed.to || '',
+      vehicle: parsed.vehicle || '',
+      total: '₹' + total.toFixed(2),
+      status: 'Pending',
+      source: 'received'
+    };
+
+    newInvoices.push(inv);
+    newReceived.push({
+      id: inv.id,
+      date: parsed.date,
+      vehicle: parsed.vehicle,
+      from: parsed.from,
+      to: parsed.to,
+      lrNo: parsed.lrNo,
+      unloading: parsed.unloading,
+      detention: parsed.detention,
+      invoiceId: inv.id,
+      invoiceNo: inv.no,
+      status: 'imported'
+    });
+
+    // Update progress
+    const pct = Math.round(((idx + 1) / total) * 100);
+    progressFill.style.width = pct + '%';
+    progressPct.textContent = pct + '%';
+    progressLabel.textContent = `Importing row ${idx + 1} of ${total}...`;
+  });
+
+  // Save to localStorage
+  invoices = [...newInvoices, ...invoices];
+  receivedData = [...newReceived, ...receivedData];
+  save('pt_invoices', invoices);
+  save('pt_received', receivedData);
+
+  // Update all views
+  renderDashboard();
+  renderInvoiceList();
+  renderReceivedList();
+  updatePaymentDropdown();
+  updateInvPartyFilter();
+
+  progressLabel.textContent = `Done! ${total} rows imported.`;
+  progressFill.style.width = '100%';
+  progressPct.textContent = '100%';
+
+  showToast(`${total} rows imported successfully as invoices!`);
+}
+
+// Import all rows as LR items in a single invoice
+function importReceivedAsLR() {
+  if (!_receivedRawData.length) { showToast('No data to import', 'danger'); return; }
+  
+  const mapping = getReceivedMapping();
+  
+  const progressWrap = document.getElementById('importProgressWrap');
+  const progressFill = document.getElementById('importProgressFill');
+  const progressLabel = document.getElementById('importProgressLabel');
+  const progressPct = document.getElementById('importProgressPct');
+  progressWrap.style.display = 'block';
+
+  const total = _receivedRawData.length;
+  const lrItems = [];
+  const newReceived = [];
+
+  let firstDate = '';
+  let firstFrom = '';
+  let firstTo = '';
+  let firstVehicle = '';
+
+  _receivedRawData.forEach((row, idx) => {
+    const parsed = parseReceivedRow(row, mapping);
+    
+    if (!firstDate && parsed.date) firstDate = parsed.date;
+    if (!firstFrom && parsed.from) firstFrom = parsed.from;
+    if (!firstTo && parsed.to) firstTo = parsed.to;
+    if (!firstVehicle && parsed.vehicle) firstVehicle = parsed.vehicle;
+
+    lrItems.push({
+      lrNo: parsed.lrNo || '',
+      consignor: '',
+      consignee: '',
+      from: parsed.from || '',
+      to: parsed.to || '',
+      vehicle: parsed.vehicle || '',
+      service: 'FTL',
+      goods: '',
+      qty: 1,
+      rate: 0,
+      freight: 0,
+      loading: 0,
+      unloading: parsed.unloading || 0,
+      detention: parsed.detention || 0,
+      gst: 5,
+      remarks: ''
+    });
+
+    newReceived.push({
+      id: Date.now() + idx + Math.floor(Math.random() * 1000),
+      date: parsed.date,
+      vehicle: parsed.vehicle,
+      from: parsed.from,
+      to: parsed.to,
+      lrNo: parsed.lrNo,
+      unloading: parsed.unloading,
+      detention: parsed.detention,
+      invoiceId: null,
+      invoiceNo: null,
+      status: 'imported-lr'
+    });
+
+    const pct = Math.round(((idx + 1) / total) * 50);
+    progressFill.style.width = pct + '%';
+    progressPct.textContent = pct + '%';
+    progressLabel.textContent = `Processing row ${idx + 1} of ${total}...`;
+  });
+
+  // Calculate totals
+  let totalSub = 0, totalGstAmt = 0;
+  lrItems.forEach(item => {
+    const sub = item.unloading + item.detention;
+    const gst = sub * item.gst / 100;
+    totalSub += sub;
+    totalGstAmt += gst;
+  });
+  const grandTotal = Math.round(totalSub + totalGstAmt);
+
+  const invNo = getNextInvoiceNo();
+  const inv = {
+    id: Date.now(),
+    no: invNo,
+    shipNo: getNextShipNo(),
+    date: firstDate || new Date().toISOString().split('T')[0],
+    party: '',
+    lrItems: lrItems,
+    from: firstFrom,
+    to: firstTo,
+    vehicle: firstVehicle,
+    total: '₹' + grandTotal.toFixed(2),
+    status: 'Pending',
+    source: 'received'
+  };
+
+  // Update received data with invoice reference
+  newReceived.forEach(r => { r.invoiceId = inv.id; r.invoiceNo = inv.no; });
+
+  invoices.unshift(inv);
+  receivedData = [...newReceived, ...receivedData];
+  save('pt_invoices', invoices);
+  save('pt_received', receivedData);
+
+  renderDashboard();
+  renderInvoiceList();
+  renderReceivedList();
+  updatePaymentDropdown();
+  updateInvPartyFilter();
+
+  progressLabel.textContent = `Done! ${total} LR rows imported into invoice ${invNo}.`;
+  progressFill.style.width = '100%';
+  progressPct.textContent = '100%';
+
+  showToast(`${total} rows imported as single invoice ${invNo}!`);
+}
+
+function clearReceivedData() {
+  _receivedRawData = [];
+  _receivedHeaders = [];
+  document.getElementById('receivedMappingCard').style.display = 'none';
+  document.getElementById('importProgressWrap').style.display = 'none';
+  document.getElementById('receivedFile').value = '';
+  showToast('Upload data cleared');
+}
+
+function renderReceivedList(list = receivedData) {
+  const tb = document.getElementById('receivedBody');
+  if (!list.length) {
+    tb.innerHTML = '<tr><td colspan="10" class="text-center text-muted py-4"><i class="fa-solid fa-file-import fa-2x mb-2 d-block" style="opacity:.2"></i>No imported data yet</td></tr>';
+    return;
+  }
+  tb.innerHTML = list.map((r, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td>${r.date || '—'}</td>
+      <td><strong style="color:var(--col-violet)">${r.vehicle || '—'}</strong></td>
+      <td>${r.from || '—'}</td>
+      <td>${r.to || '—'}</td>
+      <td><strong style="color:var(--col-orange)">${r.lrNo || '—'}</strong></td>
+      <td style="color:var(--col-amber)">₹${(r.unloading || 0).toLocaleString('en-IN')}</td>
+      <td style="color:var(--col-rose)">₹${(r.detention || 0).toLocaleString('en-IN')}</td>
+      <td>${r.invoiceNo ? `<a href="#" onclick="printInvoiceFromList(${r.invoiceId})" style="color:var(--col-orange);font-weight:600">${r.invoiceNo}</a>` : '—'}</td>
+      <td><span class="received-row-status ${r.status === 'imported' ? 'new' : r.status === 'imported-lr' ? 'new' : 'duplicate'}">${r.status === 'imported' ? 'Imported' : r.status === 'imported-lr' ? 'LR Import' : r.status}</span></td>
+    </tr>
+  `).join('');
+}
+
+function filterReceived() {
+  const q = (document.getElementById('receivedSearch')?.value || '').toLowerCase();
+  const dateFrom = document.getElementById('receivedDateFrom')?.value || '';
+  const dateTo = document.getElementById('receivedDateTo')?.value || '';
+
+  renderReceivedList(receivedData.filter(r => {
+    if (q && ![r.vehicle, r.lrNo, r.from, r.to, r.invoiceNo].join(' ').toLowerCase().includes(q)) return false;
+    if (dateFrom && r.date < dateFrom) return false;
+    if (dateTo && r.date > dateTo) return false;
+    return true;
+  }));
+}
+
+function exportReceivedExcel() {
+  if (!receivedData.length) { showToast('No received data to export', 'danger'); return; }
+  const data = receivedData.map((r, i) => ({
+    '#': i + 1,
+    'Date': r.date || '-',
+    'Vehicle No': r.vehicle || '-',
+    'From (Origin)': r.from || '-',
+    'To (Destination)': r.to || '-',
+    'LR No': r.lrNo || '-',
+    'Unloading (₹)': r.unloading || 0,
+    'Detention (₹)': r.detention || 0,
+    'Invoice No': r.invoiceNo || '-',
+    'Status': r.status || '-'
+  }));
+  const ws = XLSX.utils.json_to_sheet(data);
+  const colWidths = Object.keys(data[0]).map(k => ({ wch: Math.max(k.length + 2, 14) }));
+  ws['!cols'] = colWidths;
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Received_Data');
+  XLSX.writeFile(wb, `Prahar_Received_Data_${new Date().toISOString().split('T')[0]}.xlsx`);
+  showToast('Received data Excel downloaded!');
+}
+
+function clearAllReceived() {
+  if (!confirm('Clear all imported received data? This will NOT delete the invoices created from imports.')) return;
+  receivedData = [];
+  save('pt_received', receivedData);
+  renderReceivedList();
+  showToast('Received data history cleared');
 }
 
 // ===== INIT =====
@@ -1827,10 +2991,11 @@ function init() {
   document.getElementById('invDate').value=new Date().toISOString().split('T')[0];
   document.getElementById('payDate').value=new Date().toISOString().split('T')[0];
   document.getElementById('invNo').value=getNextInvoiceNo();
+  document.getElementById('invShipNo').value=getNextShipNo();
 
-  updatePartyDropdown(); updateTransportDropdown(); updatePaymentDropdown();
-  syncAllLRSections();
-  renderDashboard(); renderInvoiceList(); renderParties(); renderTransports(); renderPayments(); renderBank();
+  updatePartyDropdown(); updatePaymentDropdown(); updateInvPartyFilter(); initReportPartyFilter();
+  renderDashboard(); renderInvoiceList(); renderParties(); renderPayments(); renderBank(); renderReceivedList();
+  setTimeout(initOutstandingRange, 200);
 }
 init();
 </script>
